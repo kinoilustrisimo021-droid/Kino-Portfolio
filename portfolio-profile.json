@@ -1,0 +1,274 @@
+{
+  "name": "Kino Ilustrisimo",
+  "title": "Python Automation and Data Operations Portfolio",
+  "positioning": "Future-ready portfolio for job, client, recruiter, and stakeholder review.",
+  "botPersonalityRules": [
+    "The assistant must sound professional, confident, friendly, and helpful.",
+    "The assistant must answer in the same language used by the visitor when possible.",
+    "The assistant must understand English, Filipino, Taglish, informal phrasing, and incorrect grammar.",
+    "The assistant must guide visitors toward Kino's skills, projects, services, experience, tools, contact options, or availability.",
+    "The assistant must act as a portfolio assistant, service recommender, project explainer, and client inquiry helper.",
+    "The assistant must not invent missing information.",
+    "The assistant must not disclose private address, salary, credentials, debtor information, account-level data, confidential client data, internal URLs, or private company information."
+  ],
+  "sections": [
+    {
+      "id": "about",
+      "title": "About Me",
+      "intentKeys": ["about"],
+      "keywords": ["who is kino", "sino ka", "about me", "introduction", "professional profile", "tell me about yourself"],
+      "summary": "Kino Ilustrisimo is a practical data operations and Python automation professional focused on reporting workflows, dashboard monitoring, collection strategy support, process improvement, and operational performance visibility.",
+      "summaryFilipino": "Si Kino Ilustrisimo ay isang practical data operations at Python automation professional na focused sa reporting workflows, dashboard monitoring, collection strategy support, process improvement, at operational performance visibility.",
+      "bullets": [
+        "Builds tools that reduce manual reporting work",
+        "Turns operational pain points into usable automation and dashboard outputs",
+        "Positions his portfolio for future job and client opportunities"
+      ],
+      "bulletsFilipino": [
+        "Gumagawa ng tools para mabawasan ang manual reporting work",
+        "Ginagawang usable automation at dashboard outputs ang operational pain points",
+        "Positioned ang portfolio niya para sa future job at client opportunities"
+      ]
+    },
+    {
+      "id": "skills",
+      "title": "Skills and Expertise",
+      "intentKeys": ["skills", "services"],
+      "keywords": ["skills", "expertise", "ano kaya mo", "ano kaya mong gawin", "kakayahan", "capability", "what can you do"],
+      "summary": "Kino's core skills include Python automation, data reporting, Excel reporting, CSV/XLSX processing, dashboard monitoring, data validation, operational monitoring, communication, and process improvement.",
+      "summaryFilipino": "Ang core skills ni Kino ay Python automation, data reporting, Excel reporting, CSV/XLSX processing, dashboard monitoring, data validation, operational monitoring, communication, at process improvement.",
+      "bullets": [
+        "Python automation",
+        "Excel, CSV, and XLSX reporting workflows",
+        "Dashboard and KPI monitoring",
+        "Operational performance analysis",
+        "Workflow improvement and reporting accuracy"
+      ],
+      "bulletsFilipino": [
+        "Python automation",
+        "Excel, CSV, at XLSX reporting workflows",
+        "Dashboard at KPI monitoring",
+        "Operational performance analysis",
+        "Workflow improvement at reporting accuracy"
+      ]
+    },
+    {
+      "id": "services",
+      "title": "Services Offered",
+      "intentKeys": ["services", "skills", "availability"],
+      "keywords": ["services", "offer", "client", "freelance", "what can you offer", "ano kaya mong i offer", "ano kaya mong gawin"],
+      "summary": "Kino can support future clients or employers with reporting automation, dashboard monitoring, Excel and CSV/XLSX processing, operational performance tracking, data validation, and workflow improvement.",
+      "summaryFilipino": "Kaya ni Kino mag-support sa future clients o employers gamit ang reporting automation, dashboard monitoring, Excel at CSV/XLSX processing, operational performance tracking, data validation, at workflow improvement.",
+      "bullets": [
+        "Automate repetitive reports and extracts",
+        "Create structured reporting outputs",
+        "Build dashboard-style monitoring views",
+        "Improve operational workflows using practical data tools"
+      ],
+      "bulletsFilipino": [
+        "Mag-automate ng repetitive reports at extracts",
+        "Gumawa ng structured reporting outputs",
+        "Gumawa ng dashboard-style monitoring views",
+        "Mag-improve ng operational workflows gamit ang practical data tools"
+      ]
+    },
+    {
+      "id": "projects",
+      "title": "Projects and Sample Work",
+      "intentKeys": ["projects"],
+      "keywords": ["projects", "sample work", "portfolio", "may sample work", "may gawa ka", "completed projects", "show work"],
+      "summary": "Kino's portfolio includes practical projects built around reporting, monitoring, extraction, account review, and workflow automation.",
+      "summaryFilipino": "Kasama sa portfolio ni Kino ang practical projects na focused sa reporting, monitoring, extraction, account review, at workflow automation.",
+      "bullets": [
+        "MC6 Collection Pipeline",
+        "Digital Omnichannel Monitoring Dashboard",
+        "Digital Reporting App",
+        "Excel Reporting Result",
+        "Predictive Summary Extractor",
+        "Alloc Review Builder",
+        "Auto Redial Automation",
+        "MC6 Analytics Hub",
+        "Report Auto Extractor"
+      ],
+      "bulletsFilipino": [
+        "MC6 Collection Pipeline",
+        "Digital Omnichannel Monitoring Dashboard",
+        "Digital Reporting App",
+        "Excel Reporting Result",
+        "Predictive Summary Extractor",
+        "Alloc Review Builder",
+        "Auto Redial Automation",
+        "MC6 Analytics Hub",
+        "Report Auto Extractor"
+      ]
+    },
+    {
+      "id": "dashboard",
+      "title": "Dashboard Capability",
+      "intentKeys": ["dashboard", "projects", "tools"],
+      "keywords": ["dashboard", "dashboards", "marunong ka dashboard", "gumawa dashboard", "kpi monitoring", "digital monitoring", "analytics hub"],
+      "summary": "Kino has dashboard experience through operational monitoring projects that organize KPIs, campaign movement, activity results, digital engagement, reporting outputs, and performance visibility.",
+      "summaryFilipino": "May dashboard experience si Kino sa operational monitoring projects na nag-oorganize ng KPIs, campaign movement, activity results, digital engagement, reporting outputs, at performance visibility.",
+      "bullets": [
+        "Built monitoring views for KPIs and collection indicators",
+        "Created dashboard-style projects for digital channel performance",
+        "Used dashboards to make reporting faster and easier to review"
+      ],
+      "bulletsFilipino": [
+        "Gumawa ng monitoring views para sa KPIs at collection indicators",
+        "Gumawa ng dashboard-style projects para sa digital channel performance",
+        "Ginamit ang dashboards para mapabilis at mapadali ang reporting review"
+      ]
+    },
+    {
+      "id": "tools",
+      "title": "Tools and Technologies",
+      "intentKeys": ["tools", "automation"],
+      "keywords": ["tools", "technologies", "tech stack", "python", "excel", "csv", "xlsx", "anong tools", "gamit", "ginagamit"],
+      "summary": "Kino's technical stack is centered on Python, Excel, CSV/XLSX workflows, reporting dashboards, data validation, file processing, and automation for operational reporting.",
+      "summaryFilipino": "Ang technical stack ni Kino ay centered sa Python, Excel, CSV/XLSX workflows, reporting dashboards, data validation, file processing, at automation para sa operational reporting.",
+      "bullets": [
+        "Python for automation and extraction",
+        "Excel for structured reporting outputs",
+        "CSV/XLSX processing for operational data",
+        "Dashboard-style views for KPI and performance monitoring"
+      ],
+      "bulletsFilipino": [
+        "Python para sa automation at extraction",
+        "Excel para sa structured reporting outputs",
+        "CSV/XLSX processing para sa operational data",
+        "Dashboard-style views para sa KPI at performance monitoring"
+      ]
+    },
+    {
+      "id": "automation",
+      "title": "Automation and Process Improvement",
+      "intentKeys": ["automation", "services", "tools"],
+      "keywords": ["automation", "python automation", "extractor", "auto extract", "workflow", "process improvement", "manual work"],
+      "summary": "Kino uses automation to reduce repetitive work, speed up extraction, improve reporting consistency, and make operational workflows easier to manage.",
+      "summaryFilipino": "Ginagamit ni Kino ang automation para mabawasan ang repetitive work, mapabilis ang extraction, mapaganda ang reporting consistency, at gawing mas madaling i-manage ang operational workflows.",
+      "bullets": [
+        "Predictive Summary Extractor for lead extraction",
+        "Auto Redial Automation for repeated redial workflows",
+        "Report Auto Extractor for previous-day activity reporting",
+        "Digital Reporting App for faster report building"
+      ],
+      "bulletsFilipino": [
+        "Predictive Summary Extractor para sa lead extraction",
+        "Auto Redial Automation para sa repeated redial workflows",
+        "Report Auto Extractor para sa previous-day activity reporting",
+        "Digital Reporting App para sa mas mabilis na report building"
+      ]
+    },
+    {
+      "id": "experience",
+      "title": "Work Experience",
+      "intentKeys": ["experience"],
+      "keywords": ["experience", "work experience", "career background", "operations", "collection operations", "team supervision", "ano experience"],
+      "summary": "Kino has experience across customer-facing operations, service roles, sales support, team supervision, collection operations, dialer strategy, data strategy, dashboard monitoring, reporting, and automation.",
+      "summaryFilipino": "May experience si Kino sa customer-facing operations, service roles, sales support, team supervision, collection operations, dialer strategy, data strategy, dashboard monitoring, reporting, at automation.",
+      "bullets": [
+        "Started from frontline service and customer-facing work",
+        "Progressed into operations, strategy support, and data-focused work",
+        "Uses operational experience to build practical reporting and automation tools"
+      ],
+      "bulletsFilipino": [
+        "Nagsimula sa frontline service at customer-facing work",
+        "Nag-progress sa operations, strategy support, at data-focused work",
+        "Ginagamit ang operations experience para gumawa ng practical reporting at automation tools"
+      ]
+    },
+    {
+      "id": "value",
+      "title": "Value Proposition",
+      "intentKeys": ["value", "skills", "experience", "achievements"],
+      "keywords": ["why hire", "bakit ikaw", "bakit ka namin kukunin", "qualified", "value", "strengths", "why should we hire you"],
+      "summary": "Kino is valuable because he combines hands-on operations experience with Python automation, reporting discipline, dashboard thinking, and practical problem-solving.",
+      "summaryFilipino": "Valuable si Kino dahil pinagsasama niya ang hands-on operations experience, Python automation, reporting discipline, dashboard thinking, at practical problem-solving.",
+      "bullets": [
+        "Understands real operational workflow problems",
+        "Builds tools that make reporting faster and clearer",
+        "Can support teams, stakeholders, recruiters, and clients with data-driven outputs"
+      ],
+      "bulletsFilipino": [
+        "Naiintindihan niya ang real operational workflow problems",
+        "Gumagawa siya ng tools na nagpapabilis at nagpapalinaw ng reporting",
+        "Kaya niyang mag-support sa teams, stakeholders, recruiters, at clients gamit ang data-driven outputs"
+      ]
+    },
+    {
+      "id": "achievements",
+      "title": "Achievements and Recognition",
+      "intentKeys": ["achievements", "value"],
+      "keywords": ["achievements", "awards", "recognition", "promotion", "impact", "service gilas", "rookie of the month"],
+      "summary": "Kino's achievements include workplace recognition, role progressions, and practical project work that improved reporting visibility and reduced repetitive effort.",
+      "summaryFilipino": "Kasama sa achievements ni Kino ang workplace recognition, role progressions, at practical project work na nakatulong sa reporting visibility at pagbawas ng repetitive effort.",
+      "bullets": [
+        "Service Gilas Award",
+        "Rookie of the Month",
+        "Promotion history across operations, strategy, and data-focused roles",
+        "Creation of reporting, monitoring, and automation projects"
+      ],
+      "bulletsFilipino": [
+        "Service Gilas Award",
+        "Rookie of the Month",
+        "Promotion history sa operations, strategy, at data-focused roles",
+        "Pagbuo ng reporting, monitoring, at automation projects"
+      ]
+    },
+    {
+      "id": "contact",
+      "title": "Contact Information",
+      "intentKeys": ["contact"],
+      "keywords": ["contact", "how to contact", "reach", "mako contact", "collaboration", "hire"],
+      "summary": "Kino can be contacted through email at kinoilustrisimo.021@gmail.com, mobile at +639927911469, or Facebook at https://www.facebook.com/palonpon.kino.",
+      "summaryFilipino": "Pwede ma-contact si Kino sa email na kinoilustrisimo.021@gmail.com, mobile number na +639927911469, o Facebook na https://www.facebook.com/palonpon.kino.",
+      "bullets": [
+        "Email: kinoilustrisimo.021@gmail.com",
+        "Mobile: +639927911469",
+        "Facebook: https://www.facebook.com/palonpon.kino",
+        "Prepared for recruiter, employer, client, and stakeholder inquiries"
+      ],
+      "bulletsFilipino": [
+        "Email: kinoilustrisimo.021@gmail.com",
+        "Mobile: +639927911469",
+        "Facebook: https://www.facebook.com/palonpon.kino",
+        "Prepared para sa recruiter, employer, client, at stakeholder inquiries"
+      ]
+    },
+    {
+      "id": "availability",
+      "title": "Availability",
+      "intentKeys": ["availability", "services"],
+      "keywords": ["available", "freelance", "full time", "full-time", "job opportunity", "client opportunity", "open for work"],
+      "summary": "Kino's portfolio is positioned for future job and client opportunities involving Python automation, data operations, dashboard monitoring, reporting analysis, workflow improvement, and collection strategy support.",
+      "summaryFilipino": "Ang portfolio ni Kino ay positioned para sa future job at client opportunities sa Python automation, data operations, dashboard monitoring, reporting analysis, workflow improvement, at collection strategy support.",
+      "bullets": [
+        "Future employer opportunities",
+        "Client or project-based reporting automation work",
+        "Dashboard and workflow improvement support"
+      ],
+      "bulletsFilipino": [
+        "Future employer opportunities",
+        "Client o project-based reporting automation work",
+        "Dashboard at workflow improvement support"
+      ]
+    },
+    {
+      "id": "privacy",
+      "title": "Privacy and Confidentiality",
+      "intentKeys": ["privacy"],
+      "keywords": ["private information", "confidential", "address", "salary", "credentials", "client data", "debtor", "account"],
+      "summary": "The public portfolio does not disclose private address, salary, credentials, debtor information, account-level data, confidential client data, internal URLs, or private company information.",
+      "summaryFilipino": "Hindi dini-disclose ng public portfolio ang private address, salary, credentials, debtor information, account-level data, confidential client data, internal URLs, o private company information.",
+      "bullets": [
+        "Answers should stay public-safe",
+        "Sensitive or unavailable information should not be invented"
+      ],
+      "bulletsFilipino": [
+        "Dapat public-safe ang mga sagot",
+        "Hindi dapat gumawa ng sensitive o unavailable information"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="950" viewBox="0 0 1600 950">
+  <defs>
+    <style>
+      .bg{fill:#f4f7fb}.panel{fill:#fff;stroke:#d9e2ee;stroke-width:2}.navy{fill:#0b2239}.blue{fill:#2f6fed}.gold{fill:#c9a227}.muted{fill:#64748b}.text{font-family:Inter,Segoe UI,Arial,sans-serif}.h{font-size:42px;font-weight:800;fill:#071827}.s{font-size:18px;font-weight:700;fill:#64748b}.label{font-size:16px;font-weight:800;fill:#64748b;text-transform:uppercase}.num{font-size:40px;font-weight:900;fill:#071827}.white{fill:#fff}.line{stroke:#dbe4ef;stroke-width:2}
+    </style>
+  </defs>
+  <rect class="bg" width="1600" height="950"/>
+  <rect x="34" y="38" width="1532" height="70" rx="18" class="panel"/>
+  <text x="62" y="82" class="text h">MC6 Collection Needs</text>
+  <rect x="1020" y="54" width="240" height="38" rx="10" fill="#fff4cf" stroke="#c9a227"/>
+  <text x="1042" y="79" class="text s" fill="#8a6d14">DB updating ready</text>
+  <rect x="1288" y="52" width="120" height="42" rx="10" class="panel"/>
+  <text x="1316" y="80" class="text s">Export</text>
+  <rect x="36" y="132" width="218" height="760" rx="16" class="navy"/>
+  <rect x="64" y="166" width="54" height="54" rx="12" class="blue"/>
+  <circle cx="91" cy="193" r="15" fill="none" stroke="#fff" stroke-width="8"/>
+  <text x="132" y="190" class="text white" font-size="28" font-weight="900">MC6</text>
+  <text x="132" y="214" class="text" font-size="13" font-weight="800" fill="#cbd5e1">GET IT RIGHT</text>
+  <rect x="64" y="274" width="154" height="38" rx="8" fill="#203b5b"/>
+  <rect x="64" y="344" width="154" height="38" rx="8" fill="#1b3350"/>
+  <rect x="64" y="414" width="154" height="38" rx="8" fill="#1b3350"/>
+  <rect x="64" y="484" width="154" height="38" rx="8" fill="#1b3350"/>
+  <rect x="282" y="132" width="1284" height="760" rx="16" class="panel"/>
+  <text x="326" y="188" class="text label">Report Workspace</text>
+  <text x="326" y="222" class="text h" font-size="28">MC6 Collection Pipeline</text>
+  <rect x="326" y="266" width="1196" height="92" rx="14" fill="#fff" stroke="#dce5ef"/>
+  <rect x="354" y="296" width="160" height="40" rx="8" fill="#fff" stroke="#cbd5e1"/>
+  <rect x="536" y="296" width="160" height="40" rx="8" fill="#fff" stroke="#cbd5e1"/>
+  <rect x="718" y="296" width="160" height="40" rx="8" fill="#fff" stroke="#cbd5e1"/>
+  <rect x="900" y="296" width="300" height="40" rx="8" fill="#fff" stroke="#cbd5e1"/>
+  <rect x="1220" y="296" width="250" height="40" rx="8" fill="#2f6fed"/>
+  <text x="1285" y="322" class="text white" font-size="18" font-weight="900">GENERATE</text>
+  <g>
+    <rect x="326" y="392" width="280" height="120" rx="12" class="panel"/><text x="350" y="430" class="text label">Endorsement</text><text x="350" y="480" class="text num">147k</text>
+    <rect x="626" y="392" width="280" height="120" rx="12" class="panel"/><text x="650" y="430" class="text label">Worked</text><text x="650" y="480" class="text num">58%</text>
+    <rect x="926" y="392" width="280" height="120" rx="12" class="panel"/><text x="950" y="430" class="text label">RPC</text><text x="950" y="480" class="text num">15k</text>
+    <rect x="1226" y="392" width="296" height="120" rx="12" class="panel"/><text x="1250" y="430" class="text label">BP</text><text x="1250" y="480" class="text num">7k</text>
+  </g>
+  <rect x="326" y="548" width="1196" height="284" rx="12" class="panel"/>
+  <text x="350" y="594" class="text h" font-size="24">Per Client Summary</text>
+  <line x1="326" y1="626" x2="1522" y2="626" class="line"/>
+  <g class="text s">
+    <text x="350" y="664">Client</text><text x="520" y="664">Placement</text><text x="760" y="664">Endorsement</text><text x="970" y="664">Worked</text><text x="1110" y="664">RPC</text><text x="1260" y="664">PTP</text><text x="1400" y="664">BP</text>
+  </g>
+  <g stroke="#e6edf5" stroke-width="2">
+    <line x1="326" y1="696" x2="1522" y2="696"/><line x1="326" y1="736" x2="1522" y2="736"/><line x1="326" y1="776" x2="1522" y2="776"/>
+  </g>
+  <g fill="#e8eef6">
+    <rect x="350" y="676" width="116" height="12" rx="6"/><rect x="520" y="676" width="150" height="12" rx="6"/><rect x="760" y="676" width="100" height="12" rx="6"/><rect x="970" y="676" width="90" height="12" rx="6"/>
+    <rect x="350" y="716" width="116" height="12" rx="6"/><rect x="520" y="716" width="150" height="12" rx="6"/><rect x="760" y="716" width="100" height="12" rx="6"/><rect x="970" y="716" width="90" height="12" rx="6"/>
+    <rect x="350" y="756" width="116" height="12" rx="6"/><rect x="520" y="756" width="150" height="12" rx="6"/><rect x="760" y="756" width="100" height="12" rx="6"/><rect x="970" y="756" width="90" height="12" rx="6"/>
+  </g>
+</svg>

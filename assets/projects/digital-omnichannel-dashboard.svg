@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="950" viewBox="0 0 1600 950">
+  <defs>
+    <style>
+      .bg{fill:#020d18}.panel{fill:#11294a;stroke:#21436c;stroke-width:2}.panel2{fill:#0b2239;stroke:#1f3b5c;stroke-width:2}.green{fill:#16c7a5}.blue{fill:#4f8cff}.purple{fill:#8b5cf6}.gold{fill:#f59e0b}.text{font-family:Inter,Segoe UI,Arial,sans-serif}.h{font-size:34px;font-weight:900;fill:#f8fafc}.s{font-size:18px;font-weight:700;fill:#94a3b8}.label{font-size:16px;font-weight:900;fill:#62e6ce;text-transform:uppercase}.white{fill:#fff}
+    </style>
+  </defs>
+  <rect class="bg" width="1600" height="950"/>
+  <rect x="0" y="0" width="1600" height="82" fill="#0b1d34"/>
+  <text x="36" y="34" class="text label">Digital Collection Pipeline</text>
+  <text x="36" y="63" class="text h" font-size="24">Campaign Operations</text>
+  <text x="420" y="53" class="text s">Dashboard</text>
+  <text x="560" y="53" class="text s">Search Activity</text>
+  <text x="740" y="53" class="text s">Raw Export</text>
+  <text x="890" y="53" class="text s">Upload</text>
+  <circle cx="1250" cy="42" r="6" class="green"/><text x="1264" y="48" class="text s">API Online</text>
+  <rect x="1440" y="24" width="76" height="36" rx="8" class="green"/><text x="1462" y="48" class="text" font-size="16" font-weight="900" fill="#06241e">MC6</text>
+  <rect x="44" y="120" width="1512" height="76" rx="10" class="panel"/>
+  <text x="76" y="166" class="text s">Email</text><text x="210" y="166" class="text s">Viber</text><text x="340" y="166" class="text s">SMS</text><text x="460" y="166" class="text s">CYN</text>
+  <line x1="72" y1="190" x2="170" y2="190" stroke="#4f8cff" stroke-width="4"/>
+  <rect x="44" y="224" width="1512" height="124" rx="12" class="panel"/>
+  <rect x="76" y="266" width="260" height="42" rx="8" fill="#071827" stroke="#234362"/>
+  <rect x="360" y="266" width="260" height="42" rx="8" fill="#071827" stroke="#234362"/>
+  <rect x="644" y="266" width="240" height="42" rx="8" fill="#071827" stroke="#234362"/>
+  <rect x="908" y="266" width="240" height="42" rx="8" fill="#071827" stroke="#234362"/>
+  <rect x="1172" y="266" width="220" height="42" rx="8" fill="#071827" stroke="#234362"/>
+  <rect x="1410" y="266" width="118" height="42" rx="8" fill="#4f8cff"/>
+  <g>
+    <rect x="44" y="382" width="352" height="112" rx="10" class="panel"/><rect x="76" y="414" width="48" height="48" rx="10" fill="#163a5f"/><text x="142" y="434" class="text h" font-size="28">0</text><text x="142" y="462" class="text s">Worked</text>
+    <rect x="416" y="382" width="352" height="112" rx="10" class="panel"/><rect x="448" y="414" width="48" height="48" rx="10" fill="#064e46"/><text x="514" y="434" class="text h" font-size="28">0.00%</text><text x="514" y="462" class="text s">Delivered Rate</text>
+    <rect x="788" y="382" width="352" height="112" rx="10" class="panel"/><rect x="820" y="414" width="48" height="48" rx="10" fill="#312e81"/><text x="886" y="434" class="text h" font-size="28">0.00%</text><text x="886" y="462" class="text s">Open Rate</text>
+    <rect x="1160" y="382" width="396" height="112" rx="10" class="panel"/><rect x="1192" y="414" width="48" height="48" rx="10" fill="#422006"/><text x="1258" y="434" class="text h" font-size="28">0.00%</text><text x="1258" y="462" class="text s">Reply Rate</text>
+  </g>
+  <rect x="44" y="530" width="1512" height="72" rx="10" class="panel"/>
+  <text x="72" y="574" class="text s">Download summary</text>
+  <rect x="44" y="634" width="1512" height="220" rx="10" class="panel2"/>
+  <text x="72" y="684" class="text h" font-size="24">Email KPI Breakdown</text>
+  <g fill="#1c3657">
+    <rect x="72" y="728" width="260" height="18" rx="8"/><rect x="360" y="728" width="260" height="18" rx="8"/><rect x="648" y="728" width="260" height="18" rx="8"/><rect x="936" y="728" width="260" height="18" rx="8"/>
+    <rect x="72" y="770" width="1100" height="18" rx="8"/><rect x="72" y="812" width="860" height="18" rx="8"/>
+  </g>
+</svg>

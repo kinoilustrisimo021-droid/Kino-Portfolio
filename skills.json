@@ -1,0 +1,37 @@
+{
+  "title": "Skills and Tools",
+  "items": [
+    {
+      "title": "Python Automation",
+      "intentKeys": ["skills", "automation", "services", "tools"],
+      "keywords": ["python", "automation", "extractor", "workflow", "report automation", "file processing"],
+      "summary": "Kino uses Python to automate repetitive reporting tasks, extract data, process files, and improve operational workflows.",
+      "summaryFilipino": "Gumagamit si Kino ng Python para i-automate ang repetitive reporting tasks, data extraction, file processing, at workflow improvement.",
+      "bullets": ["Report extraction", "File processing", "Workflow automation", "Repetitive task reduction"]
+    },
+    {
+      "title": "Dashboard Monitoring",
+      "intentKeys": ["skills", "dashboard", "projects", "tools"],
+      "keywords": ["dashboard", "monitoring", "kpi", "analytics", "visual reporting", "performance"],
+      "summary": "Kino can create dashboard-style monitoring views for KPIs, campaign movement, digital activity, and operational performance.",
+      "summaryFilipino": "Kaya ni Kino gumawa ng dashboard-style monitoring views para sa KPIs, campaign movement, digital activity, at operational performance.",
+      "bullets": ["KPI monitoring", "Performance views", "Digital channel reporting", "Operational visibility"]
+    },
+    {
+      "title": "Reporting and Data Handling",
+      "intentKeys": ["skills", "tools", "services"],
+      "keywords": ["excel", "csv", "xlsx", "reporting", "data validation", "raw export"],
+      "summary": "Kino works with Excel, CSV, and XLSX reporting workflows to turn raw operational files into structured outputs.",
+      "summaryFilipino": "Gumagamit si Kino ng Excel, CSV, at XLSX reporting workflows para gawing structured outputs ang raw operational files.",
+      "bullets": ["Excel summaries", "CSV/XLSX processing", "Data validation", "Stakeholder-ready reporting"]
+    },
+    {
+      "title": "Professional Strengths",
+      "intentKeys": ["skills", "value", "experience"],
+      "keywords": ["leadership", "communication", "attention to detail", "fast learner", "process improvement"],
+      "summary": "Kino brings communication, leadership, attention to detail, adaptability, and practical process improvement into technical work.",
+      "summaryFilipino": "Dinadala ni Kino ang communication, leadership, attention to detail, adaptability, at practical process improvement sa technical work.",
+      "bullets": ["Communication", "Leadership", "Attention to detail", "Fast learning", "Operational judgment"]
+    }
+  ]
+}

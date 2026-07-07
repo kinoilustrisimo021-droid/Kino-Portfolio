@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs><style>.text{font-family:Inter,Segoe UI,Arial,sans-serif}.bg{fill:#202020}.panel{fill:#303030}.field{fill:#3b3b3b;stroke:#5b6470;stroke-width:2}.blue{fill:#1f78b4}.dark{fill:#171a19}.muted{fill:#cbd5e1}.h{font-size:34px;font-weight:900;fill:#e5e7eb}.s{font-size:18px;font-weight:600;fill:#d1d5db}</style></defs>
+  <rect class="bg" width="1400" height="900"/>
+  <rect x="24" y="52" width="1352" height="96" rx="8" class="panel"/>
+  <text x="530" y="110" class="text h">Predictive Summary Extractor</text>
+  <rect x="24" y="168" width="1352" height="82" rx="8" class="panel"/>
+  <text x="58" y="217" class="text s">Environment:</text>
+  <rect x="188" y="188" width="280" height="38" rx="6" class="blue"/>
+  <text x="208" y="213" class="text s" fill="#fff">Envi 2</text>
+  <rect x="24" y="270" width="1352" height="120" rx="8" class="panel"/>
+  <text x="58" y="318" class="text s">Username:</text><rect x="188" y="294" width="280" height="38" rx="6" class="field"/>
+  <text x="58" y="366" class="text s">Access Key:</text><rect x="188" y="342" width="280" height="38" rx="6" class="field"/>
+  <rect x="24" y="410" width="1352" height="130" rx="8" class="panel"/>
+  <text x="58" y="456" class="text s">Input File:</text><rect x="188" y="432" width="380" height="38" rx="6" class="field"/><rect x="596" y="432" width="92" height="38" rx="6" class="blue"/>
+  <text x="58" y="505" class="text s">Output File:</text><rect x="188" y="482" width="380" height="38" rx="6" class="field"/><rect x="596" y="482" width="92" height="38" rx="6" class="blue"/>
+  <rect x="24" y="562" width="1352" height="70" rx="8" class="panel"/>
+  <text x="650" y="592" class="text s">Progress: 0%</text>
+  <rect x="520" y="608" width="360" height="8" rx="4" fill="#59616b"/>
+  <rect x="520" y="608" width="88" height="8" rx="4" class="blue"/>
+  <rect x="24" y="660" width="1352" height="160" rx="8" class="dark"/>
+  <rect x="36" y="842" width="108" height="38" rx="8" class="blue"/><text x="72" y="867" class="text s" fill="#fff">Start</text>
+  <rect x="164" y="842" width="108" height="38" rx="8" fill="#2b6f9f"/><text x="205" y="867" class="text s" fill="#9ca3af">Stop</text>
+</svg>

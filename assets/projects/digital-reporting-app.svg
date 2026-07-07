@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs><style>.text{font-family:Inter,Segoe UI,Arial,sans-serif}.bg{fill:#edf4fa}.nav{fill:#111827}.panel{fill:#fff}.muted{fill:#64748b}.h{font-size:48px;font-weight:900;fill:#0f172a}.s{font-size:20px;font-weight:700;fill:#64748b}.blue{fill:#2f6fed}.green{fill:#0f9f6e}</style></defs>
+  <rect class="bg" width="1400" height="900"/>
+  <rect x="0" y="0" width="270" height="900" class="nav"/>
+  <text x="32" y="78" class="text" font-size="32" font-weight="900" fill="#fff">DIGITAL TEAM</text>
+  <text x="32" y="112" class="text s" fill="#9ca3af">Collection reporting suite</text>
+  <rect x="28" y="170" width="214" height="118" fill="#1f2937"/>
+  <text x="52" y="206" class="text s" fill="#cbd5e1">Report Type</text>
+  <rect x="52" y="230" width="166" height="44" fill="#e7e5df" stroke="#9ca3af"/>
+  <text x="66" y="259" class="text" font-size="18">Email</text>
+  <rect x="28" y="318" width="214" height="134" fill="#1f2937"/>
+  <text x="52" y="356" class="text s" fill="#fff">Required Files</text>
+  <rect x="52" y="384" width="150" height="34" fill="#0b1324"/>
+  <rect x="36" y="806" width="220" height="52" rx="2" class="blue"/><text x="92" y="839" class="text" font-size="20" font-weight="800" fill="#fff">Build Report</text>
+  <rect x="36" y="868" width="220" height="42" rx="2" class="green"/>
+  <text x="326" y="96" class="text h">Digital Team</text>
+  <text x="326" y="142" class="text s">Build executive-ready collection reports from masterlist, dialer, and digital channel exports.</text>
+  <rect x="326" y="194" width="276" height="86" class="panel"/><text x="352" y="228" class="text s">Selected Report</text><text x="352" y="260" class="text" font-size="28" font-weight="900">Email</text>
+  <rect x="618" y="194" width="310" height="86" class="panel"/><text x="644" y="228" class="text s">Input Files</text><text x="644" y="260" class="text" font-size="28" font-weight="900">3 files selected</text>
+  <rect x="944" y="194" width="360" height="86" class="panel"/><text x="970" y="228" class="text s">Output</text><text x="970" y="260" class="text" font-size="28" font-weight="900">18 summary rows</text>
+  <rect x="326" y="310" width="978" height="520" class="panel"/>
+  <text x="350" y="356" class="text" font-size="24" font-weight="800">Email report ready</text>
+  <rect x="350" y="374" width="930" height="410" fill="#f8fafc" stroke="#cbd5e1"/>
+  <g fill="#e5e7eb"><rect x="350" y="374" width="930" height="34"/><rect x="350" y="450" width="930" height="34"/><rect x="350" y="526" width="930" height="34"/><rect x="350" y="602" width="930" height="34"/></g>
+  <g stroke="#d1d5db" stroke-width="1">
+    <line x1="440" y1="374" x2="440" y2="784"/><line x1="548" y1="374" x2="548" y2="784"/><line x1="668" y1="374" x2="668" y2="784"/><line x1="790" y1="374" x2="790" y2="784"/><line x1="920" y1="374" x2="920" y2="784"/><line x1="1060" y1="374" x2="1060" y2="784"/></g>
+</svg>

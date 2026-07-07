@@ -1,0 +1,45 @@
+{
+  "title": "Services Offered",
+  "items": [
+    {
+      "title": "Dashboard Development",
+      "intentKeys": ["services", "dashboard", "projects"],
+      "keywords": ["dashboard", "monitoring", "kpi", "visualization", "performance"],
+      "summary": "Kino may assist with dashboard development for KPI monitoring, performance visibility, operational tracking, and digital activity reporting.",
+      "summaryFilipino": "Kaya ni Kino mag-assist sa dashboard development para sa KPI monitoring, performance visibility, operational tracking, at digital activity reporting.",
+      "bullets": ["KPI dashboard", "Operational monitoring view", "Digital activity monitoring", "Performance summary"]
+    },
+    {
+      "title": "Python Automation",
+      "intentKeys": ["services", "automation", "tools"],
+      "keywords": ["python", "automation", "extractor", "file processing", "workflow"],
+      "summary": "Kino may assist with Python automation for repetitive reporting, file processing, data extraction, and workflow improvement.",
+      "summaryFilipino": "Kaya ni Kino mag-assist sa Python automation para sa repetitive reporting, file processing, data extraction, at workflow improvement.",
+      "bullets": ["Report extraction", "CSV/XLSX processing", "Task automation", "Workflow improvement"]
+    },
+    {
+      "title": "Reporting Workflow Improvement",
+      "intentKeys": ["services", "skills", "tools"],
+      "keywords": ["reporting", "excel", "csv", "xlsx", "summary", "raw export"],
+      "summary": "Kino may assist with reporting workflows that convert raw files into structured Excel, CSV, XLSX, dashboard, or management-ready outputs.",
+      "summaryFilipino": "Kaya ni Kino mag-assist sa reporting workflows na nagko-convert ng raw files into structured Excel, CSV, XLSX, dashboard, o management-ready outputs.",
+      "bullets": ["Excel summaries", "Raw exports", "Management-ready outputs", "Performance reports"]
+    },
+    {
+      "title": "AI Portfolio Chatbot Setup",
+      "intentKeys": ["services", "chatbot", "automation"],
+      "keywords": ["chatbot", "ai assistant", "portfolio assistant", "knowledge base", "lead capture"],
+      "summary": "Kino's portfolio now demonstrates a client-facing AI assistant concept with knowledge-base answers, suggested questions, service recommendations, and lead capture flow.",
+      "summaryFilipino": "Ipinapakita ng portfolio ni Kino ang client-facing AI assistant concept na may knowledge-base answers, suggested questions, service recommendations, at lead capture flow.",
+      "bullets": ["Knowledge-base structure", "Suggested questions", "Lead capture", "Portfolio navigation"]
+    },
+    {
+      "title": "Data Validation and Cleanup",
+      "intentKeys": ["services", "tools", "automation"],
+      "keywords": ["data validation", "cleanup", "masterlist", "raw data", "accuracy"],
+      "summary": "Kino may assist with data validation and cleanup workflows that improve report consistency and reduce manual checking.",
+      "summaryFilipino": "Kaya ni Kino mag-assist sa data validation at cleanup workflows para mapaganda ang report consistency at mabawasan ang manual checking.",
+      "bullets": ["Validation checks", "File cleanup", "Masterlist support", "Reporting accuracy"]
+    }
+  ]
+}

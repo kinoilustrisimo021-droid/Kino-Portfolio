@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+  <defs><style>.text{font-family:Inter,Segoe UI,Arial,sans-serif}.bg{fill:#242424}.panel{fill:#303030}.field{fill:#393939;stroke:#62676f;stroke-width:2}.green{fill:#2fb36d}.blue{fill:#1f78b4}.h{font-size:34px;font-weight:800;fill:#f8fafc}.s{font-size:18px;font-weight:600;fill:#d1d5db}</style></defs>
+  <rect class="bg" width="1400" height="900"/>
+  <rect x="492" y="120" width="416" height="660" rx="28" class="panel"/>
+  <text x="600" y="190" class="text h">REPORT CONTROL PANEL</text>
+  <rect x="520" y="238" width="360" height="48" rx="8" class="field"/>
+  <rect x="520" y="306" width="360" height="48" rx="8" class="field"/>
+  <rect x="520" y="374" width="360" height="48" rx="8" class="field"/>
+  <rect x="520" y="442" width="360" height="48" rx="8" class="field"/>
+  <text x="650" y="540" class="text s" font-weight="800">Extraction Mode:</text>
+  <circle cx="620" cy="590" r="13" fill="none" stroke="#9ca3af" stroke-width="4"/><text x="648" y="598" class="text s">Option 1: Single Session</text>
+  <circle cx="620" cy="638" r="13" fill="none" stroke="#1f78b4" stroke-width="8"/><text x="648" y="646" class="text s">Option 2: Daily Range</text>
+  <rect x="586" y="682" width="24" height="24" rx="4" class="blue"/><text x="628" y="702" class="text s">Run in Headless Mode</text>
+  <text x="648" y="754" class="text" font-size="18" font-weight="700" fill="#1f78b4">System: Ready</text>
+  <rect x="560" y="790" width="280" height="56" rx="8" class="green"/><text x="630" y="826" class="text" font-size="20" font-weight="900" fill="#fff">START EXTRACTION</text>
+</svg>

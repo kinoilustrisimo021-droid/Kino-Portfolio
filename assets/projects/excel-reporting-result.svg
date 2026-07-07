@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="900" viewBox="0 0 1500 900">
+  <defs><style>.text{font-family:Calibri,Arial,sans-serif}.red{fill:#e11d1d}.green{fill:#c7f0d8}.cell{fill:#fff;stroke:#111;stroke-width:1}.head{font-size:18px;font-weight:700;fill:#fff}.body{font-size:16px;fill:#111}.title{font-size:36px;font-weight:800;fill:#e11d1d}</style></defs>
+  <rect width="1500" height="900" fill="#f8fafc"/>
+  <rect x="0" y="0" width="1500" height="82" fill="#f3f4f6"/>
+  <text x="32" y="52" class="text" font-size="28" font-weight="700">60 DPD Monday Huddle - Performance Workbook</text>
+  <text x="28" y="126" class="text title">Dialer Report</text>
+  <g transform="translate(28 144)">
+    <rect width="1440" height="24" class="red"/>
+    <g class="text head"><text x="20" y="18">Date Cutoff</text><text x="140" y="18">Cycle</text><text x="240" y="18">Worked</text><text x="360" y="18">Dials</text><text x="470" y="18">Connected</text><text x="610" y="18">Talk Time</text><text x="750" y="18">RPC</text><text x="850" y="18">PTP</text><text x="960" y="18">Penetration</text><text x="1110" y="18">Connect Rate</text><text x="1280" y="18">PTP Rate</text></g>
+    <g>
+      <rect y="24" width="1440" height="30" class="cell"/><rect y="54" width="1440" height="30" class="cell"/><rect y="84" width="1440" height="30" class="cell"/><rect y="114" width="1440" height="30" class="cell"/><rect y="144" width="1440" height="30" class="cell"/>
+      <rect x="1110" y="28" width="90" height="20" class="green"/><rect x="1280" y="58" width="90" height="20" class="green"/><rect x="960" y="88" width="90" height="20" class="green"/>
+    </g>
+  </g>
+  <text x="28" y="382" class="text title">Email Report</text>
+  <g transform="translate(28 400)">
+    <rect width="1440" height="24" class="red"/>
+    <g class="text head"><text x="20" y="18">Date Cutoff</text><text x="142" y="18">Cycle</text><text x="250" y="18">Worked</text><text x="370" y="18">Passes</text><text x="488" y="18">Delivered</text><text x="620" y="18">Open</text><text x="735" y="18">Reply</text><text x="850" y="18">Ave Passes</text><text x="1010" y="18">Delivered Rate</text><text x="1190" y="18">Open Rate</text><text x="1330" y="18">Reply Rate</text></g>
+    <rect y="24" width="1440" height="30" class="cell"/><rect y="54" width="1440" height="30" class="cell"/><rect y="84" width="1440" height="30" class="cell"/><rect y="114" width="1440" height="30" class="cell"/><rect y="144" width="1440" height="30" class="cell"/>
+    <rect x="1010" y="28" width="108" height="20" class="green"/><rect x="1190" y="58" width="100" height="20" class="green"/><rect x="1330" y="88" width="80" height="20" class="green"/>
+  </g>
+  <text x="28" y="638" class="text title">Viber Report</text>
+  <g transform="translate(28 656)">
+    <rect width="1440" height="24" class="red"/>
+    <rect y="24" width="1440" height="30" class="cell"/><rect y="54" width="1440" height="30" class="cell"/><rect y="84" width="1440" height="30" class="cell"/>
+  </g>
+</svg>
