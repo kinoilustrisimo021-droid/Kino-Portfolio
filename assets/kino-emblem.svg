@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="kino-gold" x1="10" y1="7" x2="55" y2="57" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff0bd"/>
+      <stop offset=".32" stop-color="#ffd56b"/>
+      <stop offset=".64" stop-color="#ffb000"/>
+      <stop offset="1" stop-color="#754000"/>
+    </linearGradient>
+    <radialGradient id="kino-core" cx="0" cy="0" r="1" gradientTransform="translate(25 20) rotate(48) scale(41)">
+      <stop stop-color="#142331"/>
+      <stop offset=".48" stop-color="#071019"/>
+      <stop offset="1" stop-color="#020508"/>
+    </radialGradient>
+  </defs>
+
+  <circle cx="32" cy="32" r="30" fill="#020406"/>
+  <circle cx="32" cy="32" r="28.5" fill="url(#kino-core)" stroke="url(#kino-gold)" stroke-width="2.5"/>
+  <circle cx="32" cy="32" r="24.25" fill="none" stroke="#f4f7f9" stroke-opacity=".11"/>
+
+  <path d="M10.6 24.7A23 23 0 0 1 25.5 10.9" fill="none" stroke="url(#kino-gold)" stroke-width="2.75" stroke-linecap="round"/>
+  <path d="M53.4 39.3A23 23 0 0 1 38.5 53.1" fill="none" stroke="url(#kino-gold)" stroke-width="2.75" stroke-linecap="round"/>
+
+  <path d="M20.5 18.5v27M38 18.5 23 32l15 13.5" fill="none" stroke="#f4f7f9" stroke-width="4.7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M45 18.5v27" fill="none" stroke="url(#kino-gold)" stroke-width="4.7" stroke-linecap="round"/>
+
+  <circle cx="10.6" cy="24.7" r="1.25" fill="#fff0bd"/>
+  <circle cx="53.4" cy="39.3" r="1.25" fill="#ffb000"/>
+</svg>

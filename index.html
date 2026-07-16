@@ -2,27 +2,38 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#04080d">
   <meta name="description" content="Professional career portfolio for Kino Ilustrisimo, focused on Python automation, data reporting, operational dashboards, workflow improvement, and campaign analytics.">
   <title>Kino Ilustrisimo | Python Automation and Data Operations Portfolio</title>
+  <link rel="icon" type="image/png" href="assets/kino-logo.png?v=20260716-ki-logo-v1">
+  <link rel="apple-touch-icon" href="assets/kino-logo.png?v=20260716-ki-logo-v1">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260707-1830">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260716-hire-me-v1">
 </head>
-<body>
+<body class="premium-portal">
+  <a class="skip-link" href="#mainContent">Skip to portfolio content</a>
   <div class="scroll-progress" aria-hidden="true"></div>
+  <div class="page-atmosphere" aria-hidden="true">
+    <span class="atmosphere-orb atmosphere-orb-one"></span>
+    <span class="atmosphere-orb atmosphere-orb-two"></span>
+    <span class="atmosphere-grid"></span>
+  </div>
 
-  <header class="site-header">
+  <header class="site-header" data-site-header>
     <a class="brand" href="#cover" aria-label="Kino Ilustrisimo portfolio home">
-      <span class="brand-mark">KI</span>
+      <span class="brand-mark" aria-hidden="true">
+        <img src="assets/kino-logo.png?v=20260716-ki-logo-v1" width="46" height="46" alt="">
+      </span>
       <span class="brand-copy">
         <strong>Kino Ilustrisimo</strong>
-        <small>Career Portfolio</small>
+        <small>Automation &amp; Data</small>
       </span>
     </a>
 
-    <nav class="nav-links" aria-label="Primary navigation">
+    <nav class="nav-links" id="primaryNavigation" aria-label="Primary navigation">
       <a href="#profile">Profile</a>
       <a href="#skills">Skills</a>
       <a href="#projects">Projects</a>
@@ -30,81 +41,93 @@
       <a href="#contact">Contact</a>
     </nav>
 
-    <button class="print-button" type="button" onclick="window.print()">Download Resume PDF</button>
+    <div class="header-actions">
+      <button class="print-button" type="button" onclick="window.print()">
+        <span>Resume</span>
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2v10m0 0 4-4m-4 4L6 8M3 14v3h14v-3"/></svg>
+      </button>
+      <button class="menu-toggle" type="button" aria-label="Open navigation" aria-controls="primaryNavigation" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
   </header>
 
-  <main>
+  <main id="mainContent">
     <section class="hero" id="cover">
       <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-glow" aria-hidden="true"></div>
       <div class="hero-copy reveal">
-        <p class="eyebrow">Professional Portfolio</p>
-        <h1><span>Kino</span><span>Ilustrisimo</span></h1>
-        <p class="hero-title">Python Automation | Data Reporting | Operations Strategy</p>
+        <div class="hero-status"><span></span> Open to select opportunities</div>
+        <p class="eyebrow">Automation architect &bull; Data operator</p>
+        <h1><span>Kino</span><span>Ilustrisimo<span class="headline-dot">.</span></span></h1>
+        <p class="hero-title">I turn operational friction into clear, reliable systems.</p>
         <p class="hero-summary">
-          Future-ready data operations professional building automation, dashboards, reporting
-          workflows, and performance monitoring tools for teams that need faster, clearer, and
-          more reliable decision support.
+          Python automation, reporting workflows, and performance dashboards built for teams that
+          need faster execution, sharper visibility, and fewer repetitive tasks.
         </p>
 
         <div class="hero-actions">
-          <a class="primary-action magnetic" href="#projects">View Proof of Work</a>
-          <a class="secondary-action magnetic" href="#skills">View Skills</a>
+          <a class="primary-action magnetic" href="#projects">
+            <span>Explore selected work</span>
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5"/></svg>
+          </a>
+          <a class="secondary-action magnetic" href="mailto:kinoilustrisimo.021@gmail.com">Start a conversation</a>
         </div>
 
         <div class="hero-metrics" aria-label="Career highlights">
           <div>
             <strong>5+</strong>
-            <span>Role Progressions</span>
+            <span>Role progressions</span>
           </div>
           <div>
-            <strong>Python</strong>
-            <span>Automation Stack</span>
+            <strong>9</strong>
+            <span>Systems showcased</span>
           </div>
           <div>
-            <strong>Reports</strong>
-            <span>Dashboards and Analysis</span>
+            <strong>4</strong>
+            <span>Core disciplines</span>
           </div>
         </div>
       </div>
 
       <aside class="portrait-card reveal" aria-label="Kino Ilustrisimo profile photo and role summary">
-        <div class="portrait-frame">
-          <span class="portrait-ring"></span>
-          <img
-            id="profilePhoto"
-            data-photo-sources="assets/kino-ilustrisimo.jpg?v=20260707-1830,assets/kino-ilustrisimo.png,assets/kino-ilustrisimo.webp,assets/kino-ilustrisimo.jpeg"
-            alt="Professional portrait of Kino Ilustrisimo"
-          >
-          <div class="portrait-fallback" aria-hidden="true">
-            <strong>KI</strong>
-            <small>Professional photo</small>
-          </div>
+        <div class="portrait-console-bar">
+          <span class="console-label"><i></i> KINO / PORTFOLIO</span>
+          <span class="console-signal">LIVE</span>
         </div>
 
-        <div class="role-badge">
-          <span></span>
-          Available for job and client opportunities
+        <div class="portrait-stage">
+          <span class="stage-orbit stage-orbit-one" aria-hidden="true"></span>
+          <span class="stage-orbit stage-orbit-two" aria-hidden="true"></span>
+          <div class="portrait-frame">
+            <span class="portrait-ring"></span>
+            <img
+              id="profilePhoto"
+              data-photo-sources="assets/kino-ilustrisimo.jpg?v=20260716-motion-v3,assets/kino-ilustrisimo.png,assets/kino-ilustrisimo.webp,assets/kino-ilustrisimo.jpeg"
+              alt="Professional portrait of Kino Ilustrisimo"
+            >
+            <div class="portrait-fallback" aria-hidden="true">
+              <img class="portrait-fallback-mark" src="assets/kino-logo.png?v=20260716-ki-logo-v1" width="104" height="104" alt="">
+              <small>Professional photo</small>
+            </div>
+          </div>
+          <div class="floating-chip floating-chip-python"><span>PY</span> Python systems</div>
+          <div class="floating-chip floating-chip-data"><span>01</span> Data clarity</div>
         </div>
 
-        <dl class="role-list">
+        <div class="portrait-meta">
           <div>
-            <dt>Professional Focus</dt>
-            <dd>Data operations, automation, and reporting</dd>
+            <span class="meta-index">01</span>
+            <p>Based in Pasay City, Philippines</p>
           </div>
           <div>
-            <dt>Tech Stack</dt>
-            <dd>Python, Excel workflows, CSV/XLSX processing</dd>
+            <span class="meta-index">02</span>
+            <p>Python &bull; Dashboards &bull; Operations</p>
           </div>
-          <div>
-            <dt>Delivery Strength</dt>
-            <dd>Dashboards, extractors, monitoring tools</dd>
-          </div>
-          <div>
-            <dt>Location</dt>
-            <dd>Pasay City, Philippines</dd>
-          </div>
-        </dl>
+        </div>
       </aside>
+
+      <div class="hero-scroll-cue" aria-hidden="true"><span></span> Scroll to explore</div>
     </section>
 
     <section class="section profile-section" id="profile">
@@ -138,6 +161,53 @@
             tools for visibility, process improvement, and execution control.
           </p>
         </article>
+      </div>
+    </section>
+
+    <section class="section hire-me-section" id="hire-me" aria-labelledby="hireMeTitle">
+      <div class="hire-me-shell reveal">
+        <div class="hire-me-copy">
+          <div class="hire-me-availability">
+            <span aria-hidden="true"></span>
+            Available for select opportunities
+          </div>
+          <p class="section-kicker">Hire Me</p>
+          <h2 id="hireMeTitle">Let&rsquo;s turn operational friction into a system that works.</h2>
+          <p class="hire-me-lead">
+            Kino helps teams reduce repetitive work, improve reporting visibility, and build practical
+            automation that people can actually use.
+          </p>
+
+          <div class="hire-me-actions">
+            <a class="hire-me-primary" href="#contact">
+              <span>Hire Me</span>
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5"/></svg>
+            </a>
+            <a class="hire-me-secondary" href="#projects">View selected work</a>
+          </div>
+
+          <p class="hire-me-note">No questionnaire required. Contact Kino directly when you are ready.</p>
+        </div>
+
+        <aside class="hire-me-fit" aria-label="Best-fit opportunities">
+          <p class="hire-me-fit-label">Best fit for</p>
+          <h3>Practical systems with measurable operational value.</h3>
+          <ul class="hire-me-value-list">
+            <li><span>01</span><strong>Python automation and workflow improvement</strong></li>
+            <li><span>02</span><strong>Reporting, dashboards, and data operations</strong></li>
+            <li><span>03</span><strong>Delivery shaped by frontline and leadership experience</strong></li>
+          </ul>
+          <div class="hire-me-meta">
+            <div>
+              <small>Opportunity</small>
+              <strong>Employment or client work</strong>
+            </div>
+            <div>
+              <small>Location</small>
+              <strong>Pasay City, Philippines</strong>
+            </div>
+          </div>
+        </aside>
       </div>
     </section>
 
@@ -240,7 +310,7 @@
         <h2>Skills clients and employers can use immediately.</h2>
       </div>
 
-      <div class="ticker reveal" aria-label="Competency list">
+      <div class="ticker reveal" tabindex="0" aria-label="Competency list. Focus or hover to pause movement.">
         <div class="ticker-track">
           <span>Python</span>
           <span>Automation</span>
@@ -286,7 +356,7 @@
       <div class="project-grid">
         <article class="project-card feature-card reveal">
           <div class="project-shot shot-pipeline" aria-hidden="true">
-            <img class="project-image" data-project-image="mc6-pipeline" data-image-sources="assets/projects/mc6-collection-pipeline.jpg,assets/projects/mc6-collection-pipeline.png,assets/projects/mc6-collection-pipeline.webp,assets/projects/mc6-collection-pipeline.svg" alt="">
+            <img class="project-image" loading="lazy" decoding="async" data-project-image="mc6-pipeline" data-image-sources="assets/projects/mc6-collection-pipeline.jpg,assets/projects/mc6-collection-pipeline.png,assets/projects/mc6-collection-pipeline.webp,assets/projects/mc6-collection-pipeline.svg" alt="">
             <div class="shot-topbar"></div>
             <div class="shot-body">
               <div class="shot-sidebar"></div>
@@ -314,7 +384,7 @@
 
         <article class="project-card feature-card dark-card reveal">
           <div class="project-shot shot-omni" aria-hidden="true">
-            <img class="project-image" data-project-image="omnichannel-dashboard" data-image-sources="assets/projects/digital-omnichannel-dashboard.jpg,assets/projects/digital-omnichannel-dashboard.png,assets/projects/digital-omnichannel-dashboard.webp,assets/projects/digital-omnichannel-dashboard.svg" alt="">
+            <img class="project-image" loading="lazy" decoding="async" data-project-image="omnichannel-dashboard" data-image-sources="assets/projects/digital-omnichannel-dashboard.jpg,assets/projects/digital-omnichannel-dashboard.png,assets/projects/digital-omnichannel-dashboard.webp,assets/projects/digital-omnichannel-dashboard.svg" alt="">
             <div class="shot-tabs">
               <span></span><span></span><span></span><span></span>
             </div>
@@ -340,7 +410,7 @@
 
         <article class="project-card reveal">
           <div class="project-shot compact-shot shot-reporting" aria-hidden="true">
-            <img class="project-image" data-project-image="digital-reporting-app" data-image-sources="assets/projects/digital-reporting-app.jpg,assets/projects/digital-reporting-app.png,assets/projects/digital-reporting-app.webp,assets/projects/digital-reporting-app.svg" alt="">
+            <img class="project-image" loading="lazy" decoding="async" data-project-image="digital-reporting-app" data-image-sources="assets/projects/digital-reporting-app.jpg,assets/projects/digital-reporting-app.png,assets/projects/digital-reporting-app.webp,assets/projects/digital-reporting-app.svg" alt="">
             <div class="app-sidebar">
               <span></span><span></span><span></span>
             </div>
@@ -361,7 +431,7 @@
 
         <article class="project-card reveal">
           <div class="project-shot compact-shot shot-excel" aria-hidden="true">
-            <img class="project-image" data-project-image="excel-reporting-result" data-image-sources="assets/projects/excel-reporting-result.jpg,assets/projects/excel-reporting-result.png,assets/projects/excel-reporting-result.webp,assets/projects/excel-reporting-result.svg" alt="">
+            <img class="project-image" loading="lazy" decoding="async" data-project-image="excel-reporting-result" data-image-sources="assets/projects/excel-reporting-result.jpg,assets/projects/excel-reporting-result.png,assets/projects/excel-reporting-result.webp,assets/projects/excel-reporting-result.svg" alt="">
             <div class="excel-title"></div>
             <div class="excel-grid">
               <span></span><span></span><span></span><span></span>
@@ -378,7 +448,7 @@
 
         <article class="project-card reveal">
           <div class="project-shot compact-shot shot-extractor" aria-hidden="true">
-            <img class="project-image" data-project-image="predictive-summary-extractor" data-image-sources="assets/projects/predictive-summary-extractor.jpg,assets/projects/predictive-summary-extractor.png,assets/projects/predictive-summary-extractor.webp,assets/projects/predictive-summary-extractor.svg" alt="">
+            <img class="project-image" loading="lazy" decoding="async" data-project-image="predictive-summary-extractor" data-image-sources="assets/projects/predictive-summary-extractor.jpg,assets/projects/predictive-summary-extractor.png,assets/projects/predictive-summary-extractor.webp,assets/projects/predictive-summary-extractor.svg" alt="">
             <div class="form-row"></div>
             <div class="form-row short"></div>
             <div class="form-row"></div>
@@ -395,7 +465,7 @@
 
         <article class="project-card reveal">
           <div class="project-shot compact-shot shot-alloc" aria-hidden="true">
-            <img class="project-image" data-project-image="alloc-review-builder" data-image-sources="assets/projects/alloc-review-builder.jpg,assets/projects/alloc-review-builder.png,assets/projects/alloc-review-builder.webp,assets/projects/alloc-review-builder.svg" alt="">
+            <img class="project-image" loading="lazy" decoding="async" data-project-image="alloc-review-builder" data-image-sources="assets/projects/alloc-review-builder.jpg,assets/projects/alloc-review-builder.png,assets/projects/alloc-review-builder.webp,assets/projects/alloc-review-builder.svg" alt="">
             <div class="alloc-sidebar"></div>
             <div class="alloc-main">
               <div class="alloc-filter"></div>
@@ -415,7 +485,7 @@
 
         <article class="project-card reveal">
           <div class="project-shot compact-shot shot-redial" aria-hidden="true">
-            <img class="project-image" data-project-image="auto-redial" data-image-sources="assets/projects/auto-redial.jpg,assets/projects/auto-redial.png,assets/projects/auto-redial.webp,assets/projects/auto-redial.svg" alt="">
+            <img class="project-image" loading="lazy" decoding="async" data-project-image="auto-redial" data-image-sources="assets/projects/auto-redial.jpg,assets/projects/auto-redial.png,assets/projects/auto-redial.webp,assets/projects/auto-redial.svg" alt="">
             <div class="redial-header"></div>
             <div class="redial-form"></div>
             <div class="redial-controls">
@@ -433,7 +503,7 @@
 
         <article class="project-card reveal">
           <div class="project-shot compact-shot shot-hub" aria-hidden="true">
-            <img class="project-image" data-project-image="mc6-analytics-hub" data-image-sources="assets/projects/mc6-analytics-hub.jpg,assets/projects/mc6-analytics-hub.png,assets/projects/mc6-analytics-hub.webp,assets/projects/mc6-analytics-hub.svg" alt="">
+            <img class="project-image" loading="lazy" decoding="async" data-project-image="mc6-analytics-hub" data-image-sources="assets/projects/mc6-analytics-hub.jpg,assets/projects/mc6-analytics-hub.png,assets/projects/mc6-analytics-hub.webp,assets/projects/mc6-analytics-hub.svg" alt="">
             <div class="hub-title"></div>
             <div class="hub-modules">
               <span></span><span></span><span></span>
@@ -449,7 +519,7 @@
 
         <article class="project-card reveal">
           <div class="project-shot compact-shot shot-auto-report" aria-hidden="true">
-            <img class="project-image" data-project-image="report-auto-extractor" data-image-sources="assets/projects/report-auto-extractor.jpg,assets/projects/report-auto-extractor.png,assets/projects/report-auto-extractor.webp,assets/projects/report-auto-extractor.svg" alt="">
+            <img class="project-image" loading="lazy" decoding="async" data-project-image="report-auto-extractor" data-image-sources="assets/projects/report-auto-extractor.jpg,assets/projects/report-auto-extractor.png,assets/projects/report-auto-extractor.webp,assets/projects/report-auto-extractor.svg" alt="">
             <div class="extractor-panel">
               <span></span><span></span><span></span><span></span>
               <strong></strong>
@@ -588,6 +658,13 @@
         repetitive workflow problems and turn them into usable tools for future employers, clients,
         and teams that need faster data visibility.
       </p>
+      <div class="closing-actions">
+        <a class="primary-action magnetic" href="mailto:kinoilustrisimo.021@gmail.com">
+          <span>Discuss an opportunity</span>
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12m-5-5 5 5-5 5"/></svg>
+        </a>
+        <a class="closing-link" href="#projects">Review selected work</a>
+      </div>
     </section>
   </main>
 
@@ -595,7 +672,7 @@
     <article class="resume-sheet">
       <header class="resume-head">
         <div class="resume-photo">
-          <img src="assets/kino-ilustrisimo.jpg?v=20260707-1830" alt="Professional portrait of Kino Ilustrisimo">
+          <img src="assets/kino-ilustrisimo.jpg?v=20260716-motion-v3" alt="Professional portrait of Kino Ilustrisimo">
         </div>
         <div class="resume-title-block">
           <p>Professional Resume</p>
@@ -736,16 +813,23 @@
   <div class="chatbot-backdrop" data-chatbot-backdrop></div>
 
   <div class="chatbot-widget" data-portfolio-chatbot>
-    <button class="chatbot-toggle" type="button" aria-label="Open Kino Portfolio Assistant" aria-expanded="false">
-      <span class="chatbot-toggle-icon">AI</span>
-      <span class="chatbot-toggle-text">Ask Portfolio</span>
+    <button class="chatbot-toggle" type="button" aria-label="Open Kino Portfolio Assistant" aria-expanded="false" aria-controls="kinoPortfolioAssistant">
+      <span class="chatbot-toggle-icon" aria-hidden="true">
+        <img src="assets/kino-logo.png?v=20260716-ki-logo-v1" width="44" height="44" alt="">
+      </span>
+      <span class="chatbot-toggle-text">Ask Kino AI</span>
     </button>
 
-    <section class="chatbot-panel" aria-label="Kino Portfolio Assistant" aria-hidden="true">
+    <section class="chatbot-panel" id="kinoPortfolioAssistant" role="dialog" aria-modal="true" aria-labelledby="chatbotDialogTitle" aria-hidden="true">
       <header class="chatbot-header">
-        <div>
-          <p>Portfolio AI</p>
-          <h2>Kino Portfolio Assistant</h2>
+        <div class="chatbot-identity">
+          <span class="chatbot-header-mark" aria-hidden="true">
+            <img src="assets/kino-logo.png?v=20260716-ki-logo-v1" width="36" height="36" alt="">
+          </span>
+          <div>
+            <p>Portfolio concierge</p>
+            <h2 id="chatbotDialogTitle">Ask about Kino</h2>
+          </div>
         </div>
         <div class="chatbot-header-actions">
           <button class="chatbot-clear" type="button">Clear</button>
@@ -753,7 +837,7 @@
         </div>
       </header>
 
-      <div class="chatbot-status" data-chatbot-status>Loading portfolio assistant knowledge base...</div>
+      <div class="chatbot-status" data-chatbot-status role="status">Preparing verified portfolio knowledge...</div>
       <div class="chatbot-suggestions" data-chatbot-suggestions aria-label="Suggested portfolio questions"></div>
       <div class="chatbot-quick-actions" data-chatbot-quick-actions aria-label="Portfolio quick actions"></div>
       <div class="chatbot-messages" data-chatbot-messages aria-live="polite"></div>
@@ -765,9 +849,12 @@
           data-chatbot-input
           type="text"
           autocomplete="off"
-          placeholder="Ask about skills, projects, Python, reports..."
+          maxlength="1200"
+          aria-describedby="chatbotPrivacyNote"
+          placeholder="Ask about Kino or a general question..."
         >
         <button type="submit">Send</button>
+        <p class="chatbot-privacy-note" id="chatbotPrivacyNote">When live AI is connected, messages are processed by OpenAI. Do not share confidential or sensitive information.</p>
       </form>
     </section>
   </div>
@@ -776,6 +863,6 @@
     <p>Portfolio prepared for professional presentation. Public version excludes exact residential address, credentials, and confidential production data.</p>
   </footer>
 
-  <script src="script.js?v=20260707-1830"></script>
+  <script src="script.js?v=20260716-prompt-v7"></script>
 </body>
 </html>

@@ -1,14 +1,17 @@
 (function () {
+  document.documentElement.classList.add("has-js");
+
   const progress = document.querySelector(".scroll-progress");
   const revealItems = document.querySelectorAll(".reveal");
   const navLinks = document.querySelectorAll(".nav-links a");
   const portraitCard = document.querySelector(".portrait-card");
   const profilePhoto = document.querySelector("#profilePhoto");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const reduceMotion = reduceMotionQuery.matches;
   const canUsePointerMotion = window.matchMedia("(hover: hover) and (pointer: fine)").matches && !reduceMotion;
   const CHATBOT_CONFIG = {
     botName: "Kino Portfolio Assistant",
-    provider: "retrieval",
+    provider: "hybrid",
     structuredProfileUrl: "portfolio-profile.json",
     portfolioTextUrl: "portfolio.txt",
     skillsUrl: "skills.json",
@@ -17,42 +20,116 @@
     contactUrl: "contact.json",
     faqUrl: "faq.txt",
     knowledgeBaseUrl: "questionnaire.txt",
-    confidenceThreshold: 2,
+    confidenceThreshold: 5,
     fallbackResponse:
-      "Thank you for your question. I do not have that exact information in the portfolio, but based on the available details, I can share related information about skills, projects, experience, services, tools, or contact information.",
+      "I don't see that exact detail in Kino's public portfolio, so I don't want to guess. I can still help with his work, skills, project fit, availability, or contact details.",
     localizedFallbackResponse:
-      "Salamat sa tanong. Wala akong exact information na iyon sa portfolio, pero base sa available details, pwede akong mag-share ng related information tungkol sa skills, projects, experience, services, tools, o contact information.",
+      "Wala ang exact detail na iyon sa public portfolio ni Kino, kaya ayokong manghula. Matutulungan pa rin kita sa work, skills, project fit, availability, o contact details niya.",
     privacyFallbackResponse:
-      "Thank you for your question. This specific information is not currently available in the public portfolio. You may ask about skills, work experience, projects, tools used, achievements, or contact information.",
+      "That detail isn't public, and I won't guess or expose private information. I can help with Kino's verified work, skills, experience, projects, or contact options instead.",
     localizedPrivacyFallbackResponse:
-      "Salamat sa tanong. Ang specific information na ito ay hindi kasalukuyang available sa public portfolio. Pwede kang magtanong tungkol sa skills, work experience, projects, tools na gamit, achievements, o contact information.",
+      "Hindi public ang detail na iyon, at hindi ako manghuhula o maglalabas ng private information. Matutulungan kita sa verified work, skills, experience, projects, o contact options ni Kino.",
     suggestedQuestions: [
-      "Tell me about yourself.",
-      "What can you do?",
-      "What projects have you completed?",
-      "Can you build dashboards?",
-      "What tools and technologies do you use?",
-      "Do you have sample work?",
-      "What services can you offer?",
-      "Why should we hire you?",
-      "How can we contact you?",
-      "Are you available for freelance or full-time work?",
-      "I want to submit a project request."
+      "What problems can Kino solve?",
+      "Can he automate our reporting?",
+      "Show me his strongest work.",
+      "Is Kino a fit for our team?",
+      "What tools does he use?",
+      "How can I contact Kino?"
     ],
     futureModel: {
-      type: "replaceable",
-      options: ["local-llm", "huggingface-inference", "api-backend"],
-      endpoint: ""
+      type: "secure-backend",
+      endpoint: "/api/portfolio-chat",
+      timeoutMs: 12_000,
+      maxHistoryMessages: 8
     }
   };
 
-  document.body.classList.add("page-ready");
+  if (reduceMotion) {
+    document.body.classList.add("page-ready", "page-entered");
+  } else {
+    document.body.classList.add("motion-ready");
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => document.body.classList.add("page-ready", "page-entered"));
+    });
+  }
+
+  reduceMotionQuery.addEventListener?.("change", (event) => {
+    if (!event.matches) return;
+    document.body.classList.add("page-ready", "page-entered");
+    document
+      .querySelectorAll("[style*='--tilt'], [style*='--magnetic'], [style*='--spotlight']")
+      .forEach((target) => {
+        target.classList.remove("is-interacting");
+        ["--tilt-x", "--tilt-y", "--magnetic-x", "--magnetic-y", "--spotlight-x", "--spotlight-y"].forEach(
+          (property) => target.style.removeProperty(property)
+        );
+      });
+  });
+
+  const siteHeader = document.querySelector("[data-site-header]");
+  const menuToggle = document.querySelector(".menu-toggle");
+  const mobileNavigation = document.querySelector("#primaryNavigation");
+
+  function closeNavigation({ returnFocus = false } = {}) {
+    if (!menuToggle || !mobileNavigation) return;
+    document.body.classList.remove("nav-open");
+    menuToggle.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-label", "Open navigation");
+    if (returnFocus) menuToggle.focus();
+  }
+
+  if (menuToggle && mobileNavigation) {
+    menuToggle.addEventListener("click", () => {
+      const willOpen = !document.body.classList.contains("nav-open");
+      document.body.classList.toggle("nav-open", willOpen);
+      menuToggle.setAttribute("aria-expanded", String(willOpen));
+      menuToggle.setAttribute("aria-label", willOpen ? "Close navigation" : "Open navigation");
+      if (willOpen) {
+        window.setTimeout(() => mobileNavigation.querySelector("a")?.focus(), reduceMotionQuery.matches ? 0 : 380);
+      }
+    });
+
+    navLinks.forEach((link) => link.addEventListener("click", () => closeNavigation()));
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && document.body.classList.contains("nav-open")) {
+        closeNavigation({ returnFocus: true });
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 760) closeNavigation();
+    });
+  }
+
+  function updateHeaderState() {
+    siteHeader?.classList.toggle("is-scrolled", window.scrollY > 24);
+  }
+
+  function updateCompactChatState() {
+    document.body.classList.add("compact-chat-ready");
+  }
 
   function updateProgress() {
     if (!progress) return;
     const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-    const percent = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
-    progress.style.width = `${percent}%`;
+    const ratio = scrollable > 0 ? Math.min(Math.max(window.scrollY / scrollable, 0), 1) : 0;
+    progress.style.setProperty("--scroll-progress", ratio.toFixed(4));
+  }
+
+  let viewportFrame = 0;
+
+  function updateViewportState() {
+    viewportFrame = 0;
+    updateProgress();
+    updateHeaderState();
+    updateCompactChatState();
+  }
+
+  function scheduleViewportUpdate() {
+    if (viewportFrame) return;
+    viewportFrame = window.requestAnimationFrame(updateViewportState);
   }
 
   if ("IntersectionObserver" in window) {
@@ -65,20 +142,39 @@
           }
         });
       },
-      { threshold: 0.16 }
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
     );
 
-    revealItems.forEach((item, index) => {
-      item.style.setProperty("--reveal-delay", `${Math.min(index * 45, 260)}ms`);
+    revealItems.forEach((item) => {
+      const revealSiblings = Array.from(item.parentElement?.children || []).filter((sibling) =>
+        sibling.classList.contains("reveal")
+      );
+      const siblingIndex = Math.max(0, revealSiblings.indexOf(item));
+      const isVerticalList = item.parentElement?.matches(".experience-list");
+      const delay = revealSiblings.length > 1 && !isVerticalList ? (siblingIndex % 3) * 72 : 0;
+      item.style.setProperty("--reveal-delay", `${delay}ms`);
       observer.observe(item);
     });
   } else {
     revealItems.forEach((item) => item.classList.add("is-visible"));
   }
 
-  updateProgress();
-  window.addEventListener("scroll", updateProgress, { passive: true });
-  window.addEventListener("resize", updateProgress);
+  const ambientRegions = document.querySelectorAll(".hero, .ticker");
+  if ("IntersectionObserver" in window && ambientRegions.length) {
+    const ambientObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => entry.target.classList.toggle("is-in-view", entry.isIntersecting));
+      },
+      { rootMargin: "10% 0px 10% 0px", threshold: 0.01 }
+    );
+    ambientRegions.forEach((region) => ambientObserver.observe(region));
+  } else {
+    ambientRegions.forEach((region) => region.classList.add("is-in-view"));
+  }
+
+  updateViewportState();
+  window.addEventListener("scroll", scheduleViewportUpdate, { passive: true });
+  window.addEventListener("resize", scheduleViewportUpdate, { passive: true });
 
   if (portraitCard && profilePhoto) {
     const sources = (profilePhoto.dataset.photoSources || "")
@@ -183,34 +279,77 @@
   });
 
   if (canUsePointerMotion) {
-    const premiumTargets = document.querySelectorAll(
-      ".project-card, .glass-card, .timeline-item, .experience-item, .responsibility-grid article, .primary-action, .secondary-action"
+    const spotlightTargets = document.querySelectorAll(
+      ".project-card, .glass-card, .timeline-item, .experience-item, .responsibility-grid article"
     );
 
-    premiumTargets.forEach((target) => {
-      target.addEventListener("pointermove", (event) => {
+    spotlightTargets.forEach((target) => {
+      const canTilt = target.matches(".project-card, .glass-card, .responsibility-grid article");
+      let pointerFrame = 0;
+      let latestPointer = null;
+
+      const renderPointerMotion = () => {
+        pointerFrame = 0;
+        if (!latestPointer || reduceMotionQuery.matches) return;
+
         const rect = target.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-        const xPercent = (x / rect.width) * 100;
-        const yPercent = (y / rect.height) * 100;
-        const rotateY = ((x / rect.width) - 0.5) * 5;
-        const rotateX = ((y / rect.height) - 0.5) * -5;
+        const xRatio = Math.min(Math.max((latestPointer.clientX - rect.left) / rect.width, 0), 1);
+        const yRatio = Math.min(Math.max((latestPointer.clientY - rect.top) / rect.height, 0), 1);
+        target.style.setProperty("--spotlight-x", `${(xRatio * 100).toFixed(2)}%`);
+        target.style.setProperty("--spotlight-y", `${(yRatio * 100).toFixed(2)}%`);
 
-        target.style.setProperty("--spotlight-x", `${xPercent}%`);
-        target.style.setProperty("--spotlight-y", `${yPercent}%`);
-        target.style.setProperty("--tilt-x", `${rotateX.toFixed(2)}deg`);
-        target.style.setProperty("--tilt-y", `${rotateY.toFixed(2)}deg`);
-
-        if (target.classList.contains("magnetic")) {
-          target.style.setProperty("--magnetic-x", `${(x / rect.width - 0.5) * 8}px`);
-          target.style.setProperty("--magnetic-y", `${(y / rect.height - 0.5) * 8}px`);
+        if (canTilt) {
+          const strength = target.classList.contains("project-card") ? 2.4 : 1.8;
+          target.style.setProperty("--tilt-x", `${((yRatio - 0.5) * -strength).toFixed(2)}deg`);
+          target.style.setProperty("--tilt-y", `${((xRatio - 0.5) * strength).toFixed(2)}deg`);
         }
+      };
+
+      target.addEventListener("pointerenter", () => target.classList.add("is-interacting"));
+      target.addEventListener("pointermove", (event) => {
+        latestPointer = event;
+        if (!pointerFrame) pointerFrame = window.requestAnimationFrame(renderPointerMotion);
       });
 
-      target.addEventListener("pointerleave", () => {
+      const resetPointerMotion = () => {
+        if (pointerFrame) window.cancelAnimationFrame(pointerFrame);
+        pointerFrame = 0;
+        latestPointer = null;
+        target.classList.remove("is-interacting");
         target.style.removeProperty("--tilt-x");
         target.style.removeProperty("--tilt-y");
+        target.style.removeProperty("--spotlight-x");
+        target.style.removeProperty("--spotlight-y");
+      };
+
+      target.addEventListener("pointerleave", resetPointerMotion);
+      target.addEventListener("pointercancel", resetPointerMotion);
+    });
+
+    document.querySelectorAll(".magnetic").forEach((target) => {
+      let magneticFrame = 0;
+      let latestPointer = null;
+
+      const renderMagneticMotion = () => {
+        magneticFrame = 0;
+        if (!latestPointer || reduceMotionQuery.matches) return;
+        const rect = target.getBoundingClientRect();
+        const xRatio = (latestPointer.clientX - rect.left) / rect.width - 0.5;
+        const yRatio = (latestPointer.clientY - rect.top) / rect.height - 0.5;
+        target.style.setProperty("--magnetic-x", `${(xRatio * 4).toFixed(2)}px`);
+        target.style.setProperty("--magnetic-y", `${(yRatio * 4).toFixed(2)}px`);
+      };
+
+      target.addEventListener("pointerenter", () => target.classList.add("is-interacting"));
+      target.addEventListener("pointermove", (event) => {
+        latestPointer = event;
+        if (!magneticFrame) magneticFrame = window.requestAnimationFrame(renderMagneticMotion);
+      });
+      target.addEventListener("pointerleave", () => {
+        if (magneticFrame) window.cancelAnimationFrame(magneticFrame);
+        magneticFrame = 0;
+        latestPointer = null;
+        target.classList.remove("is-interacting");
         target.style.removeProperty("--magnetic-x");
         target.style.removeProperty("--magnetic-y");
       });
@@ -219,6 +358,11 @@
 
   const lightbox = document.createElement("div");
   lightbox.className = "image-lightbox";
+  lightbox.setAttribute("role", "dialog");
+  lightbox.setAttribute("aria-modal", "true");
+  lightbox.setAttribute("aria-hidden", "true");
+  lightbox.setAttribute("aria-label", "Project preview");
+  lightbox.inert = true;
   lightbox.innerHTML = `
     <button class="lightbox-close" type="button" aria-label="Close preview">Close</button>
     <figure class="lightbox-panel">
@@ -231,27 +375,48 @@
   const lightboxImage = lightbox.querySelector("img");
   const lightboxCaption = lightbox.querySelector("figcaption");
   const closeLightbox = lightbox.querySelector(".lightbox-close");
+  let lightboxTrigger = null;
 
   function openLightbox(img) {
     const card = img.closest(".project-card");
     const title = card?.querySelector("h3")?.textContent?.trim() || "Project screenshot";
     if (!img.src || !lightboxImage || !lightboxCaption) return;
 
+    lightboxTrigger = img.closest(".project-shot");
     lightboxImage.src = img.src;
     lightboxImage.alt = title;
     lightboxCaption.textContent = title;
     lightbox.classList.add("is-open");
+    lightbox.setAttribute("aria-hidden", "false");
+    lightbox.inert = false;
     document.body.classList.add("lightbox-open");
     closeLightbox?.focus();
   }
 
   function hideLightbox() {
     lightbox.classList.remove("is-open");
+    lightbox.setAttribute("aria-hidden", "true");
+    lightbox.inert = true;
     document.body.classList.remove("lightbox-open");
+    lightboxTrigger?.focus();
+    lightboxTrigger = null;
   }
 
   document.querySelectorAll(".project-shot").forEach((shot) => {
+    const cardTitle = shot.closest(".project-card")?.querySelector("h3")?.textContent?.trim();
+    shot.removeAttribute("aria-hidden");
+    shot.setAttribute("role", "button");
+    shot.setAttribute("tabindex", "0");
+    shot.setAttribute("aria-label", `Open ${cardTitle || "project"} preview`);
+
     shot.addEventListener("click", () => {
+      const img = shot.querySelector(".project-image");
+      if (img && shot.classList.contains("has-image")) openLightbox(img);
+    });
+
+    shot.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
       const img = shot.querySelector(".project-image");
       if (img && shot.classList.contains("has-image")) openLightbox(img);
     });
@@ -278,16 +443,30 @@
     const clear = widget.querySelector(".chatbot-clear");
     const form = widget.querySelector("[data-chatbot-form]");
     const input = widget.querySelector("[data-chatbot-input]");
+    const sendButton = form?.querySelector("button[type='submit']");
     const messages = widget.querySelector("[data-chatbot-messages]");
     const status = widget.querySelector("[data-chatbot-status]");
     const suggestions = widget.querySelector("[data-chatbot-suggestions]");
     const quickActions = widget.querySelector("[data-chatbot-quick-actions]");
     const backdrop = document.querySelector("[data-chatbot-backdrop]");
+    panel.inert = true;
     let started = false;
     let knowledgeItems = [];
     let projectData = [];
     let contactData = {};
     let projectRequestModal = null;
+    let chatbotCloseTimer = 0;
+    let isResponding = false;
+    let conversationVersion = 0;
+    let aiConnectionEstablished = false;
+    let aiStatusResolved = false;
+    let projectRequestReturnFocus = null;
+    let conversationContext = {
+      lastQuestion: "",
+      intentKeys: [],
+      projectName: ""
+    };
+    let conversationHistory = [];
 
     const fallbackKnowledge = parseKnowledgeBase(`
 # Portfolio Summary
@@ -317,54 +496,113 @@ A: The assistant should avoid inventing information and say that the specific in
 
     if (!toggle || !panel || !form || !input || !messages || !status || !suggestions || !quickActions) return;
 
+    function trapFocusWithin(event, container) {
+      if (event.key !== "Tab") return;
+
+      const focusable = Array.from(
+        container.querySelectorAll(
+          "a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex='-1'])"
+        )
+      ).filter((element) => element.getClientRects().length && !element.closest("[inert]"));
+
+      if (!focusable.length) {
+        event.preventDefault();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
     renderSuggestedQuestions();
     renderQuickActions();
 
     loadPortfolioKnowledge()
-      .then(({ items, profileCount, faqCount, projectCount, supportCount, projects, contact }) => {
+      .then(({ items, projects, contact }) => {
         knowledgeItems = items.length ? items : fallbackKnowledge;
         projectData = projects;
         contactData = contact;
         renderQuickActions();
-        status.textContent = items.length
-          ? `Portfolio assistant ready: ${profileCount} profile sections, ${projectCount} projects, ${supportCount} support sections, and ${faqCount} FAQs loaded.`
-          : "Portfolio fallback knowledge is ready. Use a local server or GitHub Pages to load the portfolio profile.";
+        if (!aiStatusResolved) {
+          status.textContent = items.length
+            ? "Ready — ask naturally about Kino or a general question."
+            : "Ready with limited portfolio information.";
+        }
       })
       .catch(() => {
         knowledgeItems = fallbackKnowledge;
-        status.textContent = "Portfolio fallback knowledge is ready. Use a local server or GitHub Pages to load the portfolio profile.";
+        if (!aiStatusResolved) status.textContent = "Ready with limited portfolio information.";
       });
 
     function openChatbot() {
+      window.clearTimeout(chatbotCloseTimer);
+      widget.classList.remove("is-closing");
       widget.classList.add("is-open");
       backdrop?.classList.add("is-open");
       document.body.classList.add("chatbot-open");
       toggle.setAttribute("aria-expanded", "true");
       panel.setAttribute("aria-hidden", "false");
+      panel.inert = false;
 
       if (!started) {
         addMessage(
           "bot",
-          "Hi! I'm Kino's Portfolio AI Assistant. You may ask me about his skills, projects, experience, services, tools, or availability. You can also submit a project request with your email, budget, timeline, and requirements."
+          "Hi — I'm Kino's AI Portfolio Assistant. Ask about his work, fit, or services, or ask a general question. I'll separate verified portfolio facts from general guidance and keep the answer clear."
         );
         started = true;
       }
 
-      window.setTimeout(() => input.focus(), 180);
+      const coarsePointer = window.matchMedia("(pointer: coarse)").matches;
+      if (reduceMotionQuery.matches && !coarsePointer) {
+        input.focus({ preventScroll: true });
+      } else if (!coarsePointer) {
+        let focusSettled = false;
+        const focusInput = () => {
+          if (focusSettled || !widget.classList.contains("is-open")) return;
+          focusSettled = true;
+          input.focus({ preventScroll: true });
+        };
+        const handlePanelTransition = (event) => {
+          if (event.target !== panel || event.propertyName !== "transform") return;
+          panel.removeEventListener("transitionend", handlePanelTransition);
+          focusInput();
+        };
+        panel.addEventListener("transitionend", handlePanelTransition);
+        window.setTimeout(focusInput, 560);
+      }
     }
 
     function closeChatbot() {
       widget.classList.remove("is-open");
+      widget.classList.add("is-closing");
       backdrop?.classList.remove("is-open");
       document.body.classList.remove("chatbot-open");
       toggle.setAttribute("aria-expanded", "false");
       panel.setAttribute("aria-hidden", "true");
-      toggle.focus();
+      panel.inert = true;
+      window.clearTimeout(chatbotCloseTimer);
+      chatbotCloseTimer = window.setTimeout(() => {
+        widget.classList.remove("is-closing");
+        toggle.focus({ preventScroll: true });
+      }, reduceMotionQuery.matches ? 0 : 430);
     }
 
     function clearChatbot() {
       messages.innerHTML = "";
       started = false;
+      conversationContext = { lastQuestion: "", intentKeys: [], projectName: "" };
+      conversationHistory = [];
+      conversationVersion += 1;
+      isResponding = false;
+      form.removeAttribute("aria-busy");
+      if (sendButton) sendButton.disabled = false;
       openChatbot();
     }
 
@@ -373,7 +611,7 @@ A: The assistant should avoid inventing information and say that the specific in
 
       const title = document.createElement("p");
       title.className = "chatbot-suggestions-title";
-      title.textContent = "Suggested questions";
+      title.textContent = "Good places to start";
       suggestions.appendChild(title);
 
       CHATBOT_CONFIG.suggestedQuestions.forEach((question) => {
@@ -461,25 +699,138 @@ A: The assistant should avoid inventing information and say that the specific in
     }
 
     async function handleQuestion(question) {
+      if (isResponding) return;
+      isResponding = true;
+      const requestVersion = conversationVersion;
+      form.setAttribute("aria-busy", "true");
+      if (sendButton) sendButton.disabled = true;
       addMessage("user", question);
       const typing = addTyping();
 
-      window.setTimeout(() => {
-        typing.remove();
-        const response = generatePortfolioResponse(question, knowledgeItems, projectData, contactData);
-        addMessage("bot", response.text);
-        addResponseActions(response.actions);
-      }, reduceMotion ? 80 : 520);
+      window.setTimeout(async () => {
+        try {
+          const contextualQuestion = resolveConversationalQuestion(question, conversationContext);
+          const localResponse = generatePortfolioResponse(contextualQuestion, knowledgeItems, projectData, contactData);
+          const aiResult = await requestPortfolioAI(contextualQuestion, conversationHistory);
+          const aiAnswer = aiResult.answer;
+          if (requestVersion !== conversationVersion) return;
+
+          const response = aiAnswer
+            ? {
+                text: aiAnswer,
+                confidence: "model",
+                actions: getResponseActions(detectIntentKeys(contextualQuestion), contactData, contextualQuestion)
+              }
+            : localResponse;
+          const nextIntents = detectIntentKeys(contextualQuestion);
+          const nextProject = findProjectMatch(contextualQuestion, projectData);
+          const responseProjectMatches = projectData.filter((project) => (
+            project.name && normalizeText(response.text).includes(normalizeText(project.name))
+          ));
+          const responseProject = responseProjectMatches.length === 1
+            ? responseProjectMatches[0]
+            : null;
+
+          conversationContext = {
+            lastQuestion: contextualQuestion,
+            intentKeys: nextIntents.length ? nextIntents : conversationContext.intentKeys,
+            projectName: nextProject?.confident
+              ? nextProject.project.name
+              : (responseProject?.name || "")
+          };
+          conversationHistory = [
+            ...conversationHistory,
+            { role: "user", content: question },
+            { role: "assistant", content: response.text }
+          ].slice(-(CHATBOT_CONFIG.futureModel.maxHistoryMessages || 8));
+
+          aiStatusResolved = true;
+          if (aiAnswer) {
+            aiConnectionEstablished = true;
+            status.textContent = "AI connected — using Kino's public portfolio.";
+          } else if (aiResult.reason === "rate-limited") {
+            status.textContent = "Live AI is resting for a moment — verified local answers are active.";
+          } else if (aiResult.reason === "timeout") {
+            status.textContent = "Live AI timed out — verified local answers are active.";
+          } else if (aiConnectionEstablished) {
+            status.textContent = "Live AI is temporarily unavailable — verified local answers are active.";
+          } else {
+            status.textContent = "Verified local answers are active — live AI is unavailable right now.";
+          }
+
+          addMessage("bot", response.text);
+          addResponseActions(response.actions);
+        } catch (error) {
+          if (requestVersion === conversationVersion) {
+            aiStatusResolved = true;
+            status.textContent = "Verified local answers are active — please try that question again.";
+            addMessage("bot", CHATBOT_CONFIG.fallbackResponse);
+          }
+        } finally {
+          typing.remove();
+          if (requestVersion === conversationVersion) {
+            isResponding = false;
+            form.removeAttribute("aria-busy");
+            if (sendButton) sendButton.disabled = false;
+          }
+        }
+      }, reduceMotionQuery.matches ? 80 : 520);
+    }
+
+    async function requestPortfolioAI(question, history) {
+      const modelConfig = CHATBOT_CONFIG.futureModel || {};
+      if (CHATBOT_CONFIG.provider === "retrieval" || !modelConfig.endpoint) {
+        return { answer: "", reason: "disabled" };
+      }
+
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), modelConfig.timeoutMs || 12_000);
+
+      try {
+        const response = await fetch(modelConfig.endpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            message: question,
+            history: history.slice(-(modelConfig.maxHistoryMessages || 8))
+          }),
+          signal: controller.signal
+        });
+
+        if (!response.ok) {
+          return {
+            answer: "",
+            reason: response.status === 429 ? "rate-limited" : "unavailable"
+          };
+        }
+        const payload = await response.json();
+        return {
+          answer: typeof payload.answer === "string" ? payload.answer.trim() : "",
+          reason: "connected"
+        };
+      } catch (error) {
+        return {
+          answer: "",
+          reason: error?.name === "AbortError" ? "timeout" : "unavailable"
+        };
+      } finally {
+        window.clearTimeout(timeout);
+      }
     }
 
     function runChatbotAction(action) {
       if (action === "projects") {
-        document.querySelector("#projects")?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+        document.querySelector("#projects")?.scrollIntoView({ behavior: reduceMotionQuery.matches ? "auto" : "smooth" });
         return;
       }
 
       if (action === "skills") {
-        document.querySelector("#skills")?.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth" });
+        document.querySelector("#skills")?.scrollIntoView({ behavior: reduceMotionQuery.matches ? "auto" : "smooth" });
+        return;
+      }
+
+      if (action === "contact") {
+        handleQuestion("How can I contact Kino?");
         return;
       }
 
@@ -502,8 +853,15 @@ A: The assistant should avoid inventing information and say that the specific in
       }
     }
 
-    function renderLeadCaptureForm(initialValues = {}) {
-      closeProjectRequestModal();
+    function renderLeadCaptureForm(
+      initialValues = {},
+      returnFocusTarget = projectRequestReturnFocus || document.activeElement
+    ) {
+      closeProjectRequestModal({ restoreFocus: false });
+      projectRequestReturnFocus =
+        returnFocusTarget instanceof HTMLElement && returnFocusTarget.isConnected
+          ? returnFocusTarget
+          : toggle;
 
       const modal = document.createElement("div");
       modal.className = "project-request-modal";
@@ -519,9 +877,9 @@ A: The assistant should avoid inventing information and say that the specific in
       card.innerHTML = `
         <div class="project-request-heading">
           <div>
-            <p class="project-request-kicker">Client Inquiry</p>
-            <h3 id="projectRequestTitle">Project Request Assistant</h3>
-            <p>Submit a project inquiry for Kino. Final pricing will still depend on scope, complexity, timeline, and requirements.</p>
+            <p class="project-request-kicker">Optional Project Brief</p>
+            <h3 id="projectRequestTitle">Share a brief with Kino</h3>
+            <p>Use this only when you want Kino to reply directly. You can keep chatting with the assistant without completing this form.</p>
           </div>
           <button class="project-request-close" type="button" data-close-project-modal aria-label="Close project request form">Close</button>
         </div>
@@ -538,8 +896,9 @@ A: The assistant should avoid inventing information and say that the specific in
           <label>Contact number
             <input name="phone" type="text" autocomplete="tel" value="${escapeHtml(initialValues.phone)}">
           </label>
-          <label>Project type <span class="required">*</span>
-            <select name="projectType" required>
+          <label>Project type
+            <select name="projectType">
+              <option value=""${initialValues.projectType ? "" : " selected"}>Select if known (optional)</option>
               ${renderOption("AI Chatbot", initialValues.projectType)}
               ${renderOption("Dashboard Development", initialValues.projectType)}
               ${renderOption("Automation", initialValues.projectType)}
@@ -551,8 +910,8 @@ A: The assistant should avoid inventing information and say that the specific in
               ${renderOption("Other Custom Project", initialValues.projectType)}
             </select>
           </label>
-          <label>Estimated budget <span class="required">*</span>
-            <input name="budget" type="text" placeholder="Example: PHP 10,000 - PHP 25,000" value="${escapeHtml(initialValues.budget)}" required>
+          <label>Estimated budget
+            <input name="budget" type="text" placeholder="Optional budget or range" value="${escapeHtml(initialValues.budget)}">
           </label>
           <label>Preferred timeline / deadline
             <input name="timeline" type="text" placeholder="Example: 2-4 weeks or target date" value="${escapeHtml(initialValues.timeline)}">
@@ -565,14 +924,14 @@ A: The assistant should avoid inventing information and say that the specific in
               ${renderOption("Any available channel", initialValues.contactMethod)}
             </select>
           </label>
-          <label class="wide-field">Project description <span class="required">*</span>
-            <textarea name="requirement" placeholder="Briefly describe what you need, the problem to solve, and expected output..." required>${escapeHtml(initialValues.requirement)}</textarea>
+          <label class="wide-field">What do you need? <span class="required">*</span>
+            <textarea name="requirement" placeholder="Describe the problem and the result you want in your own words..." required>${escapeHtml(initialValues.requirement)}</textarea>
           </label>
           <label class="wide-field">Additional notes
             <textarea name="notes" placeholder="Optional notes, references, existing tools, or special requirements...">${escapeHtml(initialValues.notes)}</textarea>
           </label>
         </div>
-        <p class="chatbot-form-note">Required fields are marked with *. Click Review & Continue first, then confirm on the next screen to send the request. This does not generate a final quotation.</p>
+        <p class="chatbot-form-note">Only your name, email, and message are required. Review the brief before sending; this does not generate a final quotation.</p>
         <div class="chatbot-lead-footer">
           <button class="chatbot-lead-submit" type="submit">Review & Continue</button>
         </div>
@@ -581,7 +940,7 @@ A: The assistant should avoid inventing information and say that the specific in
       card.addEventListener("submit", (event) => {
         event.preventDefault();
         const request = readProjectRequest(card);
-        if (!request.name || !request.email || !request.projectType || !request.budget || !request.requirement) return;
+        if (!request.name || !request.email || !request.requirement) return;
         renderProjectRequestSummary(card, request);
       });
 
@@ -593,18 +952,38 @@ A: The assistant should avoid inventing information and say that the specific in
       document.body.appendChild(modal);
       projectRequestModal = modal;
       document.body.classList.add("project-modal-open");
+      panel.inert = true;
+      panel.setAttribute("aria-hidden", "true");
+      modal.addEventListener("keydown", (event) => trapFocusWithin(event, card));
       window.requestAnimationFrame(() => modal.classList.add("is-visible"));
-      window.setTimeout(() => card.querySelector("input, select, textarea")?.focus(), reduceMotion ? 0 : 180);
+      window.setTimeout(() => card.querySelector("input, select, textarea")?.focus(), reduceMotionQuery.matches ? 0 : 420);
     }
 
-    function closeProjectRequestModal() {
+    function closeProjectRequestModal({ restoreFocus = true } = {}) {
       if (!projectRequestModal) return;
 
       const modal = projectRequestModal;
+      const returnFocusTarget = projectRequestReturnFocus;
       projectRequestModal = null;
+      if (restoreFocus) projectRequestReturnFocus = null;
       modal.classList.remove("is-visible");
       document.body.classList.remove("project-modal-open");
-      window.setTimeout(() => modal.remove(), reduceMotion ? 0 : 180);
+      if (widget.classList.contains("is-open")) {
+        panel.inert = false;
+        panel.setAttribute("aria-hidden", "false");
+      }
+      window.setTimeout(() => {
+        modal.remove();
+        if (restoreFocus && !projectRequestModal) {
+          const focusTarget =
+            returnFocusTarget instanceof HTMLElement &&
+            returnFocusTarget.isConnected &&
+            !returnFocusTarget.closest("[inert]")
+              ? returnFocusTarget
+              : toggle;
+          focusTarget?.focus({ preventScroll: true });
+        }
+      }, reduceMotionQuery.matches ? 0 : 420);
     }
 
     function readProjectRequest(card) {
@@ -629,7 +1008,7 @@ A: The assistant should avoid inventing information and say that the specific in
         <div class="project-request-heading">
           <div>
             <p class="project-request-kicker">Review Request</p>
-            <h3>Confirm and Send Project Request</h3>
+            <h3 id="projectRequestTitle">Confirm and Send Project Request</h3>
             <p>Please review the details before sending. Kino will review the request and reply through the email address provided.</p>
           </div>
           <button class="project-request-close" type="button" data-close-project-modal aria-label="Close project request form">Close</button>
@@ -639,9 +1018,9 @@ A: The assistant should avoid inventing information and say that the specific in
           ${renderSummaryRow("Email Address", request.email)}
           ${renderSummaryRow("Company / Organization", request.company || "Not provided")}
           ${renderSummaryRow("Contact Number", request.phone || "Not provided")}
-          ${renderSummaryRow("Project Type", request.projectType)}
+          ${renderSummaryRow("Project Type", request.projectType || "Not specified")}
           ${renderSummaryRow("Project Description", request.requirement)}
-          ${renderSummaryRow("Estimated Budget", request.budget)}
+          ${renderSummaryRow("Estimated Budget", request.budget || "Not specified")}
           ${renderSummaryRow("Preferred Timeline", request.timeline || "Not provided")}
           ${renderSummaryRow("Preferred Contact Method", request.contactMethod || "Email")}
           ${renderSummaryRow("Additional Notes", request.notes || "None")}
@@ -654,8 +1033,7 @@ A: The assistant should avoid inventing information and say that the specific in
 
       card.querySelector("[data-confirm-request]")?.addEventListener("click", () => submitProjectRequest(request, card));
       card.querySelector("[data-edit-request]")?.addEventListener("click", () => {
-        closeProjectRequestModal();
-        renderLeadCaptureForm(request);
+        renderLeadCaptureForm(request, projectRequestReturnFocus);
       });
       card.querySelector("[data-close-project-modal]")?.addEventListener("click", closeProjectRequestModal);
     }
@@ -913,10 +1291,11 @@ A: The assistant should avoid inventing information and say that the specific in
     backdrop?.addEventListener("click", closeChatbot);
     close?.addEventListener("click", closeChatbot);
     clear?.addEventListener("click", clearChatbot);
+    panel.addEventListener("keydown", (event) => trapFocusWithin(event, panel));
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      const question = input.value.trim();
+      const question = input.value.trim().slice(0, 1_200);
       if (!question) return;
       input.value = "";
       handleQuestion(question);
@@ -1224,9 +1603,243 @@ A: The assistant should avoid inventing information and say that the specific in
     return items.filter((item) => item.question && item.answer);
   }
 
+  function resolveConversationalQuestion(question, context = {}) {
+    const cleanQuestion = String(question || "").trim();
+    const normalized = normalizeText(cleanQuestion);
+    if (!normalized || !context.lastQuestion) return cleanQuestion;
+
+    const projectFollowUp = context.projectName && (
+      /\b(it|that|this|those|project|system|tool|built|used|impact|feature|result|work)\b/.test(normalized)
+      || /^(tell me more|more details|explain more|how does|how did|what about)/.test(normalized)
+    );
+
+    if (projectFollowUp && !normalized.includes(normalizeText(context.projectName))) {
+      return `${cleanQuestion} Context: ${context.projectName}.`;
+    }
+
+    const referentialFollowUp = /^(what|how|why|when|where|which)\b.*\b(it|that|this|one|they|those)\b/.test(normalized)
+      && normalized.split(" ").length <= 10;
+    if (referentialFollowUp) {
+      return `${cleanQuestion} Previous topic: ${context.lastQuestion}`;
+    }
+
+    const genericFollowUp = /^(tell me more|more details|go on|explain more|can you expand|how so|why is that)\??$/.test(normalized);
+    if (genericFollowUp) {
+      return `${context.lastQuestion} Follow-up: ${cleanQuestion}`;
+    }
+
+    return cleanQuestion;
+  }
+
+  function getConversationalResponse(question, contact = {}) {
+    const normalized = normalizeText(question);
+    const wantsFilipino = isLikelyFilipino(question);
+    const email = contact.email || "";
+
+    if (/^(hi|hello|hey|good morning|good afternoon|good evening|kumusta|kamusta|musta|yo)( there| po)?$/.test(normalized)) {
+      return {
+        text: wantsFilipino
+          ? "Hello! Kumusta? Ano ang maitutulong ko sa iyo ngayon?"
+          : "Hello! How can I help you today?",
+        actions: []
+      };
+    }
+
+    if (/^(how are you|how are you doing|kamusta ka|kumusta ka)( today| po)?$/.test(normalized)) {
+      return {
+        text: wantsFilipino
+          ? "Ready akong tumulong. Ano ang gusto mong pag-usapan?"
+          : "I'm ready to help. What would you like to discuss?",
+        actions: []
+      };
+    }
+
+    if (/^(what|how|why|when|where|which)\b.*\b(it|that|this|one|they|those)\b/.test(normalized)
+      && normalized.split(" ").length <= 10
+      && !normalized.includes("previous topic")
+      && !normalized.includes("context")) {
+      return {
+        text: wantsFilipino
+          ? "Aling project, skill, o portfolio item ang tinutukoy mo?"
+          : "Which project, skill, or portfolio item are you referring to?",
+        actions: []
+      };
+    }
+
+    if (/^(thank you|thanks|thankyou|salamat)( so much| very much| po)?$/.test(normalized)) {
+      return {
+        text: wantsFilipino
+          ? "You're welcome! Sabihin mo lang kung ano pa ang maitutulong ko."
+          : "You're welcome! Let me know what else I can help with.",
+        actions: []
+      };
+    }
+
+    if (/\b(are you human|are you a human|human employee|human representative|who are you|what are you|are you kino|real ai|actual ai)\b/.test(normalized)) {
+      return {
+        text: wantsFilipino
+          ? "Ako ang AI Portfolio Assistant ni Kino, hindi human employee. Gumagamit ako ng verified public portfolio details at malinaw kong ihihiwalay ang general guidance sa confirmed facts."
+          : "I'm Kino's AI Portfolio Assistant, not a human employee. I use his verified public portfolio details and clearly separate general guidance from confirmed facts.",
+        actions: []
+      };
+    }
+
+    if (/\b(price|pricing|cost|quote|quotation|budget|rate|rates|how much|magkano)\b/.test(normalized)) {
+      return {
+        text: wantsFilipino
+          ? `Walang fixed project rate na naka-publish dahil nakadepende ang quote sa scope, data volume, current workflow, at deadline. I-describe mo lang dito ang expected output — walang form na required${email ? ` — o mag-email sa ${email}` : ""}.`
+          : `Kino doesn't publish a fixed project rate because quotes depend on scope, data volume, the current workflow, and deadline. Describe the desired output here — no form is required${email ? ` — or email ${email}` : ""}.`,
+        actions: getResponseActions(["pricing", "contact"], contact, question)
+      };
+    }
+
+    if (/\b(timeline|deadline|delivery|turnaround|how long|when can|gaano katagal|kailan)\b/.test(normalized)) {
+      return {
+        text: wantsFilipino
+          ? "Walang generic delivery time na naka-publish. Ang realistic timeline ay depende sa data source, output, automation complexity, at review needs. I-share mo lang ang target result at deadline para ma-assess ang fit."
+          : "There isn't a generic delivery time published. A realistic timeline depends on the data source, desired output, automation complexity, and review needs. Share the target result and deadline to assess fit.",
+        actions: getResponseActions(["timeline", "contact"], contact, question)
+      };
+    }
+
+    return null;
+  }
+
+  function isLikelyGeneralKnowledgeQuestion(question) {
+    const normalized = normalizeText(question);
+    const referencesPortfolio = /\b(kino|his|him|he|portfolio|resume|project|work|experience|skill|service|contact|employer|client)\b/.test(normalized);
+    if (referencesPortfolio) return false;
+
+    return /^(define|explain|generally|what is|what are|what does|what s the difference|difference between|compare|how does|why does|in [a-z0-9]+ sentences)\b/.test(normalized);
+  }
+
+  function getLocalGeneralUnavailableResponse(question) {
+    return isLikelyFilipino(question)
+      ? "Hindi available ang live AI connection ngayon, kaya hindi ako mag-iimbento ng sagot sa general question na iyon gamit lang ang local portfolio data. Matutulungan pa rin kita sa verified work, skills, projects, at professional fit ni Kino."
+      : "The live AI connection is unavailable right now, so I won't invent an answer to that general question from the local portfolio data. I can still help with Kino's verified work, skills, projects, and professional fit.";
+  }
+
+  function composeDirectPortfolioAnswer(question, intentKeys, wantsFilipino) {
+    const intents = new Set(intentKeys);
+    const normalized = normalizeText(question);
+
+    if (intents.has("availability")) {
+      return wantsFilipino
+        ? "Oo — open si Kino sa selected job at client opportunities sa Python automation, data operations, dashboards, reporting, at workflow improvement."
+        : "Yes — Kino is open to selected job and client opportunities in Python automation, data operations, dashboards, reporting, and workflow improvement.";
+    }
+
+    if (intents.has("value") && /\b(hire|fit|qualified|choose|kukunin|bagay|team|role)\b/.test(normalized)) {
+      return wantsFilipino
+        ? "Strong fit si Kino para sa operations, reporting, automation, o data-support work na kailangan ng practical execution. Pinagsasama niya ang frontline at leadership experience sa Python, reporting discipline, at workflow problem-solving."
+        : "Kino is a strong fit for operations, reporting, automation, or data-support work that needs practical execution. He combines frontline and leadership experience with Python, reporting discipline, and workflow problem-solving.";
+    }
+
+    if (intents.has("dashboard")) {
+      return wantsFilipino
+        ? "Oo. Kaya ni Kino gumawa ng KPI dashboards at operational monitoring views para sa campaign movement, digital activity, performance summaries, at reporting visibility."
+        : "Yes. Kino can build KPI dashboards and operational monitoring views for campaign movement, digital activity, performance summaries, and reporting visibility.";
+    }
+
+    if (intents.has("automation") && /\b(error|errors|quality|validate|validation|cleanup|address|fix)\b/.test(normalized)) {
+      return wantsFilipino
+        ? "Base sa verified portfolio niya, kayang i-address ni Kino ang reporting errors sa pamamagitan ng input validation, consistent CSV/XLSX processing, automated checks, at mas malinaw na output monitoring. Ang exact controls ay kailangang iayon sa data source at reporting rules ng client."
+        : "Based on his verified portfolio, Kino can address reporting errors through input validation, consistent CSV/XLSX processing, automated checks, and clearer output monitoring. The exact controls should be tailored to the client's data sources and reporting rules.";
+    }
+
+    if (intents.has("automation")) {
+      return wantsFilipino
+        ? "Oo. Kaya ni Kino i-automate ang repetitive reporting, CSV/XLSX processing, data extraction, validation, at recurring workflow steps gamit ang Python."
+        : "Yes. Kino can automate repetitive reporting, CSV/XLSX processing, data extraction, validation, and recurring workflow steps with Python.";
+    }
+
+    if (intents.has("projects") && /\b(strongest|best|top|show|sample|samples|work|portfolio|gawa)\b/.test(normalized)) {
+      return wantsFilipino
+        ? "Para sa dashboards, magandang samples ang Digital Omnichannel Monitoring Dashboard at MC6 Analytics Hub. Para sa automation, tingnan ang Report Auto Extractor, Predictive Summary Extractor, at Auto Redial Automation."
+        : "For dashboard work, start with the Digital Omnichannel Monitoring Dashboard and MC6 Analytics Hub. For automation, see Report Auto Extractor, Predictive Summary Extractor, and Auto Redial Automation.";
+    }
+
+    if (intents.has("services") && /\b(problem|problems|solve|help|need|offer|service|support|client|error|errors|address|fix|quality|validate|validation|cleanup|kailangan)\b/.test(normalized)) {
+      return wantsFilipino
+        ? "Pinakamalakas si Kino sa problems kung saan nagsasabay ang operations at repetitive reporting: report automation, structured Excel/CSV/XLSX outputs, KPI monitoring, data validation, at workflow improvement."
+        : "Kino is strongest where operations and repetitive reporting meet: report automation, structured Excel/CSV/XLSX outputs, KPI monitoring, data validation, and workflow improvement.";
+    }
+
+    if (intents.has("tools") && !intents.has("projects")) {
+      return wantsFilipino
+        ? "Ang confirmed stack ni Kino ay Python, Excel, CSV/XLSX file processing, reporting dashboards, data validation, at automation scripts."
+        : "Kino's confirmed stack is Python, Excel, CSV/XLSX file processing, reporting dashboards, data validation, and automation scripts.";
+    }
+
+    if (intents.has("experience")) {
+      return wantsFilipino
+        ? "May experience si Kino sa S.P. Madrid & Associates Law Firm, Everything But Cheese Sherwood, RLX Pharmacy, Jollibee Aduana, at Tabo Rice—mula frontline service at supervision hanggang collection strategy, data operations, reporting, at automation."
+        : "Kino's background spans S.P. Madrid & Associates Law Firm, Everything But Cheese Sherwood, RLX Pharmacy, Jollibee Aduana, and Tabo Rice—from frontline service and supervision to collection strategy, data operations, reporting, and automation.";
+    }
+
+    if (intents.has("education")) {
+      return wantsFilipino
+        ? "Natapos ni Kino ang senior high school sa Taal National High School sa Computer Programming strand. Nag-aral siya sa Angel John Integrated Academy para sa elementary at junior high school."
+        : "Kino completed senior high school at Taal National High School under the Computer Programming strand. He attended Angel John Integrated Academy for elementary and junior high school.";
+    }
+
+    if (intents.has("about")) {
+      return wantsFilipino
+        ? "Si Kino Ilustrisimo ay data operations at Python automation professional na gumagawa ng practical reporting workflows, dashboards, at tools para mabawasan ang manual work."
+        : "Kino Ilustrisimo is a data operations and Python automation professional who builds practical reporting workflows, dashboards, and tools that reduce manual work.";
+    }
+
+    return "";
+  }
+
+  function getUnconfirmedCapabilityResponse(question, wantsFilipino) {
+    const normalized = normalizeText(question);
+    const unconfirmedCapabilities = [
+      ["power bi", "Power BI"],
+      ["tableau", "Tableau"],
+      ["looker", "Looker"],
+      ["qlik", "Qlik"],
+      ["react", "React"],
+      ["angular", "Angular"],
+      ["vue", "Vue"],
+      ["node js", "Node.js"],
+      ["javascript", "JavaScript development"],
+      ["wordpress", "WordPress"],
+      ["web development", "web development"],
+      ["website", "website development"],
+      ["mobile app", "mobile app development"],
+      ["aws", "AWS"],
+      ["azure", "Microsoft Azure"],
+      ["google cloud", "Google Cloud"],
+      ["figma", "Figma"]
+    ];
+    const match = unconfirmedCapabilities.find(([term]) => normalized.includes(term));
+    if (!match) return "";
+
+    return wantsFilipino
+      ? `Hindi listed ang ${match[1]} bilang confirmed capability sa public portfolio ni Kino, kaya ayokong mag-overclaim. Ang verified stack niya ay Python, Excel, CSV/XLSX processing, dashboards, data validation, at reporting automation.`
+      : `${match[1]} isn't listed as a confirmed capability in Kino's public portfolio, so I don't want to overclaim. His verified stack is Python, Excel, CSV/XLSX processing, dashboards, data validation, and reporting automation.`;
+  }
+
   function generatePortfolioResponse(question, knowledgeItems, projects, contact) {
     const normalizedQuestion = normalizeText(question);
     const wantsFilipino = isLikelyFilipino(question);
+
+    const conversationalResponse = getConversationalResponse(question, contact);
+    if (conversationalResponse) {
+      return {
+        ...conversationalResponse,
+        confidence: "conversational"
+      };
+    }
+
+    if (isLikelyGeneralKnowledgeQuestion(question)) {
+      return {
+        text: getLocalGeneralUnavailableResponse(question),
+        confidence: "general-unavailable",
+        actions: []
+      };
+    }
 
     if (!knowledgeItems.length || !normalizedQuestion) {
       return {
@@ -1248,19 +1861,37 @@ A: The assistant should avoid inventing information and say that the specific in
 
     if (intentKeys.includes("contact") && hasContactDetails(contact)) {
       return {
-        text: formatContactResponse(contact, wantsFilipino),
+        text: formatContactResponse(contact, wantsFilipino, question),
         confidence: "high",
-        actions: getResponseActions(["contact", ...intentKeys], contact)
+        actions: getResponseActions(["contact", ...intentKeys], contact, question)
       };
     }
 
     const projectMatch = findProjectMatch(question, projects);
 
-    if (projectMatch && projectMatch.score >= 4) {
+    if (projectMatch?.confident) {
       return {
-        text: formatProjectAnswer(projectMatch.project, wantsFilipino),
+        text: formatProjectAnswer(projectMatch.project, wantsFilipino, question),
         confidence: "high",
         actions: getResponseActions(["projects", ...(projectMatch.project.intentKeys || [])], contact)
+      };
+    }
+
+    const capabilityBoundary = getUnconfirmedCapabilityResponse(question, wantsFilipino);
+    if (capabilityBoundary) {
+      return {
+        text: capabilityBoundary,
+        confidence: "boundary",
+        actions: getResponseActions(["skills", "tools"], contact)
+      };
+    }
+
+    const directAnswer = composeDirectPortfolioAnswer(question, intentKeys, wantsFilipino);
+    if (directAnswer) {
+      return {
+        text: directAnswer,
+        confidence: "high",
+        actions: getResponseActions(intentKeys, contact)
       };
     }
 
@@ -1319,42 +1950,64 @@ A: The assistant should avoid inventing information and say that the specific in
       ].filter(Boolean).join(" "));
       let score = 0;
 
-      if (project.name && normalizedQuestion.includes(normalizeText(project.name))) score += 12;
+      const exactName = Boolean(project.name && normalizedQuestion.includes(normalizeText(project.name)));
+      if (exactName) score += 12;
       terms.forEach((term) => {
         if (searchable.includes(term)) score += 1.5;
       });
 
-      return { project, score };
+      return { project, score, exactName };
     }).sort((a, b) => b.score - a.score);
 
-    return matches[0] || null;
+    const top = matches[0];
+    if (!top) return null;
+    const runnerUpScore = matches[1]?.score || 0;
+    return {
+      ...top,
+      runnerUpScore,
+      confident: top.exactName || (top.score >= 6 && top.score - runnerUpScore >= 2)
+    };
   }
 
-  function formatProjectAnswer(project, wantsFilipino) {
+  function formatProjectAnswer(project, wantsFilipino, question = "") {
     const tools = Array.isArray(project.toolsUsed) ? project.toolsUsed.join(", ") : "";
     const features = Array.isArray(project.mainFeatures) ? project.mainFeatures.join("; ") : "";
-    const screenshot = project.screenshot ? `Screenshot: ${project.screenshot}` : "Screenshot: available in the project section.";
+    const normalizedQuestion = normalizeText(question);
+
+    if (/\b(tool|tools|technology|technologies|built with|stack|used|ginamit|gamit)\b/.test(normalizedQuestion)) {
+      return wantsFilipino
+        ? `Para sa ${project.name}, ang confirmed tools ay ${tools || "hindi naka-specify sa public portfolio"}.`
+        : `For ${project.name}, the confirmed tools are ${tools || "not specified in the public portfolio"}.`;
+    }
+
+    if (/\b(impact|result|results|outcome|benefit|value|epekto|resulta)\b/.test(normalizedQuestion)) {
+      return wantsFilipino
+        ? `${project.name}: ${project.businessImpactFilipino || project.businessImpact}`
+        : `${project.name}: ${project.businessImpact}`;
+    }
+
+    if (/\b(feature|features|how does|how it works|what does|function|capability|paano)\b/.test(normalizedQuestion)) {
+      return wantsFilipino
+        ? `${project.name} includes ${features || "features that are not itemized in the public portfolio"}.`
+        : `${project.name} includes ${features || "features that are not itemized in the public portfolio"}.`;
+    }
 
     if (wantsFilipino) {
       return [
-        `Project: ${project.name}`,
-        `Problem solved: ${project.problemSolvedFilipino || project.problemSolved}`,
-        `Tools used: ${tools || "Portfolio does not specify exact tools for this project."}`,
-        `Main features: ${features || "Portfolio does not specify exact feature list."}`,
-        `Business impact: ${project.businessImpactFilipino || project.businessImpact}`,
-        screenshot,
-        "Kung gusto mong i-discuss ang similar project, pwede kang mag-leave ng details sa contact form."
+        project.name,
+        `Problem: ${project.problemSolvedFilipino || project.problemSolved}`,
+        `Built with: ${tools || "Hindi naka-specify ang exact tools."}`,
+        `What it does: ${features || "Hindi naka-specify ang exact feature list."}`,
+        `Impact: ${project.businessImpactFilipino || project.businessImpact}`
       ].filter(Boolean).join("\n");
     }
 
     return [
-      `Project: ${project.name}`,
-      `Problem solved: ${project.problemSolved}`,
-      `Tools used: ${tools || "The portfolio does not specify exact tools for this project."}`,
-      `Main features: ${features || "The portfolio does not specify the exact feature list."}`,
-      `Business impact: ${project.businessImpact}`,
-      screenshot,
-      "You may contact Kino directly if you want to discuss a similar dashboard, automation, or reporting project."
+      project.name,
+      `Problem: ${project.problemSolved}`,
+      `Built with: ${tools || "The exact tools are not specified."}`,
+      `What it does: ${features || "The exact feature list is not specified."}`,
+      `Impact: ${project.businessImpact}`
     ].filter(Boolean).join("\n");
   }
 
@@ -1362,28 +2015,46 @@ A: The assistant should avoid inventing information and say that the specific in
     return Boolean(contact.email || contact.phone || contact.facebook || contact.linkedin || contact.github);
   }
 
-  function formatContactResponse(contact = {}, wantsFilipino) {
-    const details = [
-      contact.email ? `Email: ${contact.email}` : "",
-      contact.phone ? `Mobile: ${contact.phone}` : "",
-      contact.facebook ? `Facebook: ${contact.facebook}` : "",
-      contact.linkedin ? `LinkedIn: ${contact.linkedin}` : "",
-      contact.github ? `GitHub: ${contact.github}` : ""
-    ].filter(Boolean);
+  function formatContactResponse(contact = {}, wantsFilipino, question = "") {
+    const normalized = normalizeText(question);
+    const channels = [
+      { key: "email", label: "Email", value: contact.email, pattern: /\b(email|mail)\b/ },
+      { key: "phone", label: "Mobile", value: contact.phone, pattern: /\b(phone|mobile|number|call|text)\b/ },
+      { key: "facebook", label: "Facebook", value: contact.facebook, pattern: /\b(facebook|fb|messenger)\b/ },
+      { key: "linkedin", label: "LinkedIn", value: contact.linkedin, pattern: /\b(linkedin)\b/ },
+      { key: "github", label: "GitHub", value: contact.github, pattern: /\b(github)\b/ }
+    ].filter((channel) => channel.value);
+    const wantsEveryChannel = /\b(all|every|complete|other channels|all contact)\b/.test(normalized);
+    const specificallyRequested = channels.filter((channel) => channel.pattern.test(normalized));
+    const preferred = channels.find((channel) => channel.key === "email") || channels[0];
+    const selected = wantsEveryChannel
+      ? channels
+      : (specificallyRequested.length ? specificallyRequested : (preferred ? [preferred] : []));
+    const details = selected.map((channel) => `${channel.label}: ${channel.value}`);
 
-    if (wantsFilipino) {
-      return [
-        "Pwede mong ma-contact si Kino gamit ang mga details na ito:",
-        ...details,
-        contact.preferredContactMethod ? `Note: ${contact.preferredContactMethod}` : "Email is preferred for professional inquiries and project requests."
-      ].join("\n");
+    if (!details.length) {
+      return wantsFilipino
+        ? "Walang public contact channel na naka-list sa portfolio ngayon."
+        : "There is no public contact channel listed in the portfolio right now.";
     }
 
-    return [
-      "You can contact Kino through these details:",
-      ...details,
-      contact.preferredContactMethod ? `Note: ${contact.preferredContactMethod}` : "Email is preferred for professional inquiries and project requests."
-    ].join("\n");
+    if (wantsFilipino) {
+      const lead = specificallyRequested.length || wantsEveryChannel
+        ? "Narito ang requested public contact information ni Kino:"
+        : "Ang preferred way para ma-contact si Kino ay email:";
+      const alternative = !specificallyRequested.length && !wantsEveryChannel && channels.length > 1
+        ? "May mobile at Facebook options din kung kailangan mo ng ibang channel."
+        : "";
+      return [lead, ...details, alternative].filter(Boolean).join("\n");
+    }
+
+    const lead = specificallyRequested.length || wantsEveryChannel
+      ? "Here is the public contact information you requested:"
+      : "The preferred way to contact Kino is by email:";
+    const alternative = !specificallyRequested.length && !wantsEveryChannel && channels.length > 1
+      ? "Mobile and Facebook are also available if you need another channel."
+      : "";
+    return [lead, ...details, alternative].filter(Boolean).join("\n");
   }
 
   function withServiceRecommendation(answer, intentKeys, wantsFilipino) {
@@ -1425,20 +2096,16 @@ A: The assistant should avoid inventing information and say that the specific in
   function getQuickActions(contact = {}) {
     const actions = [
       { label: "View Projects", action: "projects" },
-      { label: "Download Resume PDF", action: "resume" },
-      { label: "Submit Project Request", action: "project-request", primary: true }
+      { label: "Download Resume", action: "resume" },
+      { label: "Contact Kino", action: "contact" }
     ];
 
-    if (contact.github) actions.push({ label: "GitHub", href: contact.github });
-    if (contact.linkedin) actions.push({ label: "LinkedIn", href: contact.linkedin });
-    if (contact.email) actions.push({ label: "Email", href: `mailto:${contact.email}` });
-    if (contact.phone) actions.push({ label: "Mobile", href: `tel:${contact.phone}` });
-    if (contact.facebook) actions.push({ label: "Facebook", href: contact.facebook });
+    actions.push({ label: "Optional Project Brief", action: "project-request" });
 
     return actions;
   }
 
-  function getResponseActions(intentKeys, contact = {}) {
+  function getResponseActions(intentKeys, contact = {}, question = "") {
     const intents = new Set(intentKeys);
     const actions = [];
 
@@ -1450,63 +2117,48 @@ A: The assistant should avoid inventing information and say that the specific in
       actions.push({ label: "View Skills", action: "skills" });
     }
 
-    if (intents.has("contact") || intents.has("availability") || intents.has("services") || intents.has("value") || intents.has("dashboard") || intents.has("automation") || intents.has("chatbot")) {
-      actions.push({ label: "Submit Project Request", action: "project-request", primary: true });
-    }
-
-    if (!actions.length) {
-      actions.push({ label: "View Projects", action: "projects" });
-      actions.push({ label: "Submit Project Request", action: "project-request", primary: true });
-    }
-
     if (intents.has("contact")) {
-      if (contact.email) actions.push({ label: "Email", href: `mailto:${contact.email}` });
-      if (contact.phone) actions.push({ label: "Mobile", href: `tel:${contact.phone}` });
-      if (contact.facebook) actions.push({ label: "Facebook", href: contact.facebook });
+      const normalized = normalizeText(question);
+      const wantsEveryChannel = /\b(all|every|complete|other channels|all contact)\b/.test(normalized);
+      const requestedChannels = [
+        { label: "Mobile", href: contact.phone ? `tel:${contact.phone}` : "", pattern: /\b(phone|mobile|number|call|text)\b/ },
+        { label: "Facebook", href: contact.facebook || "", pattern: /\b(facebook|fb|messenger)\b/ },
+        { label: "LinkedIn", href: contact.linkedin || "", pattern: /\b(linkedin)\b/ },
+        { label: "GitHub", href: contact.github || "", pattern: /\b(github)\b/ },
+        { label: "Email Kino", href: contact.email ? `mailto:${contact.email}` : "", pattern: /\b(email|mail)\b/, primary: true }
+      ].filter((channel) => channel.href);
+      const selectedChannels = wantsEveryChannel
+        ? requestedChannels
+        : requestedChannels.filter((channel) => channel.pattern.test(normalized));
+      const channelsToShow = selectedChannels.length
+        ? selectedChannels
+        : requestedChannels.filter((channel) => channel.label === "Email Kino").slice(0, 1);
+      channelsToShow.forEach((channel) => {
+        actions.push({
+          label: channel.label,
+          href: channel.href,
+          primary: Boolean(channel.primary)
+        });
+      });
     }
 
-    return actions.slice(0, 4);
-  }
-
-  function generateRetrievalAnswer(question, knowledgeItems) {
-    if (!knowledgeItems.length) return getFallbackResponse(question);
-
-    const normalizedQuestion = normalizeText(question);
-    if (!normalizedQuestion) return getFallbackResponse(question);
-
-    if (isSensitiveOrUnavailableRequest(normalizedQuestion)) {
-      return getPrivacyFallbackResponse(question);
+    if (intents.has("project-request")) {
+      actions.push({ label: "Share Optional Brief", action: "project-request", primary: !contact.email });
     }
 
-    const wantsFilipino = isLikelyFilipino(question);
-    const intentKeys = detectIntentKeys(question);
-
-    const normalizedSearchQuestion = normalizeText(buildSemanticSearchText(question, intentKeys));
-
-    const topMatch = knowledgeItems
-      .map((item) => ({ item, score: scoreKnowledgeItem(normalizedSearchQuestion, item) }))
-      .sort((a, b) => b.score - a.score)[0];
-
-    if (topMatch && topMatch.score >= CHATBOT_CONFIG.confidenceThreshold + 6 && topMatch.item.sourceType === "faq") {
-      return adaptAnswerLanguage(topMatch.item.answer, topMatch.item, wantsFilipino);
-    }
-
-    const intentAnswer = composeIntentAnswer(question, intentKeys, knowledgeItems, wantsFilipino);
-    if (intentAnswer) return intentAnswer;
-
-    if (!topMatch || topMatch.score < CHATBOT_CONFIG.confidenceThreshold) {
-      return getFallbackResponse(question, getRelatedLabel(intentKeys));
-    }
-
-    return adaptAnswerLanguage(topMatch.item.answer, topMatch.item, wantsFilipino);
+    return actions
+      .filter((action, index, list) => list.findIndex((candidate) => (
+        candidate.label === action.label && candidate.href === action.href && candidate.action === action.action
+      )) === index)
+      .slice(0, 3);
   }
 
   function getFallbackResponse(question, relatedLabel = "") {
     const english = relatedLabel
-      ? `Thank you for your question. I do not have that exact information in the portfolio, but based on the available details, I can share related information about ${relatedLabel}.`
+      ? `I don't see that exact detail in Kino's public portfolio. I can confirm related information about ${relatedLabel}, but I won't guess beyond what is verified.`
       : CHATBOT_CONFIG.fallbackResponse;
     const filipino = relatedLabel
-      ? `Salamat sa tanong. Wala akong exact information na iyon sa portfolio, pero base sa available details, pwede akong mag-share ng related information tungkol sa ${relatedLabel}.`
+      ? `Wala ang exact detail na iyon sa public portfolio ni Kino. Kaya kong i-confirm ang related information tungkol sa ${relatedLabel}, pero hindi ako manghuhula.`
       : CHATBOT_CONFIG.localizedFallbackResponse;
 
     return isLikelyFilipino(question) ? filipino : english;
@@ -1534,12 +2186,11 @@ A: The assistant should avoid inventing information and say that the specific in
       }))
       .filter((match) => match.rank > 0)
       .sort((a, b) => b.rank - a.rank)
-      .slice(0, 3)
+      .slice(0, 1)
       .map((match) => match.item);
 
     if (!profileItems.length) return "";
 
-    const labels = profileItems.map((item) => item.sectionLabel).filter(Boolean);
     const answerParts = profileItems.map((item) => {
       if (wantsFilipino && item.answerFilipino) return item.answerFilipino;
       return item.answer;
@@ -1547,11 +2198,7 @@ A: The assistant should avoid inventing information and say that the specific in
 
     if (!answerParts.length) return "";
 
-    if (wantsFilipino) {
-      return `Base sa portfolio ni Kino, related ito sa ${formatList(labels)}. ${answerParts.join(" ")}`;
-    }
-
-    return `Based on Kino's portfolio, this is related to ${formatList(labels)}. ${answerParts.join(" ")}`;
+    return answerParts.join(" ");
   }
 
   function rankProfileItemForIntent(item, intentKeys) {
@@ -1578,7 +2225,7 @@ A: The assistant should avoid inventing information and say that the specific in
   }
 
   function isSensitiveOrUnavailableRequest(normalizedQuestion) {
-    return /\b(age|birth|birthday|birthdate|address|salary|compensation|credential|password|username|debtor|account number|private data|client name|bank data|confidential|residential|home|bpi)\b/.test(normalizedQuestion)
+    return /\b(age|birth|birthday|birthdate|salary|compensation|credential|password|username|debtor|account number|private data|client name|bank data|confidential|residential|bpi)\b/.test(normalizedQuestion)
       || normalizedQuestion.includes("how old")
       || normalizedQuestion.includes("ilan taon")
       || normalizedQuestion.includes("saan nakatira")
@@ -1654,7 +2301,8 @@ A: The assistant should avoid inventing information and say that the specific in
     }
 
     if (hasPhrase("ano kaya mong gawin", "ano kaya mo", "what can you do", "what do you offer", "services can you offer", "kaya mong i offer", "kaya mo i offer")
-      || hasWord("skills", "skill", "kakayahan", "capability", "capabilities", "services", "offer", "service", "need", "kailangan", "gusto")) {
+      || hasPhrase("what problems can kino solve", "how can kino help", "what can kino help with")
+      || hasWord("skills", "skill", "kakayahan", "capability", "capabilities", "services", "offer", "service", "need", "kailangan", "gusto", "solve", "problems", "communication", "leadership", "adaptability")) {
       add("skills", "services");
     }
 
@@ -1663,18 +2311,18 @@ A: The assistant should avoid inventing information and say that the specific in
       add("dashboard", "projects", "tools");
     }
 
-    if (hasPhrase("may sample work", "may gawa ka", "sample work", "portfolio sample", "work sample", "show project")
-      || hasWord("projects", "project", "proyekto", "samples", "sample", "portfolio", "gawa")) {
+    if (hasPhrase("may sample work", "may gawa ka", "sample work", "portfolio sample", "work sample", "show project", "show me his work", "strongest work", "best work")
+      || hasWord("projects", "project", "proyekto", "samples", "sample", "portfolio", "gawa", "showcase")) {
       add("projects");
     }
 
-    if (hasPhrase("bakit ikaw", "bakit ka namin kukunin", "why should we hire", "why hire", "what makes you qualified", "why choose")
-      || hasWord("hire", "qualified", "value", "strengths", "valuable", "kukunin")) {
+    if (hasPhrase("bakit ikaw", "bakit ka namin kukunin", "why should we hire", "why hire", "what makes you qualified", "why choose", "fit for our team", "fit for the role", "good fit", "is kino a fit")
+      || hasWord("hire", "qualified", "value", "strengths", "valuable", "kukunin", "fit")) {
       add("value", "experience", "achievements");
     }
 
     if (hasPhrase("how to contact", "how can we contact", "mako contact", "ma contact", "reach you")
-      || hasWord("contact", "email", "reach")) {
+      || hasWord("contact", "email", "reach", "phone", "mobile", "facebook", "fb", "messenger", "linkedin", "github")) {
       add("contact");
     }
 
@@ -1683,12 +2331,16 @@ A: The assistant should avoid inventing information and say that the specific in
       add("availability", "services");
     }
 
-    if (hasPhrase("submit project request", "project request", "project inquiry", "client inquiry", "send request", "request a quote", "request quotation", "get quotation", "need a project", "need dashboard")
+    if (hasPhrase("submit project request", "project request", "project inquiry", "client inquiry", "send request")) {
+      add("project-request", "services", "contact", "availability");
+    }
+
+    if (hasPhrase("request a quote", "request quotation", "get quotation", "need a project", "need dashboard")
       || hasWord("quote", "quotation", "budget", "inquiry")) {
       add("services", "contact", "availability");
     }
 
-    if (hasPhrase("work experience", "ano experience", "ano ang experience", "ano work experience", "career background")
+    if (hasPhrase("work experience", "ano experience", "ano ang experience", "ano work experience", "career background", "where did kino work", "where has kino worked", "companies did kino work")
       || hasWord("experience", "karanasan", "background", "trabaho", "operations")) {
       add("experience");
     }
@@ -1702,12 +2354,21 @@ A: The assistant should avoid inventing information and say that the specific in
       add("automation", "tools");
     }
 
+    if (hasWord("report", "reports", "reporting", "error", "errors", "validation", "validate", "quality", "cleanup", "cleaning")) {
+      add("services", "automation");
+    }
+
     if (hasWord("chatbot", "bot", "ai") || hasPhrase("ai assistant", "portfolio assistant", "portfolio chatbot")) {
       add("chatbot", "services", "automation");
     }
 
     if (hasWord("achievement", "achievements", "awards", "recognition", "award", "promotion", "promoted")) {
       add("achievements", "value");
+    }
+
+    if (hasPhrase("academic background", "computer programming strand", "where did kino study")
+      || hasWord("education", "school", "college", "degree", "graduate", "strand")) {
+      add("education");
     }
 
     if (hasWord("client", "stakeholder", "business", "manager", "recruiter")) {
@@ -1728,6 +2389,7 @@ A: The assistant should avoid inventing information and say that the specific in
       value: ["hire", "qualified", "why", "value", "strengths", "bakit ikaw"],
       experience: ["experience", "work", "operations", "career", "background", "karanasan"],
       achievements: ["achievements", "awards", "recognition", "promotion", "impact"],
+      education: ["education", "school", "academic", "strand", "computer programming"],
       contact: ["contact", "reach", "email", "collaboration"],
       availability: ["available", "freelance", "full-time", "job", "client opportunity"],
       automation: ["automation", "python", "extractor", "workflow", "process improvement"],
@@ -1748,6 +2410,7 @@ A: The assistant should avoid inventing information and say that the specific in
       value: "strengths and value proposition",
       experience: "work experience",
       achievements: "achievements and impact",
+      education: "education and academic background",
       contact: "contact information",
       availability: "work availability",
       automation: "Python automation and workflow improvement",
@@ -1757,37 +2420,6 @@ A: The assistant should avoid inventing information and say that the specific in
     const selected = intentKeys.map((intent) => labels[intent]).filter(Boolean);
     if (!selected.length) return "";
     return formatList(selected);
-  }
-
-  function getIntentQuestion(question, wantsFilipino) {
-    const normalized = normalizeText(question);
-    const has = (...terms) => terms.some((term) => normalized.includes(term));
-
-    if (wantsFilipino) {
-      if (has("sino ka", "sino si kino")) return "Sino ka?";
-      if (has("skills", "skill", "kakayahan")) return "Ano ang skills mo?";
-      if (has("project", "projects", "proyekto")) return "Ano ang mga project mo?";
-      if (has("dashboard", "dashboards")) return "Paano gumagana ang dashboard project mo?";
-      if (has("tools", "tool", "gamit", "ginagamit", "tech")) return "Anong tools ang ginagamit mo?";
-      if (has("kukunin", "hire", "qualified", "bakit ka")) return "Bakit ka namin kukunin?";
-      if (has("contact", "mako contact", "mako contact", "ma contact")) return "Paano ka namin mako-contact?";
-      if (has("available", "freelance", "full time", "fulltime")) return "Available ka ba for work?";
-      if (has("experience", "work experience", "work exp", "exp", "karanasan", "trabaho", "work")) return "Ano ang work experience mo?";
-      if (has("offer", "client", "kaya mong", "kaya mo")) return "Ano ang kaya mong i-offer sa client?";
-      return "";
-    }
-
-    if (has("tell me about yourself", "who is kino", "about yourself", "introduce")) return "Who is Kino?";
-    if (has("skills", "expertise", "strengths")) return "What are Kino's main skills?";
-    if (has("projects", "project", "portfolio work", "completed")) return "What projects can Kino showcase?";
-    if (has("dashboard", "dashboards")) return "Can you explain your dashboard project?";
-    if (has("tools", "technologies", "tech stack", "python")) return "What tools and technologies does Kino use?";
-    if (has("work experience", "experience", "background")) return "What work experience does Kino have?";
-    if (has("services", "offer", "collaborate")) return "What services can Kino offer?";
-    if (has("hire", "qualified", "why should", "valuable")) return "Why should someone work with Kino?";
-    if (has("contact", "reach")) return "How can someone contact Kino?";
-    if (has("available", "freelance", "full time", "full-time")) return "Is Kino available for freelance or full-time work?";
-    return "";
   }
 
   function adaptAnswerLanguage(answer, item, wantsFilipino) {

@@ -5,8 +5,12 @@ This repository contains a static, GitHub Pages-ready professional portfolio for
 ## Files
 
 - `index.html` - Portfolio content and page structure
-- `styles.css` - Corporate layout, responsive design, and print/PDF styling
-- `script.js` - Scroll reveal animation, page progress behavior, active navigation, project previews, and portfolio chatbot logic
+- `styles.css` - Premium dark visual system, responsive Hire Me conversion section, mobile-first layouts, interaction states, and print/PDF styling
+- `script.js` - Mobile navigation, scroll reveals, page progress, active navigation, accessible project previews, and portfolio chatbot logic
+- `api/portfolio-chat.js` - Secure serverless AI endpoint with bounded conversation history, portfolio grounding, privacy rules, and rate limiting
+- `api/portfolio-assistant-prompt.js` - Versioned AI behavior instructions for conversational tone, portfolio grounding, general guidance, context, and privacy
+- `tests/portfolio-assistant-prompt.test.js` - Prompt contract and secure request-shape regression tests
+- `.env.example` - Server-side OpenAI environment variable template; never place a real key in frontend code
 - `portfolio-profile.json` - Main structured chatbot knowledge source for About, Skills, Services, Projects, Tools, Experience, Contact, and Privacy
 - `portfolio.txt` - Plain-text editable portfolio profile summary
 - `skills.json` - Editable skills and tools catalog
@@ -16,22 +20,28 @@ This repository contains a static, GitHub Pages-ready professional portfolio for
 - `faq.txt` - Short editable FAQ support file
 - `questionnaire.txt` - Extended FAQ support knowledge base with prepared questions and answers
 - `assets/kino-ilustrisimo.jpg` - Professional portrait used in the hero section, if provided
+- `assets/kino-logo.png` - Official black, gold, and silver KI crown logo used for the site identity, favicon, portrait fallback, and AI assistant
 - `assets/projects/` - Actual project screenshots used by the project portfolio cards, with SVG fallbacks
 
 ## Portfolio Chatbot
 
 The website includes a floating portfolio assistant at the bottom-right of the page. It opens into a professional chat window, shows suggested questions and quick action buttons, and answers using structured portfolio files first, with FAQ files as support.
 
-The current setup is retrieval-based, free, and safe for GitHub Pages. It acts as a portfolio assistant, service recommender, project explainer, and project request assistant. It uses intent mapping and semantic-style section matching for common English, Filipino, and Taglish portfolio questions. It does not invent information. If an exact answer is missing but a related portfolio section exists, it shares the related available information instead of immediately refusing.
+The assistant now uses a hybrid setup. On a serverless host with `OPENAI_API_KEY` configured, it uses a real multi-turn AI endpoint grounded in the verified portfolio data. If the endpoint is unavailable—or when the site is hosted only on GitHub Pages—it automatically falls back to the local privacy-safe portfolio answer engine. Visitors can type naturally and receive answers without completing a questionnaire.
 
 ### Chatbot Features
 
 - Suggested questions shown when the chat opens
+- Direct free-text chat with no required questionnaire
+- Natural greetings, thanks, clarification, follow-up context, and clearly identified AI behavior
+- Portfolio-first answers plus clearly separated general guidance when live AI is connected
+- Bounded multi-turn conversation history when the secure AI endpoint is connected
+- Automatic local fallback when the AI endpoint is unavailable
 - Quick actions for viewing projects, exporting PDF, and submitting a project request
 - English, Filipino, Taglish, short-question, and incorrect-grammar intent handling
 - Service recommendation for dashboard, automation, reporting, data validation, and chatbot requests
 - Project explanation mode with problem solved, tools used, features, business impact, and screenshot path
-- Project Request Assistant flow with client name, email, company, project type, description, budget, timeline, preferred contact method, and notes
+- Optional project brief flow; only name, email, and a short message are required
 - Request review screen before final submission
 - Project request entries are saved in the visitor's browser and can be downloaded as JSON
 - Optional automatic email sending through Formspree or EmailJS using `contact.json`
@@ -41,6 +51,7 @@ The current setup is retrieval-based, free, and safe for GitHub Pages. It acts a
 
 Update these files when changing chatbot content:
 
+- `api/portfolio-assistant-prompt.js` for live AI behavior, tone, source boundaries, and response examples
 - `portfolio-profile.json` for main profile sections and bot intent categories
 - `portfolio.txt` for a plain-text business profile
 - `skills.json` for skills, tools, and capabilities
@@ -60,28 +71,33 @@ A: The professional answer the chatbot should provide.
 
 Keep answers portfolio-safe. Do not add confidential client data, debtor information, account-level details, credentials, internal URLs, or private company information.
 
-### Replace or Modify the AI Model
+### Secure AI Setup
 
-The chatbot configuration is in `script.js` under `CHATBOT_CONFIG`.
+The browser calls `/api/portfolio-chat`; the serverless function then calls the OpenAI Responses API. The API key stays in the hosting provider's server-side environment and is never sent to the visitor's browser.
 
-Current provider:
+1. Deploy the repository to a host that supports Node serverless functions, such as Vercel.
+2. Add `OPENAI_API_KEY` in the project's environment settings.
+3. Optionally add `OPENAI_MODEL`; the included endpoint defaults to `gpt-5.4-mini`.
+4. Redeploy, then ask a question in the sidebar. The status changes to `AI connected` after a successful model response.
 
-```js
-provider: "retrieval"
+```text
+OPENAI_API_KEY=your_server_side_key
+OPENAI_MODEL=gpt-5.4-mini
 ```
 
-Future replacement options:
+Never paste the key into `script.js`, `index.html`, a public repository, or any other browser-delivered file. The endpoint validates request size and input length, limits retained history, sends `store: false`, grounds portfolio claims in the public JSON/text knowledge files, and falls back locally when unavailable.
 
-- Keep `retrieval` for a free static GitHub Pages setup.
-- Replace with a local model endpoint, such as a local LLM server.
-- Replace with a Hugging Face Inference endpoint through a backend.
-- Replace with another API-based model through a backend.
+Run the prompt and request-shape regression checks with:
 
-Do not place private API keys directly in frontend JavaScript. For Hugging Face or API models, create a small backend proxy with Node.js, Flask, or FastAPI, then update `CHATBOT_CONFIG.futureModel.endpoint`.
+```powershell
+node --test tests\portfolio-assistant-prompt.test.js
+```
 
-### Local Chatbot Note
+The included in-memory request limit is a best-effort development safeguard. Because serverless instances do not share memory, protect a public production deployment with a platform-level firewall/rate limit or a shared store such as Redis. The chat UI also reminds visitors that live messages are processed by OpenAI and should not contain confidential or sensitive information.
 
-The chatbot loads the JSON and text knowledge files with browser `fetch`. This works on GitHub Pages or a local web server. If the site is opened directly as a `file://` page, some browsers block local file loading; the chatbot will still show a small fallback knowledge base, but the full assistant loads best through GitHub Pages or a local server.
+### Static and Local Fallback
+
+GitHub Pages cannot run the serverless AI endpoint, but the same UI continues to answer through the built-in retrieval fallback. The chatbot also loads JSON and text files with browser `fetch`, so the full local knowledge base works best through GitHub Pages or a local web server instead of opening the HTML as `file://`.
 
 ### Project Request Email Setup
 
@@ -129,6 +145,8 @@ If no provider is configured, the assistant saves requests locally and offers a 
 
 This public version intentionally excludes the exact residential address, credentials, and raw client production data. The project screenshots provided for portfolio presentation are included in `assets/projects/`.
 
+The assistant is connected only to the public portfolio files in this repository. It does not have access to private databases, account records, live dashboards, internal systems, or visitor-uploaded documents.
+
 ## Project Screenshot Filenames
 
 The portfolio includes actual JPG project screenshots in `assets/projects/`. SVG versions remain as fallback visuals only.
@@ -155,6 +173,8 @@ The portfolio includes actual JPG project screenshots in `assets/projects/`. SVG
 The page also accepts `.png` and `.webp` versions with the same base names.
 
 ## Publish on GitHub Pages
+
+Use this route for the free static portfolio and local assistant fallback. Use a serverless host for the real AI connection.
 
 1. Create a new GitHub repository.
 2. Upload `index.html`, `styles.css`, `script.js`, `portfolio-profile.json`, `portfolio.txt`, `skills.json`, `projects.json`, `services.json`, `contact.json`, `faq.txt`, `questionnaire.txt`, `README.md`, and the `assets/` folder to the repository root.

@@ -168,14 +168,18 @@
       "summary": "Kino has experience across customer-facing operations, service roles, sales support, team supervision, collection operations, dialer strategy, data strategy, dashboard monitoring, reporting, and automation.",
       "summaryFilipino": "May experience si Kino sa customer-facing operations, service roles, sales support, team supervision, collection operations, dialer strategy, data strategy, dashboard monitoring, reporting, at automation.",
       "bullets": [
-        "Started from frontline service and customer-facing work",
-        "Progressed into operations, strategy support, and data-focused work",
-        "Uses operational experience to build practical reporting and automation tools"
+        "S.P. Madrid & Associates Law Firm: progression across collection operations, leadership, dialer strategy, and data operations",
+        "Everything But Cheese Sherwood: Team Supervisor, training-team exposure, and service operations",
+        "RLX Pharmacy: Sales Agent",
+        "Jollibee Aduana and Tabo Rice: Service Crew",
+        "Uses frontline and operational experience to build practical reporting and automation tools"
       ],
       "bulletsFilipino": [
-        "Nagsimula sa frontline service at customer-facing work",
-        "Nag-progress sa operations, strategy support, at data-focused work",
-        "Ginagamit ang operations experience para gumawa ng practical reporting at automation tools"
+        "S.P. Madrid & Associates Law Firm: progression sa collection operations, leadership, dialer strategy, at data operations",
+        "Everything But Cheese Sherwood: Team Supervisor, training-team exposure, at service operations",
+        "RLX Pharmacy: Sales Agent",
+        "Jollibee Aduana at Tabo Rice: Service Crew",
+        "Ginagamit ang frontline at operations experience para gumawa ng practical reporting at automation tools"
       ]
     },
     {
@@ -214,6 +218,24 @@
         "Rookie of the Month",
         "Promotion history sa operations, strategy, at data-focused roles",
         "Pagbuo ng reporting, monitoring, at automation projects"
+      ]
+    },
+    {
+      "id": "education",
+      "title": "Education",
+      "intentKeys": ["education"],
+      "keywords": ["education", "academic background", "school", "strand", "computer programming", "degree", "college"],
+      "summary": "Kino completed senior high school at Taal National High School under the Computer Programming strand. He attended Angel John Integrated Academy for elementary and junior high school.",
+      "summaryFilipino": "Natapos ni Kino ang senior high school sa Taal National High School sa Computer Programming strand. Nag-aral siya sa Angel John Integrated Academy para sa elementary at junior high school.",
+      "bullets": [
+        "Senior High School: Taal National High School",
+        "Strand / Track: Computer Programming",
+        "Junior High and Elementary: Angel John Integrated Academy"
+      ],
+      "bulletsFilipino": [
+        "Senior High School: Taal National High School",
+        "Strand / Track: Computer Programming",
+        "Junior High at Elementary: Angel John Integrated Academy"
       ]
     },
     {
