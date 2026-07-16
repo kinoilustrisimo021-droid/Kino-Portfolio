@@ -4,10 +4,42 @@
     {
       "title": "Python Automation",
       "intentKeys": ["skills", "automation", "services", "tools"],
-      "keywords": ["python", "automation", "extractor", "workflow", "report automation", "file processing"],
-      "summary": "Kino uses Python to automate repetitive reporting tasks, extract data, process files, and improve operational workflows.",
-      "summaryFilipino": "Gumagamit si Kino ng Python para i-automate ang repetitive reporting tasks, data extraction, file processing, at workflow improvement.",
+      "keywords": ["python", "python 3.14", "automation", "extractor", "workflow", "report automation", "file processing"],
+      "summary": "Kino uses Python 3.14 to automate repetitive reporting tasks, extract data, process files, and improve operational workflows.",
+      "summaryFilipino": "Gumagamit si Kino ng Python 3.14 para i-automate ang repetitive reporting tasks, data extraction, file processing, at workflow improvement.",
       "bullets": ["Report extraction", "File processing", "Workflow automation", "Repetitive task reduction"]
+    },
+    {
+      "title": "Backend and API Development",
+      "intentKeys": ["skills", "tools", "backend", "services"],
+      "keywords": ["backend", "api", "fastapi", "uvicorn", "python 3.14", "application server"],
+      "summary": "Kino builds Python backend services using FastAPI with Uvicorn for lightweight application serving.",
+      "summaryFilipino": "Gumagawa si Kino ng Python backend services gamit ang FastAPI at Uvicorn para sa lightweight application serving.",
+      "bullets": ["Python 3.14", "FastAPI", "Uvicorn", "Backend service workflows"]
+    },
+    {
+      "title": "Database and Data Analytics",
+      "intentKeys": ["skills", "tools", "database", "analytics", "services"],
+      "keywords": ["duckdb", "pandas", "pyarrow", "mysql", "pymysql", "database", "data analytics", "database integration"],
+      "summary": "Kino works with DuckDB, Pandas, PyArrow, MySQL, and PyMySQL for analytics workflows and external database integration.",
+      "summaryFilipino": "Gumagamit si Kino ng DuckDB, Pandas, PyArrow, MySQL, at PyMySQL para sa analytics workflows at external database integration.",
+      "bullets": ["DuckDB analytics", "Pandas and PyArrow processing", "MySQL integration", "PyMySQL workflows"]
+    },
+    {
+      "title": "Frontend and Desktop Interfaces",
+      "intentKeys": ["skills", "tools", "frontend", "desktop", "services"],
+      "keywords": ["html", "css", "javascript", "plain javascript", "customtkinter", "desktop app", "ui", "no react", "no vue", "no node"],
+      "summary": "Kino builds plain HTML, CSS, and JavaScript frontends without requiring React, Vue, Node.js, or a frontend build system, and also creates CustomTkinter desktop tools.",
+      "summaryFilipino": "Gumagawa si Kino ng plain HTML, CSS, at JavaScript frontends na hindi kailangan ng React, Vue, Node.js, o frontend build system, at gumagawa rin siya ng CustomTkinter desktop tools.",
+      "bullets": ["Plain HTML/CSS/JavaScript", "No frontend build system required", "CustomTkinter desktop UI", "Deployable lightweight interfaces"]
+    },
+    {
+      "title": "Automation and Report Generation",
+      "intentKeys": ["skills", "automation", "reporting", "tools", "services"],
+      "keywords": ["selenium", "chrome automation", "google chrome automation", "xlsxwriter", "csv generation", "powerpoint automation", "management report", "report generation"],
+      "summary": "Kino uses Selenium, Google Chrome automation, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts to turn workflows into usable outputs.",
+      "summaryFilipino": "Gumagamit si Kino ng Selenium, Google Chrome automation, XlsxWriter, CSV generation, at automated PowerPoint o management report scripts para gawing usable outputs ang workflows.",
+      "bullets": ["Selenium automation", "Google Chrome automation", "XlsxWriter and CSV exports", "Automated PowerPoint and management reports"]
     },
     {
       "title": "Dashboard Monitoring",

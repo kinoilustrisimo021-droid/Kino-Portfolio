@@ -95,10 +95,10 @@ A: Kino has handled file extraction, report automation, dashboard creation, mast
 
 # Skills and Expertise
 Q: What are Kino's main skills?
-A: Kino's main skills include Python automation, data management, Excel reporting, CSV/XLSX processing, dashboard monitoring, reporting analysis, process improvement, and operational strategy.
+A: Kino's main skills include Python automation, backend API workflows, data management, database integration, Excel reporting, CSV/XLSX processing, dashboard monitoring, reporting analysis, browser automation, desktop tools, process improvement, and operational strategy.
 
 Q: What is Kino's technical stack?
-A: Kino's technical stack includes Python, Excel workflows, CSV and XLSX processing, reporting dashboards, automation scripts, and operational data validation methods.
+A: Kino's technical stack includes Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Google Chrome automation, CustomTkinter, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts.
 
 Q: What is Kino's experience in Python?
 A: Kino uses Python for practical automation, extraction, reporting support, and workflow improvement where repetitive manual tasks can be reduced.
@@ -331,11 +331,14 @@ A: Kino's skills include Python automation, data reporting, Excel reporting, CSV
 Q: What projects have you completed?
 A: Kino's portfolio includes the MC6 Collection Pipeline, Digital Omnichannel Monitoring Dashboard, Digital Reporting App, Excel Reporting Result, Predictive Summary Extractor, Alloc Review Builder, Auto Redial Automation, MC6 Analytics Hub, and Report Auto Extractor.
 
+Q: Are these all of Kino's projects?
+A: No. The projects shown in the public portfolio are an initial sample of Kino's developed applications. Other projects include more advanced features, automation, data processing, reporting, and database integration.
+
 Q: Can you explain your dashboard project?
 A: Kino's dashboard projects were created to improve operational visibility. They organize activity data, KPIs, campaign movement, digital engagement, performance output, and reporting downloads into clearer monitoring views for faster review and decision support.
 
 Q: What tools and technologies do you use?
-A: Kino's current technical stack focuses on Python, Excel, CSV/XLSX processing, reporting dashboards, data validation, automation scripts, file extraction workflows, operational monitoring, and structured reporting outputs.
+A: Kino's current technical stack includes Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Google Chrome automation, CustomTkinter, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts.
 
 Q: What is your work experience?
 A: Kino has experience in customer-facing roles, service operations, sales support, team supervision, collection operations, dialer strategy, data strategy, reporting, dashboard monitoring, and process automation.
@@ -353,7 +356,7 @@ Q: Are you available for freelance or full-time work?
 A: Kino's portfolio is positioned for future job and client opportunities involving Python automation, data operations, reporting analysis, dashboard development, workflow improvement, and collection strategy support.
 
 Q: What technologies are in Kino's tech stack?
-A: Kino's tech stack is centered on Python, Excel, CSV/XLSX data workflows, reporting dashboards, data validation, file processing, and automation for operational reporting.
+A: Kino's tech stack includes Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Google Chrome automation, CustomTkinter, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts.
 
 Q: What makes Kino qualified for reporting or automation work?
 A: Kino is qualified because his project work comes from actual operational pain points. He has built tools for extraction, reporting, monitoring, validation, and campaign review, with a focus on reducing manual work and improving decision visibility.
@@ -381,7 +384,7 @@ Q: Paano gumagana ang dashboard project mo?
 A: Ang dashboard projects ni Kino ay ginawa para mas madaling makita ang KPIs, campaign movement, activity results, digital engagement, reporting outputs, at operational performance. Layunin nito na gawing mas mabilis at mas malinaw ang review ng data.
 
 Q: Anong tools ang ginagamit mo?
-A: Base sa portfolio, gumagamit si Kino ng Python, Excel, CSV/XLSX workflows, reporting dashboards, data validation, automation scripts, file extraction, at structured reporting tools para mapabilis ang operational reporting.
+A: Base sa portfolio, gumagamit si Kino ng Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Google Chrome automation, CustomTkinter, XlsxWriter, CSV generation, at automated PowerPoint o management report scripts.
 
 Q: Ano ang work experience mo?
 A: May experience si Kino sa customer-facing operations, service roles, sales support, team supervision, collection operations, dialer strategy, data strategy, dashboard monitoring, reporting, at automation.

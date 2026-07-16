@@ -159,7 +159,7 @@
     revealItems.forEach((item) => item.classList.add("is-visible"));
   }
 
-  const ambientRegions = document.querySelectorAll(".hero, .ticker");
+  const ambientRegions = document.querySelectorAll(".hero, .ticker, .stack-category-grid, .closing-section");
   if ("IntersectionObserver" in window && ambientRegions.length) {
     const ambientObserver = new IntersectionObserver(
       (entries) => {
@@ -280,11 +280,11 @@
 
   if (canUsePointerMotion) {
     const spotlightTargets = document.querySelectorAll(
-      ".project-card, .glass-card, .timeline-item, .experience-item, .responsibility-grid article"
+      ".project-card, .glass-card, .timeline-item, .experience-item, .responsibility-grid article, .stack-category"
     );
 
     spotlightTargets.forEach((target) => {
-      const canTilt = target.matches(".project-card, .glass-card, .responsibility-grid article");
+      const canTilt = target.matches(".project-card, .glass-card, .responsibility-grid article, .stack-category");
       let pointerFrame = 0;
       let latestPointer = null;
 
@@ -473,15 +473,15 @@
 Q: Who is Kino?
 A: Kino Ilustrisimo is a data operations and automation professional focused on Python automation, reporting workflows, dashboard monitoring, and operational performance improvement.
 Q: What is Kino's technical focus?
-A: Kino's technical focus includes Python automation, Excel reporting, CSV and XLSX processing, dashboard monitoring, data validation, and workflow improvement.
+A: Kino's technical focus includes Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Chrome automation, CustomTkinter, XlsxWriter, CSV generation, PowerPoint report automation, dashboard monitoring, data validation, and workflow improvement.
 Q: What projects can Kino showcase?
 A: Kino can showcase the MC6 Collection Pipeline, Digital Omnichannel Monitoring Dashboard, Digital Reporting App, Excel Reporting Result, Predictive Summary Extractor, Alloc Review Builder, Auto Redial Automation, MC6 Analytics Hub, and Report Auto Extractor.
 Q: What are your skills?
-A: Kino's skills include Python automation, data reporting, Excel reporting, CSV/XLSX processing, dashboard monitoring, data validation, workflow improvement, operational monitoring, and communication.
+A: Kino's skills include Python automation, backend API work, data analytics, database integration, reporting, CSV/XLSX processing, dashboard monitoring, desktop tools, browser automation, data validation, workflow improvement, operational monitoring, and communication.
 Q: What tools and technologies do you use?
-A: Kino's technical stack focuses on Python, Excel, CSV and XLSX workflows, reporting dashboards, data validation, automation scripts, and operational monitoring tools.
+A: Kino's technical stack includes Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Google Chrome automation, CustomTkinter, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts.
 Q: What services can you offer?
-A: Kino can support reporting automation, dashboard monitoring, Excel/CSV/XLSX processing, workflow improvement, data validation, and operations-focused performance reporting.
+A: Kino can support web applications, reporting automation, dashboard monitoring, Excel/CSV/XLSX processing, database workflows, workflow improvement, data validation, and operations-focused performance reporting.
 Q: What makes Kino valuable to future employers or clients?
 A: Kino connects operational experience with practical automation, helping teams reduce manual work, improve reporting visibility, and monitor performance through usable tools.
 Q: Sino ka?
@@ -1749,8 +1749,8 @@ A: The assistant should avoid inventing information and say that the specific in
 
     if (intents.has("automation")) {
       return wantsFilipino
-        ? "Oo. Kaya ni Kino i-automate ang repetitive reporting, CSV/XLSX processing, data extraction, validation, at recurring workflow steps gamit ang Python."
-        : "Yes. Kino can automate repetitive reporting, CSV/XLSX processing, data extraction, validation, and recurring workflow steps with Python.";
+        ? "Oo. Kaya ni Kino i-automate ang repetitive reporting, CSV/XLSX processing, data extraction, validation, browser workflows gamit ang Selenium/Chrome automation, at recurring workflow steps gamit ang Python."
+        : "Yes. Kino can automate repetitive reporting, CSV/XLSX processing, data extraction, validation, browser workflows with Selenium/Chrome automation, and recurring workflow steps with Python.";
     }
 
     if (intents.has("projects") && /\b(strongest|best|top|show|sample|samples|work|portfolio|gawa)\b/.test(normalized)) {
@@ -1767,8 +1767,8 @@ A: The assistant should avoid inventing information and say that the specific in
 
     if (intents.has("tools") && !intents.has("projects")) {
       return wantsFilipino
-        ? "Ang confirmed stack ni Kino ay Python, Excel, CSV/XLSX file processing, reporting dashboards, data validation, at automation scripts."
-        : "Kino's confirmed stack is Python, Excel, CSV/XLSX file processing, reporting dashboards, data validation, and automation scripts.";
+        ? "Ang confirmed stack ni Kino ay Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Chrome automation, CustomTkinter, XlsxWriter, CSV generation, at automated PowerPoint o management report scripts."
+        : "Kino's confirmed stack is Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Chrome automation, CustomTkinter, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts.";
     }
 
     if (intents.has("experience")) {
@@ -1803,10 +1803,7 @@ A: The assistant should avoid inventing information and say that the specific in
       ["angular", "Angular"],
       ["vue", "Vue"],
       ["node js", "Node.js"],
-      ["javascript", "JavaScript development"],
       ["wordpress", "WordPress"],
-      ["web development", "web development"],
-      ["website", "website development"],
       ["mobile app", "mobile app development"],
       ["aws", "AWS"],
       ["azure", "Microsoft Azure"],
@@ -1817,8 +1814,8 @@ A: The assistant should avoid inventing information and say that the specific in
     if (!match) return "";
 
     return wantsFilipino
-      ? `Hindi listed ang ${match[1]} bilang confirmed capability sa public portfolio ni Kino, kaya ayokong mag-overclaim. Ang verified stack niya ay Python, Excel, CSV/XLSX processing, dashboards, data validation, at reporting automation.`
-      : `${match[1]} isn't listed as a confirmed capability in Kino's public portfolio, so I don't want to overclaim. His verified stack is Python, Excel, CSV/XLSX processing, dashboards, data validation, and reporting automation.`;
+      ? `Hindi listed ang ${match[1]} bilang confirmed capability sa public portfolio ni Kino, kaya ayokong mag-overclaim. Ang verified stack niya ay Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Chrome automation, CustomTkinter, XlsxWriter, CSV generation, at automated PowerPoint o management report scripts.`
+      : `${match[1]} isn't listed as a confirmed capability in Kino's public portfolio, so I don't want to overclaim. His verified stack is Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Chrome automation, CustomTkinter, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts.`;
   }
 
   function generatePortfolioResponse(question, knowledgeItems, projects, contact) {
@@ -2345,12 +2342,12 @@ A: The assistant should avoid inventing information and say that the specific in
       add("experience");
     }
 
-    if (hasPhrase("tools and technologies", "tech stack", "anong tools", "tools gamit", "tools ginagamit")
-      || hasWord("tools", "tool", "technology", "technologies", "python", "excel", "csv", "xlsx", "gamit", "ginagamit")) {
+    if (hasPhrase("tools and technologies", "tech stack", "anong tools", "tools gamit", "tools ginagamit", "chrome automation", "google chrome automation", "management report", "powerpoint automation")
+      || hasWord("tools", "tool", "technology", "technologies", "python", "fastapi", "uvicorn", "duckdb", "pandas", "pyarrow", "mysql", "pymysql", "html", "css", "javascript", "selenium", "customtkinter", "xlsxwriter", "excel", "csv", "xlsx", "powerpoint", "gamit", "ginagamit")) {
       add("tools");
     }
 
-    if (hasWord("python", "automation", "automate", "extractor", "extract", "workflow")) {
+    if (hasWord("python", "automation", "automate", "extractor", "extract", "workflow", "selenium", "chrome")) {
       add("automation", "tools");
     }
 

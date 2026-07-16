@@ -7,9 +7,11 @@ Career Objective: Contribute Python automation, reporting discipline, dashboard 
 SKILLS
 Technical Skills: Python automation, Excel reporting, CSV/XLSX processing, data validation, dashboard monitoring, operational reporting, workflow improvement.
 Soft Skills: Communication, leadership, attention to detail, adaptability, customer handling, stakeholder support, fast learning.
-Programming Languages: Python.
+Expanded Stack: Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Google Chrome automation, CustomTkinter, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts.
+Programming Languages: Python and plain JavaScript.
 Dashboard Skills: KPI monitoring, performance views, operational dashboards, reporting summaries, digital monitoring dashboards.
 Automation Skills: Report extraction, file processing, workflow automation, raw data preparation, repetitive task reduction.
+Portfolio Scope: The projects shown in the public portfolio are an initial sample. Other developed projects include more advanced features, automation, data processing, reporting, and database integration.
 
 PROJECTS
 Project Focus: Reporting automation, dashboard monitoring, lead extraction, account review, redial automation, analytics hubs, and daily report extraction.
@@ -22,11 +24,11 @@ Key Responsibilities: Reporting, monitoring, data validation, campaign support, 
 Achievements: Service Gilas Award, Rookie of the Month, promotion history, and practical project work for reporting and workflow improvement.
 
 SERVICES
-Available Services: Python automation, dashboard development, Excel/CSV/XLSX reporting, reporting workflow improvement, data validation, portfolio AI chatbot setup, and operational monitoring support.
+Available Services: Python automation, dashboard development, Excel/CSV/XLSX reporting, reporting workflow improvement, database workflow support, data validation, portfolio AI chatbot setup, and operational monitoring support.
 Dashboard Development: KPI dashboards, operational monitoring dashboards, digital reporting dashboards, and performance visibility views.
-Automation: Python extraction, report generation, file processing, and workflow automation.
+Automation: Python extraction, report generation, file processing, Selenium and Google Chrome automation, and workflow automation.
 AI Chatbot: Portfolio assistant setup, knowledge-base structuring, lead capture flow, and visitor Q&A support.
-Reporting: Excel summaries, CSV/XLSX outputs, raw export preparation, and stakeholder-ready reporting outputs.
+Reporting: Excel summaries, CSV/XLSX outputs, XlsxWriter exports, raw export preparation, automated PowerPoint scripts, and stakeholder-ready management reporting outputs.
 
 CONTACT
 Availability: Available for future job, client, recruiter, employer, and stakeholder conversations.

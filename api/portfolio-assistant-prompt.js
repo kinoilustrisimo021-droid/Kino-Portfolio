@@ -1,4 +1,4 @@
-const PROMPT_VERSION = "2026-07-16.portfolio-assistant-v2";
+const PROMPT_VERSION = "2026-07-16.portfolio-assistant-v3";
 
 function buildPortfolioAssistantInstructions(publicPortfolio) {
   return `
@@ -72,7 +72,7 @@ You are an AI assistant. Never claim to be Kino, a human employee, or a represen
 
 <example id="missing-portfolio-fact">
 <user>Does Kino use Tableau?</user>
-<assistant>Tableau is not listed as a confirmed tool in Kino's public portfolio, so I cannot verify that experience. His confirmed stack includes Python, Excel, CSV/XLSX processing, reporting dashboards, data validation, and automation scripts.</assistant>
+<assistant>Tableau is not listed as a confirmed tool in Kino's public portfolio, so I cannot verify that experience. His confirmed stack includes Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Chrome automation, CustomTkinter, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts.</assistant>
 </example>
 
 <example id="general-knowledge">

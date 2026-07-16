@@ -4650,6 +4650,181 @@ body.premium-portal main {
   line-height: 1.65;
 }
 
+.expanded-stack-section {
+  padding-top: clamp(56px, 7vw, 90px);
+}
+
+.expanded-stack-section .section-heading {
+  margin-bottom: 34px;
+}
+
+.stack-category-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.stack-category {
+  position: relative;
+  min-height: 315px;
+  padding: 30px;
+  overflow: hidden;
+  color: var(--portal-text);
+  background:
+    linear-gradient(150deg, rgba(255, 255, 255, 0.055), transparent 48%),
+    #071019;
+  border: 1px solid var(--portal-border);
+  border-radius: 20px;
+  transform: perspective(1200px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(var(--stack-lift, 0px));
+  transition:
+    transform 360ms var(--portal-ease),
+    border-color 260ms ease,
+    background 260ms ease,
+    box-shadow 360ms ease;
+}
+
+.stack-category::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 2px;
+  content: "";
+  background: linear-gradient(90deg, var(--portal-amber), transparent 74%);
+  opacity: 0.74;
+}
+
+.stack-category::after {
+  position: absolute;
+  inset: -1px;
+  z-index: 0;
+  content: "";
+  background:
+    radial-gradient(
+      circle at var(--spotlight-x, 50%) var(--spotlight-y, 0%),
+      rgba(255, 176, 0, 0.13),
+      transparent 34%
+    ),
+    linear-gradient(115deg, transparent 0 37%, rgba(255, 255, 255, 0.07) 46%, transparent 56% 100%);
+  opacity: 0;
+  transform: translateX(-18%);
+  transition:
+    opacity 260ms ease,
+    transform 520ms var(--portal-ease);
+  pointer-events: none;
+}
+
+.stack-category > * {
+  position: relative;
+  z-index: 1;
+}
+
+.stack-category.is-interacting {
+  border-color: rgba(255, 176, 0, 0.3);
+  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.32), 0 0 42px rgba(255, 176, 0, 0.045);
+}
+
+.stack-category.is-interacting::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.stack-category p {
+  margin: 0 0 22px;
+  color: var(--portal-amber);
+  font-family: "Space Grotesk", Manrope, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.stack-category h3 {
+  max-width: 270px;
+  margin: 0 0 26px;
+  font-size: 1.18rem;
+  line-height: 1.18;
+}
+
+.stack-category ul {
+  display: grid;
+  gap: 13px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stack-category li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--portal-muted);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.stack-category li::before {
+  position: absolute;
+  top: 0.68em;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  content: "";
+  background: #4d7f9d;
+  border-radius: 50%;
+}
+
+body.motion-ready .stack-category-grid.reveal .stack-category {
+  opacity: 0;
+  filter: blur(5px);
+  translate: 0 18px;
+  transition:
+    opacity 520ms ease,
+    filter 560ms var(--motion-ease),
+    translate 680ms var(--motion-ease),
+    transform 360ms var(--portal-ease),
+    border-color 260ms ease,
+    background 260ms ease,
+    box-shadow 360ms ease;
+}
+
+body.motion-ready .stack-category-grid.reveal.is-visible .stack-category {
+  opacity: 1;
+  filter: blur(0);
+  translate: 0 0;
+}
+
+body.motion-ready .stack-category-grid.reveal.is-visible .stack-category:nth-child(1) {
+  transition-delay: 90ms, 90ms, 90ms, 0ms, 0ms, 0ms, 0ms;
+}
+
+body.motion-ready .stack-category-grid.reveal.is-visible .stack-category:nth-child(2) {
+  transition-delay: 170ms, 170ms, 170ms, 0ms, 0ms, 0ms, 0ms;
+}
+
+body.motion-ready .stack-category-grid.reveal.is-visible .stack-category:nth-child(3) {
+  transition-delay: 250ms, 250ms, 250ms, 0ms, 0ms, 0ms, 0ms;
+}
+
+body.motion-ready .stack-category-grid.reveal.is-visible .stack-category:nth-child(4) {
+  transition-delay: 330ms, 330ms, 330ms, 0ms, 0ms, 0ms, 0ms;
+}
+
+body.motion-ready .stack-category-grid.reveal.is-visible.is-in-view .stack-category::before {
+  animation: stackAccentPulse 3.6s ease-in-out infinite;
+}
+
+body.motion-ready .stack-category-grid.reveal.is-visible.is-in-view .stack-category:nth-child(2)::before {
+  animation-delay: 0.45s;
+}
+
+body.motion-ready .stack-category-grid.reveal.is-visible.is-in-view .stack-category:nth-child(3)::before {
+  animation-delay: 0.9s;
+}
+
+body.motion-ready .stack-category-grid.reveal.is-visible.is-in-view .stack-category:nth-child(4)::before {
+  animation-delay: 1.35s;
+}
+
 .competencies-section {
   padding-top: 96px;
   padding-bottom: 96px;
@@ -5104,6 +5279,7 @@ body.premium-portal main {
   border-radius: 32px 32px 0 0;
   text-align: center;
   isolation: isolate;
+  background-size: 140% 140%, 100% 100%;
 }
 
 .closing-section::before {
@@ -5116,6 +5292,8 @@ body.premium-portal main {
     linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
   background-size: 56px 56px;
   mask-image: radial-gradient(circle at center, #000, transparent 76%);
+  opacity: 0.78;
+  will-change: background-position, opacity;
 }
 
 .closing-section::after {
@@ -5130,6 +5308,237 @@ body.premium-portal main {
   border: 1px solid rgba(255, 176, 0, 0.1);
   border-radius: 50%;
   transform: translateX(-50%);
+  will-change: transform, opacity;
+}
+
+.closing-motion-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.closing-section > :not(.closing-motion-field) {
+  position: relative;
+  z-index: 2;
+}
+
+.closing-scan {
+  --closing-scan-opacity: 0.46;
+  position: absolute;
+  top: -22%;
+  bottom: -22%;
+  width: clamp(44px, 5vw, 84px);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 176, 0, 0.14),
+    rgba(255, 176, 0, 0.46),
+    rgba(97, 157, 190, 0.2),
+    transparent
+  );
+  box-shadow: 0 0 30px rgba(255, 176, 0, 0.12);
+  mix-blend-mode: screen;
+  opacity: 0;
+  transform: translateX(-18vw) rotate(14deg);
+  will-change: transform, opacity;
+  animation-duration: 8.4s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.closing-scan-one {
+  left: 18%;
+}
+
+.closing-scan-two {
+  left: 48%;
+  animation-delay: 2.1s;
+  animation-duration: 9.6s;
+}
+
+.closing-scan-three {
+  left: 76%;
+  animation-delay: 4.3s;
+  animation-duration: 10.8s;
+}
+
+.closing-ring {
+  position: absolute;
+  top: 12%;
+  left: 50%;
+  width: min(460px, 68vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      from 0deg,
+      transparent 0 16%,
+      rgba(255, 176, 0, 0.8) 18%,
+      transparent 23% 55%,
+      rgba(97, 157, 190, 0.5) 59%,
+      transparent 64% 100%
+    );
+  filter: drop-shadow(0 0 20px rgba(255, 176, 0, 0.14));
+  opacity: 0.62;
+  transform: translate(-50%, 0) rotate(0deg);
+  mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #000 calc(100% - 1px));
+  will-change: transform, opacity;
+  animation-duration: 28s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.closing-ring-two {
+  top: 18%;
+  width: min(620px, 88vw);
+  opacity: 0.28;
+  animation-duration: 40s;
+  animation-direction: reverse;
+}
+
+.closing-trace {
+  position: absolute;
+  left: 50%;
+  width: min(540px, 76vw);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 176, 0, 0.72), rgba(97, 157, 190, 0.45), transparent);
+  opacity: 0;
+  transform: translateX(-50%) scaleX(0.18);
+  transform-origin: center;
+  will-change: transform, opacity;
+  animation-duration: 7.2s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.closing-trace-one {
+  top: 39%;
+}
+
+.closing-trace-two {
+  top: 72%;
+  animation-delay: 2.8s;
+  animation-duration: 8.4s;
+}
+
+.motion-ready .closing-section:not(.is-in-view) .closing-motion-field * {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body.motion-ready .closing-section .closing-scan {
+    animation-name: closingScanTravel;
+  }
+
+  body.motion-ready .closing-section .closing-ring {
+    animation-name: closingRingRotate;
+  }
+
+  body.motion-ready .closing-section .closing-trace {
+    animation-name: closingTracePulse;
+  }
+
+  body.motion-ready .closing-section.reveal.is-visible.is-in-view {
+    animation: closingGlowDrift 14s ease-in-out infinite alternate;
+  }
+
+  body.motion-ready .closing-section.reveal.is-visible.is-in-view::before {
+    animation: closingGridDrift 22s linear infinite;
+  }
+
+  body.motion-ready .closing-section.reveal.is-visible.is-in-view::after {
+    animation: closingHaloBreathe 10s ease-in-out infinite;
+  }
+
+  body.motion-ready .closing-section.reveal.is-visible.is-in-view .closing-actions::before {
+    animation: closingActionSweep 5.6s ease-in-out infinite;
+  }
+}
+
+@keyframes closingGlowDrift {
+  0% {
+    background-position: 48% 0%, center;
+  }
+  100% {
+    background-position: 54% 9%, center;
+  }
+}
+
+@keyframes closingGridDrift {
+  0% {
+    background-position: 0 0, 0 0;
+    opacity: 0.52;
+  }
+  50% {
+    opacity: 0.86;
+  }
+  100% {
+    background-position: 56px 56px, 56px 0;
+    opacity: 0.52;
+  }
+}
+
+@keyframes closingHaloBreathe {
+  0%, 100% {
+    opacity: 0.7;
+    transform: translateX(-50%) translate3d(-10px, 0, 0) scale(0.96);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) translate3d(10px, -8px, 0) scale(1.06);
+  }
+}
+
+@keyframes closingActionSweep {
+  0%, 100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scaleX(0.28);
+  }
+  42%, 62% {
+    opacity: 0.75;
+    transform: translate(-50%, -50%) scaleX(1);
+  }
+}
+
+@keyframes closingScanTravel {
+  0% {
+    opacity: 0;
+    transform: translateX(-22vw) rotate(14deg);
+  }
+  12%, 72% {
+    opacity: var(--closing-scan-opacity);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(44vw) rotate(14deg);
+  }
+}
+
+@keyframes closingRingRotate {
+  0% {
+    transform: translate(-50%, 0) rotate(0deg) scale(0.98);
+  }
+  50% {
+    opacity: 0.82;
+    transform: translate(-50%, -8px) rotate(180deg) scale(1.03);
+  }
+  100% {
+    transform: translate(-50%, 0) rotate(360deg) scale(0.98);
+  }
+}
+
+@keyframes closingTracePulse {
+  0%, 100% {
+    opacity: 0;
+    transform: translateX(-50%) scaleX(0.18);
+  }
+  36%, 62% {
+    opacity: 0.68;
+    transform: translateX(-50%) scaleX(1);
+  }
 }
 
 .closing-section .section-kicker {
@@ -5150,11 +5559,27 @@ body.premium-portal main {
 }
 
 .closing-actions {
+  position: relative;
   display: flex;
   gap: 22px;
   align-items: center;
   justify-content: center;
   margin-top: 34px;
+}
+
+.closing-actions::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  width: min(520px, 82vw);
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, rgba(255, 176, 0, 0.65), transparent);
+  opacity: 0;
+  transform: translate(-50%, -50%) scaleX(0.36);
+  transform-origin: center;
+  will-change: transform, opacity;
 }
 
 .closing-link {
@@ -5543,6 +5968,10 @@ body.premium-portal main {
   .project-card,
   .project-card.feature-card {
     grid-column: span 6;
+  }
+
+  .stack-category-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -6004,6 +6433,19 @@ body.premium-portal main {
     margin-bottom: 42px;
   }
 
+  .expanded-stack-section {
+    padding-top: 58px;
+  }
+
+  .stack-category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stack-category {
+    min-height: 0;
+    padding: 24px;
+  }
+
   .competencies-section {
     padding-block: 72px;
   }
@@ -6106,6 +6548,22 @@ body.premium-portal main {
   .closing-section p {
     font-size: 0.86rem;
     line-height: 1.75;
+  }
+
+  .closing-scan {
+    --closing-scan-opacity: 0.26;
+    width: 48px;
+    filter: blur(0.6px) brightness(0.82);
+  }
+
+  .closing-scan-one {
+    left: 4%;
+    animation-duration: 11.5s;
+  }
+
+  .closing-scan-two,
+  .closing-scan-three {
+    display: none;
   }
 
   .closing-actions {
@@ -8137,6 +8595,18 @@ body.motion-ready:not(.page-entered) .hero-grid {
   }
 }
 
+@keyframes stackAccentPulse {
+  0%, 100% {
+    opacity: 0.48;
+    transform: scaleX(0.72);
+    transform-origin: left center;
+  }
+  48% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
 /* Section content uses translate longhand, leaving transform free for subtle
    card feedback without snapping or cancelling the reveal. */
 
@@ -8170,7 +8640,7 @@ body.premium-portal .closing-section.reveal.reveal-complete {
 
 /* Quiet interaction feedback: small lift, low-amplitude tilt, no bouncing. */
 
-body.premium-portal :is(.project-card, .glass-card, .responsibility-grid article).is-interacting {
+body.premium-portal :is(.project-card, .glass-card, .responsibility-grid article, .stack-category).is-interacting {
   transition-duration: 100ms, 220ms, 220ms, 260ms;
 }
 
@@ -8209,7 +8679,7 @@ body.premium-portal :is(.project-card, .glass-card, .responsibility-grid article
 }
 
 @media (hover: hover) and (pointer: fine) {
-  body.premium-portal :is(.project-card, .glass-card, .experience-item, .responsibility-grid article):hover {
+  body.premium-portal :is(.project-card, .glass-card, .experience-item, .responsibility-grid article, .stack-category):hover {
     transform: perspective(1200px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)) translateY(-3px);
   }
 
@@ -8457,7 +8927,7 @@ body.premium-portal .chatbot-widget.is-open .chatbot-panel {
     transform: scale(1.01);
   }
 
-  body.premium-portal :is(.project-card, .glass-card, .timeline-item, .experience-item, .responsibility-grid article, .contact-card):active {
+  body.premium-portal :is(.project-card, .glass-card, .timeline-item, .experience-item, .responsibility-grid article, .stack-category, .contact-card):active {
     scale: 0.992;
   }
 
@@ -8474,7 +8944,8 @@ body.premium-portal .chatbot-widget.is-open .chatbot-panel {
   body.motion-ready:not(.page-entered) .hero > .portrait-card.reveal,
   body.motion-ready:not(.page-entered) .hero-scroll-cue,
   body.premium-portal .section .reveal,
-  body.premium-portal .closing-section.reveal {
+  body.premium-portal .closing-section.reveal,
+  body.motion-ready .stack-category-grid.reveal .stack-category {
     opacity: 1 !important;
     filter: none !important;
     scale: 1 !important;
@@ -8489,6 +8960,12 @@ body.premium-portal .chatbot-widget.is-open .chatbot-panel {
   .portrait-frame,
   .hero-scroll-cue span::after,
   .ticker-track,
+  .stack-category::before,
+  .closing-section,
+  .closing-section::before,
+  .closing-section::after,
+  .closing-motion-field *,
+  .closing-actions::before,
   .chatbot-message,
   .chatbot-message.typing span {
     animation: none !important;

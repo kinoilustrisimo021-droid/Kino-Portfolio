@@ -124,20 +124,44 @@
       "id": "tools",
       "title": "Tools and Technologies",
       "intentKeys": ["tools", "automation"],
-      "keywords": ["tools", "technologies", "tech stack", "python", "excel", "csv", "xlsx", "anong tools", "gamit", "ginagamit"],
-      "summary": "Kino's technical stack is centered on Python, Excel, CSV/XLSX workflows, reporting dashboards, data validation, file processing, and automation for operational reporting.",
-      "summaryFilipino": "Ang technical stack ni Kino ay centered sa Python, Excel, CSV/XLSX workflows, reporting dashboards, data validation, file processing, at automation para sa operational reporting.",
+      "keywords": ["tools", "technologies", "tech stack", "python", "fastapi", "uvicorn", "duckdb", "pandas", "pyarrow", "mysql", "pymysql", "selenium", "customtkinter", "xlsxwriter", "excel", "csv", "xlsx", "anong tools", "gamit", "ginagamit"],
+      "summary": "Kino's technical stack includes Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Google Chrome automation, CustomTkinter, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts.",
+      "summaryFilipino": "Kasama sa technical stack ni Kino ang Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Google Chrome automation, CustomTkinter, XlsxWriter, CSV generation, at automated PowerPoint o management report scripts.",
       "bullets": [
-        "Python for automation and extraction",
-        "Excel for structured reporting outputs",
-        "CSV/XLSX processing for operational data",
-        "Dashboard-style views for KPI and performance monitoring"
+        "Backend: Python 3.14, FastAPI, and Uvicorn",
+        "Data and analytics: DuckDB, Pandas, and PyArrow",
+        "Database integration: MySQL and PyMySQL",
+        "Frontend: plain HTML, CSS, and JavaScript without React, Vue, Node.js, or a frontend build system",
+        "Automation and UI: Selenium, Google Chrome automation, and CustomTkinter",
+        "Reporting exports: XlsxWriter, CSV generation, and automated PowerPoint or management report scripts"
       ],
       "bulletsFilipino": [
-        "Python para sa automation at extraction",
-        "Excel para sa structured reporting outputs",
-        "CSV/XLSX processing para sa operational data",
-        "Dashboard-style views para sa KPI at performance monitoring"
+        "Backend: Python 3.14, FastAPI, at Uvicorn",
+        "Data at analytics: DuckDB, Pandas, at PyArrow",
+        "Database integration: MySQL at PyMySQL",
+        "Frontend: plain HTML, CSS, at JavaScript na walang React, Vue, Node.js, o frontend build system",
+        "Automation at UI: Selenium, Google Chrome automation, at CustomTkinter",
+        "Reporting exports: XlsxWriter, CSV generation, at automated PowerPoint o management report scripts"
+      ]
+    },
+    {
+      "id": "expanded_stack",
+      "title": "Expanded Development Stack",
+      "intentKeys": ["tools", "technology", "automation", "database", "reporting", "backend", "frontend"],
+      "keywords": ["initial sample", "advanced projects", "advanced features", "backend", "fastapi", "uvicorn", "duckdb", "pandas", "pyarrow", "mysql", "pymysql", "frontend", "html", "css", "javascript", "selenium", "chrome automation", "customtkinter", "xlsxwriter", "csv", "powerpoint", "management report", "database integration", "data analytics"],
+      "summary": "The projects presented in the portfolio are an initial sample of Kino's developed applications. Other projects include more advanced features, automation, data processing, reporting, and database integration using Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Chrome automation, CustomTkinter, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts.",
+      "summaryFilipino": "Ang mga project na ipinapakita sa portfolio ay initial sample pa lang ng applications na nadevelop ni Kino. May ibang projects na may mas advanced features, automation, data processing, reporting, at database integration gamit ang Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Chrome automation, CustomTkinter, XlsxWriter, CSV generation, at automated PowerPoint o management report scripts.",
+      "bullets": [
+        "Develops end-to-end web applications and automation workflows",
+        "Works with database management, data analytics, and external MySQL integration",
+        "Builds desktop tools and lightweight frontend interfaces without a frontend build system",
+        "Generates CSV, Excel, PowerPoint, and management reporting outputs through scripts"
+      ],
+      "bulletsFilipino": [
+        "Gumagawa ng end-to-end web applications at automation workflows",
+        "May experience sa database management, data analytics, at external MySQL integration",
+        "Gumagawa ng desktop tools at lightweight frontend interfaces na walang frontend build system",
+        "Nagge-generate ng CSV, Excel, PowerPoint, at management reporting outputs gamit ang scripts"
       ]
     },
     {
