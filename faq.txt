@@ -1,9 +1,15 @@
 # Visitor FAQ
 Q: Tell me about Kino.
-A: Kino Ilustrisimo is a practical data operations and Python automation professional focused on reporting workflows, dashboard monitoring, collection strategy support, process improvement, and operational performance visibility.
+A: Kino Ilustrisimo is a practical automation, data operations, and business-support professional focused on reporting, dashboards, customer and CRM workflows, administrative coordination, process improvement, and operational visibility.
 
 Q: What can Kino do?
-A: Kino can build Python automations, reporting workflows, dashboard-style monitoring views, Excel and CSV/XLSX outputs, data validation workflows, and operational performance summaries.
+A: Kino can build Python automations, reporting workflows, dashboards, Excel/Google Sheets/CSV/XLSX outputs, and data validation workflows. He can also support customer communication, CRM and account handling, data entry, records, email, calendars, files, and document preparation.
+
+Q: Can Kino work as a virtual assistant or business support professional?
+A: Yes. Kino's confirmed support skills include customer service through calls, email, and SMS; CRM and customer-account handling; payment-arrangement support; Excel formulas and Google Sheets tracking; data entry and record management; inbox, calendar, file, document, and report support.
+
+Q: What office and collaboration tools can Kino use?
+A: Kino's confirmed business-support tools include Microsoft Excel, Google Sheets, Google Docs, Microsoft Word, Gmail, Outlook, Google Drive, OneDrive, Google Workspace, and ChatGPT.
 
 Q: Can Kino build dashboards?
 A: Yes. Kino has experience creating dashboard-style projects for KPI monitoring, campaign movement, digital activity, and operational performance visibility.
@@ -12,7 +18,7 @@ Q: Does Kino have sample work?
 A: Yes. Kino's portfolio includes MC6 Collection Pipeline, Digital Omnichannel Monitoring Dashboard, Digital Reporting App, Excel Reporting Result, Predictive Summary Extractor, Alloc Review Builder, Auto Redial Automation, MC6 Analytics Hub, and Report Auto Extractor.
 
 Q: What services can Kino offer?
-A: Kino can support dashboard development, Python automation, reporting workflow improvement, data validation, Excel/CSV/XLSX reporting, and portfolio AI chatbot setup.
+A: Kino can support dashboard development, Python automation, reporting workflow improvement, data validation, Excel/Google Sheets/CSV/XLSX reporting, customer and CRM workflows, administrative coordination, and portfolio AI chatbot setup.
 
 Q: Why should we hire Kino?
 A: Kino combines hands-on operations experience with Python automation, reporting discipline, dashboard thinking, and practical workflow improvement.
@@ -24,7 +30,7 @@ Q: Marunong ka ba gumawa ng dashboard?
 A: Oo. May experience si Kino sa dashboard-style monitoring projects para sa KPIs, campaign movement, digital activity, at operational performance visibility.
 
 Q: Ano kaya mong gawin?
-A: Kaya ni Kino gumawa ng Python automation, dashboard monitoring views, Excel/CSV/XLSX reports, data validation workflows, at reporting process improvements.
+A: Kaya ni Kino gumawa ng Python automation, dashboard monitoring views, Excel/Google Sheets/CSV/XLSX reports, data validation workflows, customer at CRM support, data entry, email at calendar coordination, at document preparation.
 
 Q: May sample work ka?
 A: Oo. May project samples si Kino tulad ng MC6 Collection Pipeline, Digital Omnichannel Monitoring Dashboard, Digital Reporting App, Predictive Summary Extractor, Auto Redial Automation, at Report Auto Extractor.

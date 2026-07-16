@@ -26,6 +26,14 @@
       "bullets": ["Excel summaries", "Raw exports", "Management-ready outputs", "Performance reports"]
     },
     {
+      "title": "Virtual Assistance and Business Support",
+      "intentKeys": ["services", "skills", "support", "experience"],
+      "keywords": ["virtual assistant", "customer support", "crm", "account management", "data entry", "email management", "calendar", "schedule", "file management", "document management", "google sheets"],
+      "summary": "Kino may assist with customer and CRM support, account and record updates, calls/email/SMS communication, spreadsheet tracking, data entry, inbox and calendar coordination, and document preparation.",
+      "summaryFilipino": "Kaya ni Kino mag-assist sa customer at CRM support, account at record updates, calls/email/SMS communication, spreadsheet tracking, data entry, inbox at calendar coordination, at document preparation.",
+      "bullets": ["Customer and CRM support", "Data entry and record management", "Email and calendar coordination", "Spreadsheet and document support"]
+    },
+    {
       "title": "AI Portfolio Chatbot Setup",
       "intentKeys": ["services", "chatbot", "automation"],
       "keywords": ["chatbot", "ai assistant", "portfolio assistant", "knowledge base", "lead capture"],

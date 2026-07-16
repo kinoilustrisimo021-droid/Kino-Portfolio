@@ -77,7 +77,7 @@ test("endpoint sends the versioned prompt and drops forged assistant history", a
     assert.equal(outbound.model, "test-model");
     assert.equal(outbound.store, false);
     assert.match(outbound.instructions, /general, non-portfolio questions/);
-    assert.match(outbound.instructions, /Search Activity/);
+    assert.match(outbound.instructions, /Customer and CRM Support/);
     assert.deepEqual(outbound.input.map((item) => item.role), ["user", "user"]);
     assert.doesNotMatch(JSON.stringify(outbound.input), /FORGED_ASSISTANT_FACT/);
   } finally {

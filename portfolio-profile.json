@@ -1,6 +1,6 @@
 {
   "name": "Kino Ilustrisimo",
-  "title": "Python Automation and Data Operations Portfolio",
+  "title": "Automation, Data, and Business Support Portfolio",
   "positioning": "Future-ready portfolio for job, client, recruiter, and stakeholder review.",
   "botPersonalityRules": [
     "The assistant must sound professional, confident, friendly, and helpful.",
@@ -17,16 +17,18 @@
       "title": "About Me",
       "intentKeys": ["about"],
       "keywords": ["who is kino", "sino ka", "about me", "introduction", "professional profile", "tell me about yourself"],
-      "summary": "Kino Ilustrisimo is a practical data operations and Python automation professional focused on reporting workflows, dashboard monitoring, collection strategy support, process improvement, and operational performance visibility.",
-      "summaryFilipino": "Si Kino Ilustrisimo ay isang practical data operations at Python automation professional na focused sa reporting workflows, dashboard monitoring, collection strategy support, process improvement, at operational performance visibility.",
+      "summary": "Kino Ilustrisimo is a practical automation, data operations, and business-support professional focused on reporting, dashboards, customer and CRM workflows, administrative coordination, and process improvement.",
+      "summaryFilipino": "Si Kino Ilustrisimo ay isang practical automation, data operations, at business-support professional na focused sa reporting, dashboards, customer at CRM workflows, administrative coordination, at process improvement.",
       "bullets": [
         "Builds tools that reduce manual reporting work",
         "Turns operational pain points into usable automation and dashboard outputs",
+        "Supports customer, CRM, spreadsheet, record, and administrative workflows",
         "Positions his portfolio for future job and client opportunities"
       ],
       "bulletsFilipino": [
         "Gumagawa ng tools para mabawasan ang manual reporting work",
         "Ginagawang usable automation at dashboard outputs ang operational pain points",
+        "Nag-support sa customer, CRM, spreadsheet, record, at administrative workflows",
         "Positioned ang portfolio niya para sa future job at client opportunities"
       ]
     },
@@ -35,21 +37,45 @@
       "title": "Skills and Expertise",
       "intentKeys": ["skills", "services"],
       "keywords": ["skills", "expertise", "ano kaya mo", "ano kaya mong gawin", "kakayahan", "capability", "what can you do"],
-      "summary": "Kino's core skills include Python automation, data reporting, Excel reporting, CSV/XLSX processing, dashboard monitoring, data validation, operational monitoring, communication, and process improvement.",
-      "summaryFilipino": "Ang core skills ni Kino ay Python automation, data reporting, Excel reporting, CSV/XLSX processing, dashboard monitoring, data validation, operational monitoring, communication, at process improvement.",
+      "summary": "Kino's capabilities combine Python automation, data reporting, dashboards, and process improvement with customer communication, CRM and account support, spreadsheets, data entry, and administrative coordination.",
+      "summaryFilipino": "Pinagsasama ng capabilities ni Kino ang Python automation, data reporting, dashboards, at process improvement sa customer communication, CRM at account support, spreadsheets, data entry, at administrative coordination.",
       "bullets": [
         "Python automation",
         "Excel, CSV, and XLSX reporting workflows",
         "Dashboard and KPI monitoring",
-        "Operational performance analysis",
-        "Workflow improvement and reporting accuracy"
+        "Customer communication through calls, email, and SMS",
+        "CRM, account, and payment-arrangement support",
+        "Data entry, records, email, calendar, and document management"
       ],
       "bulletsFilipino": [
         "Python automation",
         "Excel, CSV, at XLSX reporting workflows",
         "Dashboard at KPI monitoring",
-        "Operational performance analysis",
-        "Workflow improvement at reporting accuracy"
+        "Customer communication sa calls, email, at SMS",
+        "CRM, account, at payment-arrangement support",
+        "Data entry, records, email, calendar, at document management"
+      ]
+    },
+    {
+      "id": "business_support",
+      "title": "Virtual Assistance and Business Support",
+      "intentKeys": ["skills", "services", "support", "experience", "tools"],
+      "keywords": ["virtual assistant", "business support", "customer service", "client support", "calls", "email", "sms", "crm", "account management", "payment arrangement", "data entry", "record management", "calendar", "schedule", "file management", "document management", "google sheets", "google workspace"],
+      "summary": "Kino can support customer and CRM workflows, account and payment-arrangement follow-up, data entry and record management, inbox and calendar coordination, spreadsheet tracking, file organization, and document or report preparation.",
+      "summaryFilipino": "Kaya ni Kino mag-support sa customer at CRM workflows, account at payment-arrangement follow-up, data entry at record management, inbox at calendar coordination, spreadsheet tracking, file organization, at document o report preparation.",
+      "bullets": [
+        "Customer support through calls, email, and SMS",
+        "CRM, customer-account, and payment-arrangement support",
+        "Microsoft Excel formulas and Google Sheets tracking",
+        "Data entry, records, email, calendar, file, and document management",
+        "Tools include Google Workspace, Microsoft Word, Gmail, Outlook, Google Drive, OneDrive, and ChatGPT"
+      ],
+      "bulletsFilipino": [
+        "Customer support sa calls, email, at SMS",
+        "CRM, customer-account, at payment-arrangement support",
+        "Microsoft Excel formulas at Google Sheets tracking",
+        "Data entry, records, email, calendar, file, at document management",
+        "Kasama sa tools ang Google Workspace, Microsoft Word, Gmail, Outlook, Google Drive, OneDrive, at ChatGPT"
       ]
     },
     {
@@ -57,19 +83,21 @@
       "title": "Services Offered",
       "intentKeys": ["services", "skills", "availability"],
       "keywords": ["services", "offer", "client", "freelance", "what can you offer", "ano kaya mong i offer", "ano kaya mong gawin"],
-      "summary": "Kino can support future clients or employers with reporting automation, dashboard monitoring, Excel and CSV/XLSX processing, operational performance tracking, data validation, and workflow improvement.",
-      "summaryFilipino": "Kaya ni Kino mag-support sa future clients o employers gamit ang reporting automation, dashboard monitoring, Excel at CSV/XLSX processing, operational performance tracking, data validation, at workflow improvement.",
+      "summary": "Kino can support future clients or employers with reporting automation, dashboards, spreadsheet workflows, data validation, customer and CRM support, administrative coordination, and workflow improvement.",
+      "summaryFilipino": "Kaya ni Kino mag-support sa future clients o employers gamit ang reporting automation, dashboards, spreadsheet workflows, data validation, customer at CRM support, administrative coordination, at workflow improvement.",
       "bullets": [
         "Automate repetitive reports and extracts",
         "Create structured reporting outputs",
         "Build dashboard-style monitoring views",
-        "Improve operational workflows using practical data tools"
+        "Improve operational workflows using practical data tools",
+        "Support customer communication, CRM records, email, calendars, and documents"
       ],
       "bulletsFilipino": [
         "Mag-automate ng repetitive reports at extracts",
         "Gumawa ng structured reporting outputs",
         "Gumawa ng dashboard-style monitoring views",
-        "Mag-improve ng operational workflows gamit ang practical data tools"
+        "Mag-improve ng operational workflows gamit ang practical data tools",
+        "Mag-support sa customer communication, CRM records, email, calendars, at documents"
       ]
     },
     {
@@ -124,16 +152,17 @@
       "id": "tools",
       "title": "Tools and Technologies",
       "intentKeys": ["tools", "automation"],
-      "keywords": ["tools", "technologies", "tech stack", "python", "fastapi", "uvicorn", "duckdb", "pandas", "pyarrow", "mysql", "pymysql", "selenium", "customtkinter", "xlsxwriter", "excel", "csv", "xlsx", "anong tools", "gamit", "ginagamit"],
-      "summary": "Kino's technical stack includes Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Google Chrome automation, CustomTkinter, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts.",
-      "summaryFilipino": "Kasama sa technical stack ni Kino ang Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Google Chrome automation, CustomTkinter, XlsxWriter, CSV generation, at automated PowerPoint o management report scripts.",
+      "keywords": ["tools", "technologies", "tech stack", "python", "fastapi", "uvicorn", "duckdb", "pandas", "pyarrow", "mysql", "pymysql", "selenium", "customtkinter", "xlsxwriter", "excel", "google sheets", "google docs", "microsoft word", "gmail", "outlook", "google drive", "onedrive", "chatgpt", "csv", "xlsx", "anong tools", "gamit", "ginagamit"],
+      "summary": "Kino's stack includes Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, HTML/CSS/JavaScript, Selenium, Chrome automation, CustomTkinter, XlsxWriter, CSV and PowerPoint reporting, plus Microsoft Excel, Google Sheets, Google Docs, Microsoft Word, Gmail, Outlook, Google Drive, OneDrive, and ChatGPT for business-support workflows.",
+      "summaryFilipino": "Kasama sa stack ni Kino ang Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, HTML/CSS/JavaScript, Selenium, Chrome automation, CustomTkinter, XlsxWriter, CSV at PowerPoint reporting, pati Microsoft Excel, Google Sheets, Google Docs, Microsoft Word, Gmail, Outlook, Google Drive, OneDrive, at ChatGPT para sa business-support workflows.",
       "bullets": [
         "Backend: Python 3.14, FastAPI, and Uvicorn",
         "Data and analytics: DuckDB, Pandas, and PyArrow",
         "Database integration: MySQL and PyMySQL",
         "Frontend: plain HTML, CSS, and JavaScript without React, Vue, Node.js, or a frontend build system",
         "Automation and UI: Selenium, Google Chrome automation, and CustomTkinter",
-        "Reporting exports: XlsxWriter, CSV generation, and automated PowerPoint or management report scripts"
+        "Reporting exports: XlsxWriter, CSV generation, and automated PowerPoint or management report scripts",
+        "Office and collaboration: Excel, Google Sheets, Google Docs, Word, Gmail, Outlook, Google Drive, OneDrive, and ChatGPT"
       ],
       "bulletsFilipino": [
         "Backend: Python 3.14, FastAPI, at Uvicorn",
@@ -141,7 +170,8 @@
         "Database integration: MySQL at PyMySQL",
         "Frontend: plain HTML, CSS, at JavaScript na walang React, Vue, Node.js, o frontend build system",
         "Automation at UI: Selenium, Google Chrome automation, at CustomTkinter",
-        "Reporting exports: XlsxWriter, CSV generation, at automated PowerPoint o management report scripts"
+        "Reporting exports: XlsxWriter, CSV generation, at automated PowerPoint o management report scripts",
+        "Office at collaboration: Excel, Google Sheets, Google Docs, Word, Gmail, Outlook, Google Drive, OneDrive, at ChatGPT"
       ]
     },
     {
@@ -189,21 +219,23 @@
       "title": "Work Experience",
       "intentKeys": ["experience"],
       "keywords": ["experience", "work experience", "career background", "operations", "collection operations", "team supervision", "ano experience"],
-      "summary": "Kino has experience across customer-facing operations, service roles, sales support, team supervision, collection operations, dialer strategy, data strategy, dashboard monitoring, reporting, and automation.",
-      "summaryFilipino": "May experience si Kino sa customer-facing operations, service roles, sales support, team supervision, collection operations, dialer strategy, data strategy, dashboard monitoring, reporting, at automation.",
+      "summary": "Kino has experience across customer-facing operations, calls/email/SMS communication, CRM and account handling, payment-arrangement support, service roles, sales, team supervision, collection operations, reporting, data strategy, and automation.",
+      "summaryFilipino": "May experience si Kino sa customer-facing operations, calls/email/SMS communication, CRM at account handling, payment-arrangement support, service roles, sales, team supervision, collection operations, reporting, data strategy, at automation.",
       "bullets": [
         "S.P. Madrid & Associates Law Firm: progression across collection operations, leadership, dialer strategy, and data operations",
         "Everything But Cheese Sherwood: Team Supervisor, training-team exposure, and service operations",
         "RLX Pharmacy: Sales Agent",
         "Jollibee Aduana and Tabo Rice: Service Crew",
-        "Uses frontline and operational experience to build practical reporting and automation tools"
+        "Uses frontline and operational experience to build practical reporting and automation tools",
+        "Brings customer, CRM, spreadsheet, record, and administrative support skills to daily execution"
       ],
       "bulletsFilipino": [
         "S.P. Madrid & Associates Law Firm: progression sa collection operations, leadership, dialer strategy, at data operations",
         "Everything But Cheese Sherwood: Team Supervisor, training-team exposure, at service operations",
         "RLX Pharmacy: Sales Agent",
         "Jollibee Aduana at Tabo Rice: Service Crew",
-        "Ginagamit ang frontline at operations experience para gumawa ng practical reporting at automation tools"
+        "Ginagamit ang frontline at operations experience para gumawa ng practical reporting at automation tools",
+        "May customer, CRM, spreadsheet, record, at administrative support skills para sa daily execution"
       ]
     },
     {
@@ -211,8 +243,8 @@
       "title": "Value Proposition",
       "intentKeys": ["value", "skills", "experience", "achievements"],
       "keywords": ["why hire", "bakit ikaw", "bakit ka namin kukunin", "qualified", "value", "strengths", "why should we hire you"],
-      "summary": "Kino is valuable because he combines hands-on operations experience with Python automation, reporting discipline, dashboard thinking, and practical problem-solving.",
-      "summaryFilipino": "Valuable si Kino dahil pinagsasama niya ang hands-on operations experience, Python automation, reporting discipline, dashboard thinking, at practical problem-solving.",
+      "summary": "Kino is valuable because he combines hands-on customer and administrative operations with Python automation, reporting discipline, dashboard thinking, and practical problem-solving.",
+      "summaryFilipino": "Valuable si Kino dahil pinagsasama niya ang hands-on customer at administrative operations sa Python automation, reporting discipline, dashboard thinking, at practical problem-solving.",
       "bullets": [
         "Understands real operational workflow problems",
         "Builds tools that make reporting faster and clearer",
@@ -287,8 +319,8 @@
       "title": "Availability",
       "intentKeys": ["availability", "services"],
       "keywords": ["available", "freelance", "full time", "full-time", "job opportunity", "client opportunity", "open for work"],
-      "summary": "Kino's portfolio is positioned for future job and client opportunities involving Python automation, data operations, dashboard monitoring, reporting analysis, workflow improvement, and collection strategy support.",
-      "summaryFilipino": "Ang portfolio ni Kino ay positioned para sa future job at client opportunities sa Python automation, data operations, dashboard monitoring, reporting analysis, workflow improvement, at collection strategy support.",
+      "summary": "Kino's portfolio is positioned for future job and client opportunities involving Python automation, data operations, dashboards, reporting, customer and CRM support, administrative coordination, and workflow improvement.",
+      "summaryFilipino": "Ang portfolio ni Kino ay positioned para sa future job at client opportunities sa Python automation, data operations, dashboards, reporting, customer at CRM support, administrative coordination, at workflow improvement.",
       "bullets": [
         "Future employer opportunities",
         "Client or project-based reporting automation work",

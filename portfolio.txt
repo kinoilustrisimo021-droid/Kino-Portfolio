@@ -1,12 +1,14 @@
 ABOUT ME
 Name: Kino Ilustrisimo
-Role: Python Automation and Data Operations Professional
-Professional Summary: Kino builds practical reporting systems, Python-powered automations, data validation workflows, and operational dashboards for faster and clearer decision support.
+Role: Python Automation, Data Operations, and Business Support Professional
+Professional Summary: Kino combines practical reporting systems, Python-powered automation, data validation, and dashboards with hands-on customer communication, CRM, spreadsheet, and administrative operations support.
 Career Objective: Contribute Python automation, reporting discipline, dashboard development, data management, and operational analysis to future employers or clients.
 
 SKILLS
-Technical Skills: Python automation, Excel reporting, CSV/XLSX processing, data validation, dashboard monitoring, operational reporting, workflow improvement.
-Soft Skills: Communication, leadership, attention to detail, adaptability, customer handling, stakeholder support, fast learning.
+Technical Skills: Python automation, Excel reporting, Google Sheets tracking, CSV/XLSX processing, data validation, dashboard monitoring, operational reporting, workflow improvement.
+Business Support Skills: Customer service and client support; calls, email, and SMS communication; CRM and customer-account management; payment-arrangement support; data entry and record management; email and calendar management; file, document, and report preparation.
+Soft Skills: Communication, leadership, attention to detail, time management, multitasking, adaptability, problem solving, customer handling, stakeholder support, and fast learning.
+Office Tools: Microsoft Excel, Google Sheets, Google Docs, Microsoft Word, Gmail, Outlook, Google Drive, OneDrive, Google Workspace, and ChatGPT.
 Expanded Stack: Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Google Chrome automation, CustomTkinter, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts.
 Programming Languages: Python and plain JavaScript.
 Dashboard Skills: KPI monitoring, performance views, operational dashboards, reporting summaries, digital monitoring dashboards.
@@ -19,12 +21,12 @@ Purpose: Solve repetitive operational reporting problems and improve visibility 
 Business Impact: Faster reporting, clearer performance visibility, reduced manual work, better consistency, and stronger operational decision support.
 
 EXPERIENCE
-Work Background: Customer-facing operations, service roles, sales support, team supervision, collection operations, dialer strategy, data strategy, dashboard monitoring, reporting, and automation.
-Key Responsibilities: Reporting, monitoring, data validation, campaign support, dashboard creation, process improvement, team coordination, and operational analysis.
+Work Background: Customer-facing operations, calls/email/SMS communication, CRM and account handling, payment-arrangement support, service roles, sales support, team supervision, collection operations, dialer strategy, data strategy, dashboard monitoring, reporting, and automation.
+Key Responsibilities: Customer support, account and record updates, reporting, monitoring, data validation, campaign support, dashboard creation, process improvement, team coordination, and operational analysis.
 Achievements: Service Gilas Award, Rookie of the Month, promotion history, and practical project work for reporting and workflow improvement.
 
 SERVICES
-Available Services: Python automation, dashboard development, Excel/CSV/XLSX reporting, reporting workflow improvement, database workflow support, data validation, portfolio AI chatbot setup, and operational monitoring support.
+Available Services: Python automation, dashboard development, Excel/Google Sheets/CSV/XLSX reporting, reporting workflow improvement, database workflow support, data validation, customer and CRM support, data entry, inbox/calendar/file/document coordination, portfolio AI chatbot setup, and operational monitoring support.
 Dashboard Development: KPI dashboards, operational monitoring dashboards, digital reporting dashboards, and performance visibility views.
 Automation: Python extraction, report generation, file processing, Selenium and Google Chrome automation, and workflow automation.
 AI Chatbot: Portfolio assistant setup, knowledge-base structuring, lead capture flow, and visitor Q&A support.

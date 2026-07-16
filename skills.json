@@ -52,10 +52,26 @@
     {
       "title": "Reporting and Data Handling",
       "intentKeys": ["skills", "tools", "services"],
-      "keywords": ["excel", "csv", "xlsx", "reporting", "data validation", "raw export"],
-      "summary": "Kino works with Excel, CSV, and XLSX reporting workflows to turn raw operational files into structured outputs.",
-      "summaryFilipino": "Gumagamit si Kino ng Excel, CSV, at XLSX reporting workflows para gawing structured outputs ang raw operational files.",
-      "bullets": ["Excel summaries", "CSV/XLSX processing", "Data validation", "Stakeholder-ready reporting"]
+      "keywords": ["excel", "google sheets", "csv", "xlsx", "formulas", "reporting", "data validation", "raw export"],
+      "summary": "Kino works with Microsoft Excel formulas, Google Sheets tracking, and CSV/XLSX reporting workflows to turn operational records into structured outputs.",
+      "summaryFilipino": "Gumagamit si Kino ng Microsoft Excel formulas, Google Sheets tracking, at CSV/XLSX reporting workflows para gawing structured outputs ang operational records.",
+      "bullets": ["Excel formulas and summaries", "Google Sheets data tracking", "CSV/XLSX processing", "Stakeholder-ready reporting"]
+    },
+    {
+      "title": "Customer and CRM Support",
+      "intentKeys": ["skills", "services", "support", "experience"],
+      "keywords": ["customer service", "client support", "calls", "email", "sms", "crm", "account management", "payment arrangement", "customer account"],
+      "summary": "Kino supports customers through calls, email, and SMS, with hands-on experience in CRM and customer-account handling, record updates, and payment-arrangement support.",
+      "summaryFilipino": "Kaya ni Kino mag-support ng customers sa calls, email, at SMS, at may hands-on experience siya sa CRM, customer-account handling, record updates, at payment-arrangement support.",
+      "bullets": ["Customer service and client support", "Calls, email, and SMS communication", "CRM and account management", "Payment-arrangement support"]
+    },
+    {
+      "title": "Administrative and Office Support",
+      "intentKeys": ["skills", "services", "support", "tools"],
+      "keywords": ["virtual assistant", "administrative support", "data entry", "records", "email management", "calendar", "schedule", "file management", "document management", "google workspace", "microsoft word", "gmail", "outlook", "google drive", "onedrive", "chatgpt"],
+      "summary": "Kino can support data entry, record management, email correspondence, calendar and schedule coordination, file organization, and document or report preparation using common office tools.",
+      "summaryFilipino": "Kaya ni Kino mag-support sa data entry, record management, email correspondence, calendar at schedule coordination, file organization, at document o report preparation gamit ang common office tools.",
+      "bullets": ["Data entry and record management", "Email, calendar, and schedule support", "File and document management", "Google Workspace and Microsoft Office tools"]
     },
     {
       "title": "Professional Strengths",

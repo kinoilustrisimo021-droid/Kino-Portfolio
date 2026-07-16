@@ -40,7 +40,7 @@
     futureModel: {
       type: "secure-backend",
       endpoint: "/api/portfolio-chat",
-      timeoutMs: 12_000,
+      timeoutMs: 16_000,
       maxHistoryMessages: 8
     }
   };
@@ -93,8 +93,32 @@
     navLinks.forEach((link) => link.addEventListener("click", () => closeNavigation()));
 
     window.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && document.body.classList.contains("nav-open")) {
+      if (!document.body.classList.contains("nav-open")) return;
+
+      if (event.key === "Escape") {
         closeNavigation({ returnFocus: true });
+        return;
+      }
+
+      if (event.key === "Tab" && window.innerWidth <= 760) {
+        const mobileFocusOrder = [menuToggle, ...mobileNavigation.querySelectorAll("a")];
+        const first = mobileFocusOrder[0];
+        const firstLink = mobileFocusOrder[1];
+        const last = mobileFocusOrder[mobileFocusOrder.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (event.shiftKey && document.activeElement === firstLink) {
+          event.preventDefault();
+          first.focus();
+        } else if (!event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          firstLink.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
       }
     });
 
@@ -151,7 +175,7 @@
       );
       const siblingIndex = Math.max(0, revealSiblings.indexOf(item));
       const isVerticalList = item.parentElement?.matches(".experience-list");
-      const delay = revealSiblings.length > 1 && !isVerticalList ? (siblingIndex % 3) * 72 : 0;
+      const delay = revealSiblings.length > 1 && !isVerticalList ? (siblingIndex % 4) * 72 : 0;
       item.style.setProperty("--reveal-delay", `${delay}ms`);
       observer.observe(item);
     });
@@ -159,7 +183,7 @@
     revealItems.forEach((item) => item.classList.add("is-visible"));
   }
 
-  const ambientRegions = document.querySelectorAll(".hero, .ticker, .stack-category-grid, .closing-section");
+  const ambientRegions = document.querySelectorAll(".hero, .ticker, .stack-category-grid, .support-section, .closing-section");
   if ("IntersectionObserver" in window && ambientRegions.length) {
     const ambientObserver = new IntersectionObserver(
       (entries) => {
@@ -214,19 +238,21 @@
   const navMap = new Map(
     Array.from(navLinks).map((link) => [link.getAttribute("href")?.replace("#", ""), link])
   );
+  const getNavGroup = (section) => section.dataset.navGroup || section.id;
+  const navSections = sections.filter((section) => navMap.has(getNavGroup(section)));
 
   function setActiveNav(id) {
     navLinks.forEach((link) => link.classList.toggle("is-active", link === navMap.get(id)));
   }
 
-  if ("IntersectionObserver" in window && sections.length && navLinks.length) {
+  if ("IntersectionObserver" in window && navSections.length && navLinks.length) {
     const navObserver = new IntersectionObserver(
       (entries) => {
         const activeEntry = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-        if (activeEntry) setActiveNav(activeEntry.target.id);
+        if (activeEntry) setActiveNav(getNavGroup(activeEntry.target));
       },
       {
         rootMargin: "-34% 0px -55% 0px",
@@ -234,8 +260,21 @@
       }
     );
 
-    sections.forEach((section) => navObserver.observe(section));
+    navSections.forEach((section) => navObserver.observe(section));
   }
+
+  document.querySelectorAll(".timeline").forEach((scroller) => {
+    scroller.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      if (scroller.scrollWidth <= scroller.clientWidth) return;
+      event.preventDefault();
+      const direction = event.key === "ArrowRight" ? 1 : -1;
+      scroller.scrollBy({
+        left: direction * Math.max(scroller.clientWidth * 0.78, 260),
+        behavior: reduceMotionQuery.matches ? "auto" : "smooth"
+      });
+    });
+  });
 
   const projectImages = new Map();
 
@@ -280,11 +319,11 @@
 
   if (canUsePointerMotion) {
     const spotlightTargets = document.querySelectorAll(
-      ".project-card, .glass-card, .timeline-item, .experience-item, .responsibility-grid article, .stack-category"
+      ".project-card, .glass-card, .timeline-item, .experience-item, .responsibility-grid article, .stack-category, .support-spotlight, .support-card"
     );
 
     spotlightTargets.forEach((target) => {
-      const canTilt = target.matches(".project-card, .glass-card, .responsibility-grid article, .stack-category");
+      const canTilt = target.matches(".project-card, .glass-card, .responsibility-grid article, .stack-category, .support-spotlight, .support-card");
       let pointerFrame = 0;
       let latestPointer = null;
 
@@ -375,7 +414,21 @@
   const lightboxImage = lightbox.querySelector("img");
   const lightboxCaption = lightbox.querySelector("figcaption");
   const closeLightbox = lightbox.querySelector(".lightbox-close");
+  const lightboxPageTargets = document.querySelectorAll(".site-header, main, .chatbot-widget, .site-footer");
+  const lightboxInertState = new Map();
   let lightboxTrigger = null;
+
+  function setLightboxPageInert(willBeInert) {
+    lightboxPageTargets.forEach((target) => {
+      if (willBeInert) {
+        lightboxInertState.set(target, target.inert);
+        target.inert = true;
+      } else {
+        target.inert = lightboxInertState.get(target) || false;
+      }
+    });
+    if (!willBeInert) lightboxInertState.clear();
+  }
 
   function openLightbox(img) {
     const card = img.closest(".project-card");
@@ -390,6 +443,7 @@
     lightbox.setAttribute("aria-hidden", "false");
     lightbox.inert = false;
     document.body.classList.add("lightbox-open");
+    setLightboxPageInert(true);
     closeLightbox?.focus();
   }
 
@@ -398,6 +452,7 @@
     lightbox.setAttribute("aria-hidden", "true");
     lightbox.inert = true;
     document.body.classList.remove("lightbox-open");
+    setLightboxPageInert(false);
     lightboxTrigger?.focus();
     lightboxTrigger = null;
   }
@@ -427,7 +482,12 @@
     if (event.target === lightbox) hideLightbox();
   });
   window.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && lightbox.classList.contains("is-open")) hideLightbox();
+    if (!lightbox.classList.contains("is-open")) return;
+    if (event.key === "Escape") hideLightbox();
+    if (event.key === "Tab") {
+      event.preventDefault();
+      closeLightbox?.focus();
+    }
   });
 
   const portfolioChatbot = document.querySelector("[data-portfolio-chatbot]");
@@ -452,6 +512,7 @@
     panel.inert = true;
     let started = false;
     let knowledgeItems = [];
+    let knowledgeLoadPromise = null;
     let projectData = [];
     let contactData = {};
     let projectRequestModal = null;
@@ -467,32 +528,35 @@
       projectName: ""
     };
     let conversationHistory = [];
+    const SAVED_REQUEST_LIMIT = 5;
+    const SAVED_REQUEST_TTL_MS = 30 * 24 * 60 * 60 * 1000;
 
     const fallbackKnowledge = parseKnowledgeBase(`
 # Portfolio Summary
 Q: Who is Kino?
-A: Kino Ilustrisimo is a data operations and automation professional focused on Python automation, reporting workflows, dashboard monitoring, and operational performance improvement.
+A: Kino Ilustrisimo is an automation, data operations, and business-support professional focused on reporting, dashboards, customer and CRM workflows, administrative coordination, and process improvement.
 Q: What is Kino's technical focus?
 A: Kino's technical focus includes Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Chrome automation, CustomTkinter, XlsxWriter, CSV generation, PowerPoint report automation, dashboard monitoring, data validation, and workflow improvement.
 Q: What projects can Kino showcase?
 A: Kino can showcase the MC6 Collection Pipeline, Digital Omnichannel Monitoring Dashboard, Digital Reporting App, Excel Reporting Result, Predictive Summary Extractor, Alloc Review Builder, Auto Redial Automation, MC6 Analytics Hub, and Report Auto Extractor.
 Q: What are your skills?
-A: Kino's skills include Python automation, backend API work, data analytics, database integration, reporting, CSV/XLSX processing, dashboard monitoring, desktop tools, browser automation, data validation, workflow improvement, operational monitoring, and communication.
+A: Kino's skills include Python automation, data analytics, reporting, dashboards, customer and CRM support, calls/email/SMS communication, account handling, spreadsheet tracking, data entry, records, inbox and calendar coordination, document preparation, workflow improvement, and communication.
 Q: What tools and technologies do you use?
-A: Kino's technical stack includes Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Google Chrome automation, CustomTkinter, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts.
+A: Kino's stack includes Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, HTML/CSS/JavaScript, Selenium, Chrome automation, CustomTkinter, XlsxWriter, CSV and PowerPoint reporting, plus Excel, Google Sheets, Google Docs, Word, Gmail, Outlook, Google Drive, OneDrive, and ChatGPT.
 Q: What services can you offer?
-A: Kino can support web applications, reporting automation, dashboard monitoring, Excel/CSV/XLSX processing, database workflows, workflow improvement, data validation, and operations-focused performance reporting.
+A: Kino can support web applications, reporting automation, dashboards, spreadsheet workflows, customer and CRM operations, data entry and records, email and calendar coordination, document preparation, data validation, and workflow improvement.
 Q: What makes Kino valuable to future employers or clients?
 A: Kino connects operational experience with practical automation, helping teams reduce manual work, improve reporting visibility, and monitor performance through usable tools.
 Q: Sino ka?
 A: Ako ang portfolio assistant ni Kino Ilustrisimo. Pwede akong sumagot tungkol sa kanyang skills, projects, work experience, tools, achievements, at professional background.
 Q: Ano ang skills mo?
-A: Ang main skills ni Kino ay Python automation, data reporting, Excel reporting, CSV/XLSX processing, dashboard monitoring, data validation, workflow improvement, operational monitoring, at communication.
+A: Ang main skills ni Kino ay Python automation, data reporting, Excel at Google Sheets workflows, dashboard monitoring, customer at CRM support, calls/email/SMS communication, account handling, data entry, records, email at calendar coordination, document preparation, at workflow improvement.
 Q: Ano ang mga project mo?
 A: Ilan sa projects ni Kino ay MC6 Collection Pipeline, Digital Omnichannel Monitoring Dashboard, Digital Reporting App, Excel Reporting Result, Predictive Summary Extractor, Alloc Review Builder, Auto Redial Automation, MC6 Analytics Hub, at Report Auto Extractor.
 Q: What should the assistant do if information is unavailable?
 A: The assistant should avoid inventing information and say that the specific information is not currently available in the portfolio.
     `);
+    knowledgeItems = fallbackKnowledge;
 
     if (!toggle || !panel || !form || !input || !messages || !status || !suggestions || !quickActions) return;
 
@@ -523,25 +587,33 @@ A: The assistant should avoid inventing information and say that the specific in
 
     renderSuggestedQuestions();
     renderQuickActions();
+    getSavedLeads();
 
-    loadPortfolioKnowledge()
-      .then(({ items, projects, contact }) => {
-        knowledgeItems = items.length ? items : fallbackKnowledge;
-        projectData = projects;
-        contactData = contact;
-        renderQuickActions();
-        if (!aiStatusResolved) {
-          status.textContent = items.length
-            ? "Ready — ask naturally about Kino or a general question."
-            : "Ready with limited portfolio information.";
-        }
-      })
-      .catch(() => {
-        knowledgeItems = fallbackKnowledge;
-        if (!aiStatusResolved) status.textContent = "Ready with limited portfolio information.";
-      });
+    function ensurePortfolioKnowledge() {
+      if (knowledgeLoadPromise) return knowledgeLoadPromise;
+
+      knowledgeLoadPromise = loadPortfolioKnowledge()
+        .then(({ items, projects, contact }) => {
+          knowledgeItems = items.length ? items : fallbackKnowledge;
+          projectData = projects;
+          contactData = contact;
+          renderQuickActions();
+          if (!aiStatusResolved) {
+            status.textContent = items.length
+              ? "Ready — ask naturally about Kino or a general question."
+              : "Ready with limited portfolio information.";
+          }
+        })
+        .catch(() => {
+          knowledgeItems = fallbackKnowledge;
+          if (!aiStatusResolved) status.textContent = "Ready with limited portfolio information.";
+        });
+
+      return knowledgeLoadPromise;
+    }
 
     function openChatbot() {
+      ensurePortfolioKnowledge();
       window.clearTimeout(chatbotCloseTimer);
       widget.classList.remove("is-closing");
       widget.classList.add("is-open");
@@ -907,6 +979,8 @@ A: The assistant should avoid inventing information and say that the specific in
               ${renderOption("Business Website", initialValues.projectType)}
               ${renderOption("System Development", initialValues.projectType)}
               ${renderOption("Excel / Google Sheet Automation", initialValues.projectType)}
+              ${renderOption("Virtual Assistance / Business Support", initialValues.projectType)}
+              ${renderOption("Customer / CRM Support", initialValues.projectType)}
               ${renderOption("Other Custom Project", initialValues.projectType)}
             </select>
           </label>
@@ -931,7 +1005,7 @@ A: The assistant should avoid inventing information and say that the specific in
             <textarea name="notes" placeholder="Optional notes, references, existing tools, or special requirements...">${escapeHtml(initialValues.notes)}</textarea>
           </label>
         </div>
-        <p class="chatbot-form-note">Only your name, email, and message are required. Review the brief before sending; this does not generate a final quotation.</p>
+        <p class="chatbot-form-note">Only your name, email, and message are required. Submitted details go through the configured form provider. If delivery fails, this browser keeps up to five failed requests for 30 days so you can download or retry them.</p>
         <div class="chatbot-lead-footer">
           <button class="chatbot-lead-submit" type="submit">Review & Continue</button>
         </div>
@@ -1046,9 +1120,6 @@ A: The assistant should avoid inventing information and say that the specific in
       }
 
       const config = getProjectRequestConfig();
-      const requests = getSavedLeads();
-      requests.push(request);
-      saveLeads(requests);
 
       let result = { sent: false, mode: "local" };
       try {
@@ -1060,26 +1131,48 @@ A: The assistant should avoid inventing information and say that the specific in
       closeProjectRequestModal();
 
       if (result.sent) {
-        addMessage("bot", "Thank you. Your project request has been submitted successfully. I will review the details and respond to you through the email address you provided.");
+        addMessage("bot", "Thank you. Your project request has been submitted successfully. Kino can review the details and respond through the email address you provided.");
         return;
       }
 
       if (result.mode === "mailto") {
+        saveFailedRequest(request);
         addMessage("bot", "Your project request was prepared in your email app. Please send the email there to complete the submission. A local copy was also saved in this browser.");
         addResponseActions([{ label: "Download Request JSON", action: "download-lead", primary: true }]);
         return;
       }
 
+      saveFailedRequest(request);
       addMessage("bot", "Your project request was saved locally in this browser, but automatic email delivery could not be completed. Please check the FormSubmit activation/configuration in contact.json, or switch the provider to Formspree, EmailJS, or a backend email API.");
       addResponseActions([{ label: "Download Request JSON", action: "download-lead", primary: true }]);
     }
 
     function getSavedLeads() {
       try {
-        return JSON.parse(localStorage.getItem("kinoPortfolioProjectRequests") || "[]");
+        const cutoff = Date.now() - SAVED_REQUEST_TTL_MS;
+        const saved = JSON.parse(localStorage.getItem("kinoPortfolioProjectRequests") || "[]");
+        if (!Array.isArray(saved)) return [];
+        const retained = saved
+          .filter((lead) => {
+            const capturedAt = Date.parse(lead?.capturedAt || "");
+            return Number.isFinite(capturedAt) && capturedAt >= cutoff;
+          })
+          .slice(-SAVED_REQUEST_LIMIT);
+        if (retained.length !== saved.length) saveLeads(retained);
+        return retained;
       } catch {
+        try {
+          localStorage.removeItem("kinoPortfolioProjectRequests");
+        } catch {
+          // Ignore storage restrictions in private or hardened browser contexts.
+        }
         return [];
       }
+    }
+
+    function saveFailedRequest(request) {
+      const requests = [...getSavedLeads(), request].slice(-SAVED_REQUEST_LIMIT);
+      saveLeads(requests);
     }
 
     function saveLeads(leads) {
@@ -1093,7 +1186,7 @@ A: The assistant should avoid inventing information and say that the specific in
     function downloadLeadFile() {
       const leads = getSavedLeads();
       if (!leads.length) {
-        addMessage("bot", "No project request details are saved yet. Use the Submit Project Request action first.");
+        addMessage("bot", "No failed project requests are saved in this browser.");
         return;
       }
 
@@ -1725,14 +1818,20 @@ A: The assistant should avoid inventing information and say that the specific in
 
     if (intents.has("availability")) {
       return wantsFilipino
-        ? "Oo — open si Kino sa selected job at client opportunities sa Python automation, data operations, dashboards, reporting, at workflow improvement."
-        : "Yes — Kino is open to selected job and client opportunities in Python automation, data operations, dashboards, reporting, and workflow improvement.";
+        ? "Oo — open si Kino sa selected job at client opportunities sa Python automation, data operations, dashboards, reporting, customer at CRM support, at administrative coordination."
+        : "Yes — Kino is open to selected job and client opportunities in Python automation, data operations, dashboards, reporting, customer and CRM support, and administrative coordination.";
     }
 
     if (intents.has("value") && /\b(hire|fit|qualified|choose|kukunin|bagay|team|role)\b/.test(normalized)) {
       return wantsFilipino
-        ? "Strong fit si Kino para sa operations, reporting, automation, o data-support work na kailangan ng practical execution. Pinagsasama niya ang frontline at leadership experience sa Python, reporting discipline, at workflow problem-solving."
-        : "Kino is a strong fit for operations, reporting, automation, or data-support work that needs practical execution. He combines frontline and leadership experience with Python, reporting discipline, and workflow problem-solving.";
+        ? "Strong fit si Kino para sa operations, reporting, automation, virtual assistance, o business-support work na kailangan ng practical execution. Pinagsasama niya ang frontline, customer, at leadership experience sa Python, reporting discipline, at maayos na follow-through."
+        : "Kino is a strong fit for operations, reporting, automation, virtual-assistance, or business-support work that needs practical execution. He combines frontline, customer, and leadership experience with Python, reporting discipline, and dependable follow-through.";
+    }
+
+    if (intents.has("support")) {
+      return wantsFilipino
+        ? "Oo. Confirmed ang experience ni Kino sa customer support gamit ang calls, email, at SMS; CRM at account handling; payment-arrangement support; Excel formulas at Google Sheets tracking; data entry at records; at email, calendar, file, at document management."
+        : "Yes. Kino has confirmed experience in customer support through calls, email, and SMS; CRM and account handling; payment-arrangement support; Excel formulas and Google Sheets tracking; data entry and records; and email, calendar, file, and document management.";
     }
 
     if (intents.has("dashboard")) {
@@ -1761,20 +1860,20 @@ A: The assistant should avoid inventing information and say that the specific in
 
     if (intents.has("services") && /\b(problem|problems|solve|help|need|offer|service|support|client|error|errors|address|fix|quality|validate|validation|cleanup|kailangan)\b/.test(normalized)) {
       return wantsFilipino
-        ? "Pinakamalakas si Kino sa problems kung saan nagsasabay ang operations at repetitive reporting: report automation, structured Excel/CSV/XLSX outputs, KPI monitoring, data validation, at workflow improvement."
-        : "Kino is strongest where operations and repetitive reporting meet: report automation, structured Excel/CSV/XLSX outputs, KPI monitoring, data validation, and workflow improvement.";
+        ? "Pinakamalakas si Kino sa work kung saan kailangan ang structured execution: report automation, Excel/Google Sheets outputs, KPI monitoring, data validation, customer at CRM support, administrative coordination, at workflow improvement."
+        : "Kino is strongest where work needs structured execution: report automation, Excel/Google Sheets outputs, KPI monitoring, data validation, customer and CRM support, administrative coordination, and workflow improvement.";
     }
 
     if (intents.has("tools") && !intents.has("projects")) {
       return wantsFilipino
-        ? "Ang confirmed stack ni Kino ay Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Chrome automation, CustomTkinter, XlsxWriter, CSV generation, at automated PowerPoint o management report scripts."
-        : "Kino's confirmed stack is Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Chrome automation, CustomTkinter, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts.";
+        ? "Kasama sa confirmed stack ni Kino ang Python, FastAPI, DuckDB, Pandas, MySQL, HTML/CSS/JavaScript, Selenium, CustomTkinter, XlsxWriter, CSV at PowerPoint reporting, pati Excel, Google Sheets, Google Docs, Word, Gmail, Outlook, Google Drive, OneDrive, at ChatGPT."
+        : "Kino's confirmed stack includes Python, FastAPI, DuckDB, Pandas, MySQL, HTML/CSS/JavaScript, Selenium, CustomTkinter, XlsxWriter, CSV and PowerPoint reporting, plus Excel, Google Sheets, Google Docs, Word, Gmail, Outlook, Google Drive, OneDrive, and ChatGPT.";
     }
 
     if (intents.has("experience")) {
       return wantsFilipino
-        ? "May experience si Kino sa S.P. Madrid & Associates Law Firm, Everything But Cheese Sherwood, RLX Pharmacy, Jollibee Aduana, at Tabo Rice—mula frontline service at supervision hanggang collection strategy, data operations, reporting, at automation."
-        : "Kino's background spans S.P. Madrid & Associates Law Firm, Everything But Cheese Sherwood, RLX Pharmacy, Jollibee Aduana, and Tabo Rice—from frontline service and supervision to collection strategy, data operations, reporting, and automation.";
+        ? "May experience si Kino sa S.P. Madrid & Associates Law Firm, Everything But Cheese Sherwood, RLX Pharmacy, Jollibee Aduana, at Tabo Rice—mula customer service, calls/email/SMS, CRM at account handling, at supervision hanggang data operations, reporting, at automation."
+        : "Kino's background spans S.P. Madrid & Associates Law Firm, Everything But Cheese Sherwood, RLX Pharmacy, Jollibee Aduana, and Tabo Rice—from customer service, calls/email/SMS, CRM and account handling, and supervision to data operations, reporting, and automation.";
     }
 
     if (intents.has("education")) {
@@ -1785,8 +1884,8 @@ A: The assistant should avoid inventing information and say that the specific in
 
     if (intents.has("about")) {
       return wantsFilipino
-        ? "Si Kino Ilustrisimo ay data operations at Python automation professional na gumagawa ng practical reporting workflows, dashboards, at tools para mabawasan ang manual work."
-        : "Kino Ilustrisimo is a data operations and Python automation professional who builds practical reporting workflows, dashboards, and tools that reduce manual work.";
+        ? "Si Kino Ilustrisimo ay automation, data operations, at business-support professional na gumagawa ng practical reporting workflows at dashboards, at may experience sa customer, CRM, spreadsheet, at administrative support."
+        : "Kino Ilustrisimo is an automation, data operations, and business-support professional who builds practical reporting workflows and dashboards and brings experience in customer, CRM, spreadsheet, and administrative support.";
     }
 
     return "";
@@ -2063,6 +2162,12 @@ A: The assistant should avoid inventing information and say that the specific in
   function getServiceRecommendation(intentKeys, wantsFilipino) {
     const intents = new Set(intentKeys);
 
+    if (intents.has("support")) {
+      return wantsFilipino
+        ? "Recommended service: customer at CRM support, spreadsheet tracking, data entry at records, email/calendar coordination, at document preparation."
+        : "Recommended service: customer and CRM support, spreadsheet tracking, data entry and records, email/calendar coordination, and document preparation.";
+    }
+
     if (intents.has("dashboard")) {
       return wantsFilipino
         ? "Recommended service: dashboard development, KPI monitoring setup, data visualization, at automated reporting support."
@@ -2110,7 +2215,7 @@ A: The assistant should avoid inventing information and say that the specific in
       actions.push({ label: "View Projects", action: "projects" });
     }
 
-    if (intents.has("skills") || intents.has("tools")) {
+    if (intents.has("skills") || intents.has("tools") || intents.has("support")) {
       actions.push({ label: "View Skills", action: "skills" });
     }
 
@@ -2303,6 +2408,11 @@ A: The assistant should avoid inventing information and say that the specific in
       add("skills", "services");
     }
 
+    if (hasPhrase("virtual assistant", "business support", "administrative support", "customer support", "customer service", "client support", "account management", "payment arrangement", "email management", "calendar management", "schedule management", "record management", "document management", "data entry")
+      || hasWord("crm", "admin", "administrative", "calendar", "scheduling", "records", "inbox", "onedrive", "gmail", "outlook")) {
+      add("support", "skills", "services");
+    }
+
     if (hasPhrase("marunong ka ba gumawa dashboard", "marunong ka dashboard", "can you build dashboards", "can you make dashboard", "dashboard project")
       || hasWord("dashboard", "dashboards", "monitoring", "kpi", "analytics")) {
       add("dashboard", "projects", "tools");
@@ -2318,8 +2428,8 @@ A: The assistant should avoid inventing information and say that the specific in
       add("value", "experience", "achievements");
     }
 
-    if (hasPhrase("how to contact", "how can we contact", "mako contact", "ma contact", "reach you")
-      || hasWord("contact", "email", "reach", "phone", "mobile", "facebook", "fb", "messenger", "linkedin", "github")) {
+    if (hasPhrase("how to contact", "how can we contact", "mako contact", "ma contact", "reach you", "email address", "what is your email", "kino email")
+      || hasWord("contact", "reach", "phone", "mobile", "facebook", "fb", "messenger", "linkedin", "github")) {
       add("contact");
     }
 
@@ -2342,8 +2452,8 @@ A: The assistant should avoid inventing information and say that the specific in
       add("experience");
     }
 
-    if (hasPhrase("tools and technologies", "tech stack", "anong tools", "tools gamit", "tools ginagamit", "chrome automation", "google chrome automation", "management report", "powerpoint automation")
-      || hasWord("tools", "tool", "technology", "technologies", "python", "fastapi", "uvicorn", "duckdb", "pandas", "pyarrow", "mysql", "pymysql", "html", "css", "javascript", "selenium", "customtkinter", "xlsxwriter", "excel", "csv", "xlsx", "powerpoint", "gamit", "ginagamit")) {
+    if (hasPhrase("tools and technologies", "tech stack", "anong tools", "tools gamit", "tools ginagamit", "chrome automation", "google chrome automation", "management report", "powerpoint automation", "google workspace", "microsoft office")
+      || hasWord("tools", "tool", "technology", "technologies", "python", "fastapi", "uvicorn", "duckdb", "pandas", "pyarrow", "mysql", "pymysql", "html", "css", "javascript", "selenium", "customtkinter", "xlsxwriter", "excel", "sheets", "docs", "word", "gmail", "outlook", "drive", "onedrive", "chatgpt", "csv", "xlsx", "powerpoint", "gamit", "ginagamit")) {
       add("tools");
     }
 
@@ -2380,6 +2490,7 @@ A: The assistant should avoid inventing information and say that the specific in
       about: ["about", "profile", "introduction", "sino", "background"],
       skills: ["skills", "expertise", "kakayahan", "capability", "strengths", "marunong"],
       services: ["services", "offer", "client support", "kaya gawin", "collaboration"],
+      support: ["virtual assistant", "customer support", "crm", "administrative support", "data entry", "email management", "calendar", "records", "documents"],
       dashboard: ["dashboard", "monitoring", "kpi", "analytics", "reporting view"],
       projects: ["projects", "portfolio", "sample work", "gawa", "completed work"],
       tools: ["tools", "technologies", "tech stack", "python", "excel", "csv", "xlsx"],
@@ -2401,6 +2512,7 @@ A: The assistant should avoid inventing information and say that the specific in
       about: "Kino's professional profile",
       skills: "skills and expertise",
       services: "services offered",
+      support: "customer, CRM, and administrative support",
       dashboard: "dashboard and reporting capability",
       projects: "projects and sample work",
       tools: "tools and technologies",
@@ -2427,7 +2539,7 @@ A: The assistant should avoid inventing information and say that the specific in
     const question = normalizeText(item.question);
 
     if (category.includes("skills") || question.includes("skills")) {
-      return "Base sa portfolio, ang strengths ni Kino ay Python automation, data reporting, Excel/CSV/XLSX processing, dashboard monitoring, data validation, process improvement, operations strategy, at clear communication.";
+      return "Base sa portfolio, ang strengths ni Kino ay Python automation, data reporting, Excel/Google Sheets workflows, dashboards, customer at CRM support, data entry at records, email/calendar coordination, document preparation, process improvement, at clear communication.";
     }
 
     if (category.includes("projects") || question.includes("project")) {
@@ -2435,7 +2547,7 @@ A: The assistant should avoid inventing information and say that the specific in
     }
 
     if (category.includes("career") || category.includes("work") || question.includes("experience")) {
-      return "May background si Kino sa customer-facing operations, team supervision, collection operations, strategy support, reporting, dashboard monitoring, at Python automation. Ang portfolio niya ay focused ngayon sa future job at client opportunities.";
+      return "May background si Kino sa customer-facing operations, calls/email/SMS communication, CRM at account handling, team supervision, reporting, dashboard monitoring, at Python automation. Ang portfolio niya ay focused sa future job at client opportunities.";
     }
 
     if (category.includes("contact") || question.includes("contact")) {

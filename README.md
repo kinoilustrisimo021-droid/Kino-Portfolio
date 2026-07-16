@@ -1,6 +1,6 @@
-# Kino Ilustrisimo Python Automation and Data Operations Portfolio
+# Kino Ilustrisimo Automation, Data, and Business Support Portfolio
 
-This repository contains a static, GitHub Pages-ready professional portfolio for Kino Ilustrisimo, focused on Python automation, data reporting, dashboard monitoring, operational workflow improvement, and project proof of work for future job or client opportunities.
+This repository contains a static, GitHub Pages-ready professional portfolio for Kino Ilustrisimo. It presents two complementary capability tracks: Python automation, data reporting, dashboards, and workflow improvement; plus customer and CRM support, spreadsheet work, and administrative operations for future job or client opportunities.
 
 ## Files
 
@@ -18,7 +18,7 @@ This repository contains a static, GitHub Pages-ready professional portfolio for
 - `services.json` - Editable service catalog for dashboard, automation, reporting, chatbot, and data validation support
 - `contact.json` - Editable contact, availability, project request, and email provider configuration
 - `faq.txt` - Short editable FAQ support file
-- `questionnaire.txt` - Extended FAQ support knowledge base with prepared questions and answers
+- `questionnaire.txt` - Extended FAQ support knowledge base for the browser-local assistant (kept out of the live AI prompt to reduce latency and input cost)
 - `assets/kino-ilustrisimo.jpg` - Professional portrait used in the hero section, if provided
 - `assets/kino-logo.png` - Official black, gold, and silver KI crown logo used for the site identity, favicon, portrait fallback, and AI assistant
 - `assets/projects/` - Actual project screenshots used by the project portfolio cards, with SVG fallbacks
@@ -43,7 +43,7 @@ The assistant now uses a hybrid setup. On a serverless host with `OPENAI_API_KEY
 - Project explanation mode with problem solved, tools used, features, business impact, and screenshot path
 - Optional project brief flow; only name, email, and a short message are required
 - Request review screen before final submission
-- Project request entries are saved in the visitor's browser and can be downloaded as JSON
+- Failed or unfinished project request deliveries keep up to five local browser copies for 30 days and can be downloaded as JSON; successfully delivered requests are not retained locally
 - Optional automatic email sending through Formspree or EmailJS using `contact.json`
 - Privacy rules for confidential, private, salary, credential, debtor, account-level, and client data
 
@@ -101,7 +101,7 @@ GitHub Pages cannot run the serverless AI endpoint, but the same UI continues to
 
 ### Project Request Email Setup
 
-The project request form is configured to send to `kinoilustrisimo.021@gmail.com` through FormSubmit and also keeps a local browser backup.
+The project request form is configured to send to `kinoilustrisimo.021@gmail.com` through FormSubmit. A capped 30-day local browser copy is created only when delivery fails or the visitor still needs to complete a prepared email.
 
 FormSubmit may send an activation email on the first live submission. Open that email and confirm the address so future project requests can go directly to the inbox.
 

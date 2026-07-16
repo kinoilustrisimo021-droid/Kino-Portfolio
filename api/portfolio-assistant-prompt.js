@@ -1,4 +1,4 @@
-const PROMPT_VERSION = "2026-07-16.portfolio-assistant-v3";
+const PROMPT_VERSION = "2026-07-16.portfolio-assistant-v4";
 
 function buildPortfolioAssistantInstructions(publicPortfolio) {
   return `

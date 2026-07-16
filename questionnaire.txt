@@ -95,7 +95,19 @@ A: Kino has handled file extraction, report automation, dashboard creation, mast
 
 # Skills and Expertise
 Q: What are Kino's main skills?
-A: Kino's main skills include Python automation, backend API workflows, data management, database integration, Excel reporting, CSV/XLSX processing, dashboard monitoring, reporting analysis, browser automation, desktop tools, process improvement, and operational strategy.
+A: Kino's main skills include Python automation, backend API workflows, data management, Excel and Google Sheets reporting, CSV/XLSX processing, dashboard monitoring, customer and CRM support, calls/email/SMS communication, account and payment-arrangement support, data entry, record management, email and calendar coordination, document preparation, and process improvement.
+
+Q: Can Kino work as a virtual assistant?
+A: Yes. Kino's confirmed virtual-assistance and business-support capabilities include customer service, client communication through calls, email, and SMS, CRM and customer-account handling, payment-arrangement support, data entry and records, email and calendar coordination, spreadsheet tracking, file organization, and document or report preparation.
+
+Q: What customer support experience does Kino have?
+A: Kino has daily client-handling experience through calls, email, and SMS, along with customer service, CRM and account management, record updates, and payment-arrangement support.
+
+Q: What administrative tasks can Kino support?
+A: Kino can support data entry, record management, email correspondence, calendar and schedule management, file and document organization, spreadsheet tracking, and report preparation.
+
+Q: What office tools can Kino use?
+A: Kino can use Microsoft Excel, Google Sheets, Google Docs, Microsoft Word, Gmail, Outlook, Google Drive, OneDrive, Google Workspace, and ChatGPT for business-support workflows.
 
 Q: What is Kino's technical stack?
 A: Kino's technical stack includes Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Google Chrome automation, CustomTkinter, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts.
@@ -266,7 +278,7 @@ A: Kino's project work is credible because it came from actual operational pain 
 
 # Strengths and Work Values
 Q: What are Kino's core strengths?
-A: Kino's core strengths include Python automation, data handling, reporting discipline, dashboard thinking, operational monitoring, leadership, communication, and process improvement.
+A: Kino's core strengths include Python automation, data handling, reporting discipline, dashboard thinking, customer and CRM support, administrative coordination, attention to detail, time management, problem solving, leadership, communication, and process improvement.
 
 Q: What work values does Kino demonstrate?
 A: Kino demonstrates accuracy, initiative, accountability, adaptability, confidentiality, practical problem-solving, and commitment to improving operational workflows.
@@ -323,10 +335,10 @@ A: Contact information is available in Kino's current portfolio profile. Visitor
 
 # Suggested English Questions
 Q: Tell me about yourself.
-A: Kino Ilustrisimo is a practical data operations and Python automation professional. His portfolio highlights reporting automation, dashboard monitoring, collection strategy support, Excel and CSV/XLSX workflows, process improvement, and operational performance visibility.
+A: Kino Ilustrisimo is a practical automation, data operations, and business-support professional. His portfolio highlights reporting automation, dashboards, customer and CRM support, Excel and Google Sheets workflows, administrative coordination, process improvement, and operational performance visibility.
 
 Q: What are your skills?
-A: Kino's skills include Python automation, data reporting, Excel reporting, CSV/XLSX processing, dashboard monitoring, data validation, workflow improvement, operational monitoring, collection strategy support, communication, and stakeholder-ready reporting.
+A: Kino's skills include Python automation, data reporting, Excel and Google Sheets workflows, CSV/XLSX processing, dashboards, data validation, customer and CRM support, calls/email/SMS communication, account handling, data entry, record management, email and calendar coordination, document preparation, and process improvement.
 
 Q: What projects have you completed?
 A: Kino's portfolio includes the MC6 Collection Pipeline, Digital Omnichannel Monitoring Dashboard, Digital Reporting App, Excel Reporting Result, Predictive Summary Extractor, Alloc Review Builder, Auto Redial Automation, MC6 Analytics Hub, and Report Auto Extractor.
@@ -338,13 +350,13 @@ Q: Can you explain your dashboard project?
 A: Kino's dashboard projects were created to improve operational visibility. They organize activity data, KPIs, campaign movement, digital engagement, performance output, and reporting downloads into clearer monitoring views for faster review and decision support.
 
 Q: What tools and technologies do you use?
-A: Kino's current technical stack includes Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Google Chrome automation, CustomTkinter, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts.
+A: Kino's stack includes Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, HTML/CSS/JavaScript, Selenium, Chrome automation, CustomTkinter, XlsxWriter, CSV and PowerPoint reporting, plus Microsoft Excel, Google Sheets, Google Docs, Word, Gmail, Outlook, Google Drive, OneDrive, and ChatGPT.
 
 Q: What is your work experience?
-A: Kino has experience in customer-facing roles, service operations, sales support, team supervision, collection operations, dialer strategy, data strategy, reporting, dashboard monitoring, and process automation.
+A: Kino has experience in customer-facing roles, calls/email/SMS communication, CRM and account handling, payment-arrangement support, service and sales operations, team supervision, reporting, dashboards, data strategy, and process automation.
 
 Q: What services can you offer?
-A: Kino can offer support in Python automation, reporting workflow improvement, dashboard monitoring, Excel and CSV/XLSX reporting, data validation, operational performance tracking, collection strategy support, and process improvement.
+A: Kino can support Python automation, reporting and dashboards, Excel and Google Sheets workflows, data validation, customer and CRM operations, data entry and records, inbox and calendar coordination, document preparation, and process improvement.
 
 Q: Why should we hire you?
 A: Kino should be considered because he combines hands-on operations experience with Python automation and reporting capability. He can identify workflow issues, build practical tools, improve visibility, and support better performance monitoring.
@@ -353,7 +365,7 @@ Q: How can we contact you?
 A: You can contact Kino by email at kinoilustrisimo.021@gmail.com, mobile at +639927911469, or Facebook at https://www.facebook.com/palonpon.kino.
 
 Q: Are you available for freelance or full-time work?
-A: Kino's portfolio is positioned for future job and client opportunities involving Python automation, data operations, reporting analysis, dashboard development, workflow improvement, and collection strategy support.
+A: Kino's portfolio is positioned for future job and client opportunities involving Python automation, data operations, reporting, dashboards, customer and CRM support, administrative coordination, and workflow improvement.
 
 Q: What technologies are in Kino's tech stack?
 A: Kino's tech stack includes Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Google Chrome automation, CustomTkinter, XlsxWriter, CSV generation, and automated PowerPoint or management report scripts.
@@ -375,7 +387,7 @@ Q: Sino ka?
 A: Ako ang portfolio assistant ni Kino Ilustrisimo. Pwede akong sumagot tungkol sa kanyang professional background, skills, work experience, projects, tools, achievements, at work expertise based sa portfolio knowledge base.
 
 Q: Ano ang skills mo?
-A: Ang main skills ni Kino ay Python automation, data reporting, Excel reporting, CSV/XLSX processing, dashboard monitoring, data validation, workflow improvement, operational monitoring, communication, at collection strategy support.
+A: Ang main skills ni Kino ay Python automation, data reporting, Excel at Google Sheets workflows, CSV/XLSX processing, dashboard monitoring, data validation, customer at CRM support, calls/email/SMS communication, account handling, data entry, record management, email at calendar coordination, document preparation, at workflow improvement.
 
 Q: Ano ang mga project mo?
 A: Ilan sa projects ni Kino ay MC6 Collection Pipeline, Digital Omnichannel Monitoring Dashboard, Digital Reporting App, Excel Reporting Result, Predictive Summary Extractor, Alloc Review Builder, Auto Redial Automation, MC6 Analytics Hub, at Report Auto Extractor.
@@ -384,13 +396,13 @@ Q: Paano gumagana ang dashboard project mo?
 A: Ang dashboard projects ni Kino ay ginawa para mas madaling makita ang KPIs, campaign movement, activity results, digital engagement, reporting outputs, at operational performance. Layunin nito na gawing mas mabilis at mas malinaw ang review ng data.
 
 Q: Anong tools ang ginagamit mo?
-A: Base sa portfolio, gumagamit si Kino ng Python 3.14, FastAPI, Uvicorn, DuckDB, Pandas, PyArrow, MySQL, PyMySQL, plain HTML/CSS/JavaScript, Selenium, Google Chrome automation, CustomTkinter, XlsxWriter, CSV generation, at automated PowerPoint o management report scripts.
+A: Base sa portfolio, gumagamit si Kino ng Python, FastAPI, DuckDB, Pandas, MySQL, HTML/CSS/JavaScript, Selenium, CustomTkinter, XlsxWriter, CSV at PowerPoint reporting, pati Microsoft Excel, Google Sheets, Google Docs, Word, Gmail, Outlook, Google Drive, OneDrive, at ChatGPT.
 
 Q: Ano ang work experience mo?
-A: May experience si Kino sa customer-facing operations, service roles, sales support, team supervision, collection operations, dialer strategy, data strategy, dashboard monitoring, reporting, at automation.
+A: May experience si Kino sa customer-facing operations, calls/email/SMS communication, CRM at account handling, payment-arrangement support, service at sales roles, team supervision, data strategy, dashboards, reporting, at automation.
 
 Q: Bakit ka namin kukunin?
-A: Dapat i-consider si Kino dahil pinagsasama niya ang operations experience, Python automation, reporting discipline, at dashboard thinking. Kaya niyang gumawa ng practical tools na nakakatulong sa speed, accuracy, at performance visibility.
+A: Dapat i-consider si Kino dahil pinagsasama niya ang customer at operations experience, maayos na administrative follow-through, Python automation, reporting discipline, at dashboard thinking.
 
 Q: Paano ka namin mako-contact?
 A: Pwede ninyong ma-contact si Kino sa email na kinoilustrisimo.021@gmail.com, mobile number na +639927911469, o Facebook na https://www.facebook.com/palonpon.kino.

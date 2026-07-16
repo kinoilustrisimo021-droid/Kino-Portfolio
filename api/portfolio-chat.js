@@ -32,10 +32,6 @@ const supportingPublicKnowledge = [
   {
     name: "faq.txt",
     content: readPublicKnowledge(join(__dirname, "..", "faq.txt"))
-  },
-  {
-    name: "questionnaire.txt",
-    content: readPublicKnowledge(join(__dirname, "..", "questionnaire.txt"))
   }
 ].filter((document) => document.content);
 
