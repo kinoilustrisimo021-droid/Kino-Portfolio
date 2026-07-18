@@ -6,9 +6,13 @@
   const navLinks = document.querySelectorAll(".nav-links a");
   const portraitCard = document.querySelector(".portrait-card");
   const profilePhoto = document.querySelector("#profilePhoto");
+  const systemBoot = document.querySelector("[data-system-boot]");
+  const printResumeButton = document.querySelector("[data-print-resume]");
   const reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
   const reduceMotion = reduceMotionQuery.matches;
   const canUsePointerMotion = window.matchMedia("(hover: hover) and (pointer: fine)").matches && !reduceMotion;
+  const decodeTargets = document.querySelectorAll("[data-decode]");
+  const heroCounters = document.querySelectorAll("[data-count-to]");
   const CHATBOT_CONFIG = {
     botName: "Kino Portfolio Assistant",
     provider: "hybrid",
@@ -45,6 +49,66 @@
     }
   };
 
+  const PROJECT_SHOWCASE_DETAILS = {
+    "MC6 Collection Pipeline": {
+      problem: "Campaign teams needed clearer visibility on endorsement movement, worked accounts, RPC, PTP, kept, BP, and other collection indicators.",
+      tools: ["Python", "Excel/CSV workflows", "Dashboard reporting"],
+      impact: "Improves campaign review by making performance movement easier to monitor and compare."
+    },
+    "Digital Omnichannel Monitoring Dashboard": {
+      problem: "The team needed one place to monitor digital collection activities across Email, Viber, SMS, and CYN touchpoints.",
+      tools: ["Python", "DuckDB", "Dashboard UI", "CSV/XLSX uploads"],
+      impact: "Creates a single source of truth for digital performance, faster reporting, and better campaign governance."
+    },
+    "Digital Reporting App": {
+      problem: "Internal users needed an easier way to build reports and extract raw data for strategy review.",
+      tools: ["Python", "Excel", "CSV/XLSX processing"],
+      impact: "Reduces manual report preparation and gives users faster access to strategy-ready outputs."
+    },
+    "Excel Reporting Result": {
+      problem: "Performance results needed to be visible immediately in a structured Excel format.",
+      tools: ["Excel", "Python-supported preparation", "CSV/XLSX workflows"],
+      impact: "Makes performance review faster by organizing multiple channel results into readable Excel outputs."
+    },
+    "Predictive Summary Extractor": {
+      problem: "Lead extraction was time-consuming during dialer strategy work and needed automation for faster reporting.",
+      tools: ["Python", "Desktop UI", "File automation"],
+      impact: "Reduces manual extraction effort and makes lead reports easier to prepare when needed."
+    },
+    "Alloc Review Builder": {
+      problem: "The team needed a better way to review endorsements, work frequency, hierarchy status, pulled-out activity, and report rows.",
+      tools: ["Python", "Web dashboard UI", "CSV/XLSX workflows"],
+      impact: "Improves review speed and gives campaign teams cleaner endorsement visibility."
+    },
+    "Auto Redial Automation": {
+      problem: "Repeated manual redial triggers created delay and effort when handling many daily leads.",
+      tools: ["Python", "Desktop automation UI", "Workflow automation"],
+      impact: "Helps reduce repetitive work and improves consistency in high-volume lead handling."
+    },
+    "MC6 Analytics Hub": {
+      problem: "Operational teams needed a unified hub for pipeline, penetration, and dialer monitoring.",
+      tools: ["Python", "Dashboard UI", "MySQL-connected reporting"],
+      impact: "Supports clearer operational monitoring across collection intelligence modules."
+    },
+    "Report Auto Extractor": {
+      problem: "Previous-day activity extraction needed to be prepared faster for next-day reporting.",
+      tools: ["Python", "Automation UI", "Report extraction workflow"],
+      impact: "Speeds up daily reporting and reduces repetitive extraction work."
+    }
+  };
+
+  const PROJECT_CATEGORIES = {
+    "MC6 Collection Pipeline": ["dashboards", "reporting"],
+    "Digital Omnichannel Monitoring Dashboard": ["dashboards", "reporting"],
+    "Digital Reporting App": ["automation", "reporting"],
+    "Excel Reporting Result": ["reporting"],
+    "Predictive Summary Extractor": ["automation", "reporting"],
+    "Alloc Review Builder": ["dashboards", "reporting"],
+    "Auto Redial Automation": ["automation"],
+    "MC6 Analytics Hub": ["dashboards", "reporting"],
+    "Report Auto Extractor": ["automation", "reporting"]
+  };
+
   if (reduceMotion) {
     document.body.classList.add("page-ready", "page-entered");
   } else {
@@ -54,9 +118,27 @@
     });
   }
 
+  function completeSystemBoot() {
+    document.body.classList.add("boot-complete");
+    if (!systemBoot) return;
+    window.setTimeout(() => systemBoot.remove(), reduceMotionQuery.matches ? 0 : 460);
+  }
+
+  if (reduceMotion || !systemBoot) {
+    completeSystemBoot();
+  } else {
+    window.setTimeout(completeSystemBoot, 940);
+  }
+
+  printResumeButton?.addEventListener("click", () => window.print());
+
   reduceMotionQuery.addEventListener?.("change", (event) => {
     if (!event.matches) return;
     document.body.classList.add("page-ready", "page-entered");
+    decodeTargets.forEach((target) => {
+      target.textContent = target.dataset.decodeText || target.textContent;
+    });
+    heroCounters.forEach(setCounterFinal);
     document
       .querySelectorAll("[style*='--tilt'], [style*='--magnetic'], [style*='--spotlight']")
       .forEach((target) => {
@@ -66,6 +148,132 @@
         );
       });
   });
+
+  function setCounterFinal(counter) {
+    const value = Number(counter.dataset.countTo || 0);
+    const suffix = counter.dataset.countSuffix || "";
+    counter.textContent = `${value}${suffix}`;
+  }
+
+  function decodeText(target) {
+    if (!target || target.dataset.decodeComplete === "true") return;
+
+    const original = target.textContent || "";
+    target.dataset.decodeText = original;
+    if (reduceMotionQuery.matches) {
+      target.dataset.decodeComplete = "true";
+      return;
+    }
+
+    const glyphs = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const mutableIndexes = Array.from(original)
+      .map((character, index) => (/\p{L}|\p{N}/u.test(character) ? index : -1))
+      .filter((index) => index >= 0);
+    const startedAt = performance.now();
+    const duration = 920;
+
+    function render(now) {
+      if (reduceMotionQuery.matches) {
+        target.textContent = original;
+        target.dataset.decodeComplete = "true";
+        return;
+      }
+
+      const progress = Math.min((now - startedAt) / duration, 1);
+      const revealCount = Math.floor(progress * mutableIndexes.length);
+      const revealed = new Set(mutableIndexes.slice(0, revealCount));
+      target.textContent = Array.from(original)
+        .map((character, index) => {
+          if (!mutableIndexes.includes(index) || revealed.has(index)) return character;
+          return glyphs[Math.floor(Math.random() * glyphs.length)];
+        })
+        .join("");
+
+      if (progress < 1) {
+        window.requestAnimationFrame(render);
+      } else {
+        target.textContent = original;
+        target.dataset.decodeComplete = "true";
+        document.body.classList.add("system-ready");
+      }
+    }
+
+    window.requestAnimationFrame(render);
+  }
+
+  function animateCounter(counter) {
+    if (!counter || counter.dataset.countComplete === "true") return;
+    if (reduceMotionQuery.matches) {
+      setCounterFinal(counter);
+      counter.dataset.countComplete = "true";
+      return;
+    }
+
+    const target = Number(counter.dataset.countTo || 0);
+    const suffix = counter.dataset.countSuffix || "";
+    const startedAt = performance.now();
+    const duration = 980;
+    counter.textContent = `0${suffix}`;
+
+    function render(now) {
+      const progress = Math.min((now - startedAt) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      counter.textContent = `${Math.round(target * eased)}${suffix}`;
+      if (progress < 1 && !reduceMotionQuery.matches) {
+        window.requestAnimationFrame(render);
+      } else {
+        setCounterFinal(counter);
+        counter.dataset.countComplete = "true";
+      }
+    }
+
+    window.requestAnimationFrame(render);
+  }
+
+  if (reduceMotion) {
+    decodeTargets.forEach((target) => {
+      target.dataset.decodeText = target.textContent || "";
+      target.dataset.decodeComplete = "true";
+    });
+    heroCounters.forEach(setCounterFinal);
+    document.body.classList.add("system-ready");
+  } else {
+    window.setTimeout(() => decodeTargets.forEach(decodeText), 260);
+
+    const metrics = document.querySelector(".hero-metrics");
+    if (metrics && "IntersectionObserver" in window) {
+      const counterObserver = new IntersectionObserver(
+        (entries) => {
+          if (!entries.some((entry) => entry.isIntersecting)) return;
+          heroCounters.forEach(animateCounter);
+          counterObserver.disconnect();
+        },
+        { threshold: 0.45 }
+      );
+      counterObserver.observe(metrics);
+    } else {
+      heroCounters.forEach(animateCounter);
+    }
+  }
+
+  if (canUsePointerMotion) {
+    let auraFrame = 0;
+    let auraPointer = null;
+    window.addEventListener(
+      "pointermove",
+      (event) => {
+        auraPointer = event;
+        if (auraFrame) return;
+        auraFrame = window.requestAnimationFrame(() => {
+          auraFrame = 0;
+          if (!auraPointer || reduceMotionQuery.matches) return;
+          document.documentElement.style.setProperty("--cursor-x", `${auraPointer.clientX}px`);
+          document.documentElement.style.setProperty("--cursor-y", `${auraPointer.clientY}px`);
+        });
+      },
+      { passive: true }
+    );
+  }
 
   const siteHeader = document.querySelector("[data-site-header]");
   const menuToggle = document.querySelector(".menu-toggle");
@@ -183,7 +391,7 @@
     revealItems.forEach((item) => item.classList.add("is-visible"));
   }
 
-  const ambientRegions = document.querySelectorAll(".hero, .ticker, .stack-category-grid, .support-section, .closing-section");
+  const ambientRegions = document.querySelectorAll(".hero, .ticker, .support-aristotle-stage, .stack-category-grid, .support-section, .closing-section");
   if ("IntersectionObserver" in window && ambientRegions.length) {
     const ambientObserver = new IntersectionObserver(
       (entries) => {
@@ -205,7 +413,9 @@
       .split(",")
       .map((source) => source.trim())
       .filter(Boolean);
-    let sourceIndex = 0;
+    const initialSource = profilePhoto.getAttribute("src") || "";
+    const initialSourceIndex = sources.indexOf(initialSource);
+    let sourceIndex = initialSourceIndex >= 0 ? initialSourceIndex + 1 : 0;
 
     function showLoaded() {
       portraitCard.classList.add("portrait-loaded");
@@ -231,7 +441,15 @@
     profilePhoto.addEventListener("load", showLoaded);
     profilePhoto.addEventListener("error", tryNextSource);
 
-    tryNextSource();
+    if (profilePhoto.complete) {
+      if (profilePhoto.naturalWidth > 0) {
+        showLoaded();
+      } else {
+        tryNextSource();
+      }
+    } else if (!initialSource) {
+      tryNextSource();
+    }
   }
 
   const sections = Array.from(document.querySelectorAll("main section[id]"));
@@ -242,7 +460,15 @@
   const navSections = sections.filter((section) => navMap.has(getNavGroup(section)));
 
   function setActiveNav(id) {
-    navLinks.forEach((link) => link.classList.toggle("is-active", link === navMap.get(id)));
+    navLinks.forEach((link) => {
+      const isActive = link === navMap.get(id);
+      link.classList.toggle("is-active", isActive);
+      if (isActive) {
+        link.setAttribute("aria-current", "location");
+      } else {
+        link.removeAttribute("aria-current");
+      }
+    });
   }
 
   if ("IntersectionObserver" in window && navSections.length && navLinks.length) {
@@ -262,6 +488,30 @@
 
     navSections.forEach((section) => navObserver.observe(section));
   }
+
+  let activeNavFrame = 0;
+
+  function updateActiveNavFromScroll() {
+    activeNavFrame = 0;
+    if (!navSections.length || !navLinks.length) return;
+
+    const headerHeight = siteHeader?.getBoundingClientRect().height || 0;
+    const sampleLine = Math.min(window.innerHeight * 0.42, headerHeight + 320);
+    const passedSections = navSections.filter(
+      (section) => section.getBoundingClientRect().top <= sampleLine
+    );
+    const activeSection = passedSections[passedSections.length - 1];
+    setActiveNav(activeSection ? getNavGroup(activeSection) : "");
+  }
+
+  function scheduleActiveNavUpdate() {
+    if (activeNavFrame) return;
+    activeNavFrame = window.requestAnimationFrame(updateActiveNavFromScroll);
+  }
+
+  updateActiveNavFromScroll();
+  window.addEventListener("scroll", scheduleActiveNavUpdate, { passive: true });
+  window.addEventListener("resize", scheduleActiveNavUpdate, { passive: true });
 
   document.querySelectorAll(".timeline").forEach((scroller) => {
     scroller.addEventListener("keydown", (event) => {
@@ -400,23 +650,72 @@
   lightbox.setAttribute("role", "dialog");
   lightbox.setAttribute("aria-modal", "true");
   lightbox.setAttribute("aria-hidden", "true");
-  lightbox.setAttribute("aria-label", "Project preview");
+  lightbox.setAttribute("aria-labelledby", "projectPreviewTitle");
   lightbox.inert = true;
   lightbox.innerHTML = `
     <button class="lightbox-close" type="button" aria-label="Close preview">Close</button>
     <figure class="lightbox-panel">
-      <img alt="">
-      <figcaption></figcaption>
+      <div class="lightbox-visual">
+        <img alt="">
+      </div>
+      <div class="lightbox-copy">
+        <p class="lightbox-kicker">Verified system preview</p>
+        <figcaption id="projectPreviewTitle"></figcaption>
+        <div class="lightbox-contribution">
+          <span>Contribution</span>
+          <strong>System design &amp; development</strong>
+        </div>
+        <div class="lightbox-detail-block">
+          <span>Problem addressed</span>
+          <p class="lightbox-problem"></p>
+        </div>
+        <div class="lightbox-detail-block">
+          <span>System response</span>
+          <p class="lightbox-summary"></p>
+        </div>
+        <div class="lightbox-technology">
+          <span>Technology</span>
+          <div></div>
+        </div>
+        <div class="lightbox-capabilities">
+          <span>Core capabilities</span>
+          <ul></ul>
+        </div>
+        <div class="lightbox-impact">
+          <span>Operational impact</span>
+          <p></p>
+        </div>
+        <div class="lightbox-navigation" aria-label="Project preview navigation">
+          <button type="button" data-lightbox-previous><span aria-hidden="true">&larr;</span> Previous</button>
+          <span data-lightbox-position>01 / 09</span>
+          <button type="button" data-lightbox-next>Next <span aria-hidden="true">&rarr;</span></button>
+        </div>
+      </div>
     </figure>
   `;
   document.body.appendChild(lightbox);
 
   const lightboxImage = lightbox.querySelector("img");
   const lightboxCaption = lightbox.querySelector("figcaption");
+  const lightboxKicker = lightbox.querySelector(".lightbox-kicker");
+  const lightboxProblem = lightbox.querySelector(".lightbox-problem");
+  const lightboxSummary = lightbox.querySelector(".lightbox-summary");
+  const lightboxTechnology = lightbox.querySelector(".lightbox-technology > div");
+  const lightboxCapabilities = lightbox.querySelector(".lightbox-capabilities");
+  const lightboxFeatureList = lightbox.querySelector(".lightbox-capabilities ul");
+  const lightboxImpact = lightbox.querySelector(".lightbox-impact p");
+  const lightboxPrevious = lightbox.querySelector("[data-lightbox-previous]");
+  const lightboxNext = lightbox.querySelector("[data-lightbox-next]");
+  const lightboxPosition = lightbox.querySelector("[data-lightbox-position]");
   const closeLightbox = lightbox.querySelector(".lightbox-close");
   const lightboxPageTargets = document.querySelectorAll(".site-header, main, .chatbot-widget, .site-footer");
   const lightboxInertState = new Map();
   let lightboxTrigger = null;
+  let activeLightboxImage = null;
+
+  function getAvailableProjectImages() {
+    return Array.from(document.querySelectorAll(".project-card:not([hidden]) .project-shot.has-image .project-image"));
+  }
 
   function setLightboxPageInert(willBeInert) {
     lightboxPageTargets.forEach((target) => {
@@ -430,21 +729,71 @@
     if (!willBeInert) lightboxInertState.clear();
   }
 
-  function openLightbox(img) {
+  function openLightbox(img, { preserveTrigger = false } = {}) {
     const card = img.closest(".project-card");
     const title = card?.querySelector("h3")?.textContent?.trim() || "Project screenshot";
+    const category = card?.querySelector(".project-type")?.textContent?.trim() || "System preview";
+    const summary = Array.from(card?.children || []).find(
+      (child) => child.matches?.("p:not(.project-type)")
+    )?.textContent?.trim() || "A practical system designed around a real operational workflow.";
+    const features = Array.from(card?.querySelectorAll(":scope > ul li") || [])
+      .map((item) => item.textContent?.trim())
+      .filter(Boolean);
+    const details = PROJECT_SHOWCASE_DETAILS[title] || {
+      problem: summary,
+      tools: [],
+      impact: "Designed to make a real operational workflow clearer, faster, and easier to manage."
+    };
     if (!img.src || !lightboxImage || !lightboxCaption) return;
 
-    lightboxTrigger = img.closest(".project-shot");
+    if (!preserveTrigger) lightboxTrigger = img.closest(".project-shot");
+    activeLightboxImage = img;
     lightboxImage.src = img.src;
-    lightboxImage.alt = title;
+    lightboxImage.alt = `${title} project screenshot`;
     lightboxCaption.textContent = title;
+    if (lightboxKicker) lightboxKicker.textContent = category;
+    if (lightboxProblem) lightboxProblem.textContent = details.problem;
+    if (lightboxSummary) lightboxSummary.textContent = summary;
+    if (lightboxTechnology) {
+      lightboxTechnology.replaceChildren();
+      details.tools.forEach((tool) => {
+        const tag = document.createElement("span");
+        tag.textContent = tool;
+        lightboxTechnology.appendChild(tag);
+      });
+    }
+    if (lightboxFeatureList) {
+      lightboxFeatureList.replaceChildren();
+      features.forEach((feature) => {
+        const item = document.createElement("li");
+        item.textContent = feature;
+        lightboxFeatureList.appendChild(item);
+      });
+    }
+    if (lightboxCapabilities) lightboxCapabilities.hidden = features.length === 0;
+    if (lightboxImpact) lightboxImpact.textContent = details.impact;
+    const availableImages = getAvailableProjectImages();
+    const projectIndex = Math.max(0, availableImages.indexOf(img));
+    if (lightboxPosition) {
+      lightboxPosition.textContent = `${String(projectIndex + 1).padStart(2, "0")} / ${String(availableImages.length).padStart(2, "0")}`;
+    }
+    if (lightboxPrevious) lightboxPrevious.hidden = availableImages.length < 2;
+    if (lightboxNext) lightboxNext.hidden = availableImages.length < 2;
     lightbox.classList.add("is-open");
     lightbox.setAttribute("aria-hidden", "false");
     lightbox.inert = false;
     document.body.classList.add("lightbox-open");
     setLightboxPageInert(true);
     closeLightbox?.focus();
+  }
+
+  function navigateLightbox(direction) {
+    const availableImages = getAvailableProjectImages();
+    if (!activeLightboxImage || availableImages.length < 2) return;
+    const currentIndex = Math.max(0, availableImages.indexOf(activeLightboxImage));
+    const nextIndex = (currentIndex + direction + availableImages.length) % availableImages.length;
+    openLightbox(availableImages[nextIndex], { preserveTrigger: true });
+    lightbox.querySelector(".lightbox-copy")?.scrollTo({ top: 0, behavior: "auto" });
   }
 
   function hideLightbox() {
@@ -455,6 +804,7 @@
     setLightboxPageInert(false);
     lightboxTrigger?.focus();
     lightboxTrigger = null;
+    activeLightboxImage = null;
   }
 
   document.querySelectorAll(".project-shot").forEach((shot) => {
@@ -478,17 +828,104 @@
   });
 
   closeLightbox?.addEventListener("click", hideLightbox);
+  lightboxPrevious?.addEventListener("click", () => navigateLightbox(-1));
+  lightboxNext?.addEventListener("click", () => navigateLightbox(1));
   lightbox.addEventListener("click", (event) => {
     if (event.target === lightbox) hideLightbox();
   });
   window.addEventListener("keydown", (event) => {
     if (!lightbox.classList.contains("is-open")) return;
     if (event.key === "Escape") hideLightbox();
+    if (event.key === "ArrowLeft") navigateLightbox(-1);
+    if (event.key === "ArrowRight") navigateLightbox(1);
     if (event.key === "Tab") {
-      event.preventDefault();
-      closeLightbox?.focus();
+      const focusable = Array.from(lightbox.querySelectorAll("button:not([hidden]):not([disabled])"));
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
     }
   });
+
+  function setupProjectDiscovery() {
+    const projectGrid = document.querySelector(".project-grid");
+    const projectCards = Array.from(document.querySelectorAll(".project-card"));
+    const filterButtons = Array.from(document.querySelectorAll("[data-project-filter]"));
+    const resultCount = document.querySelector("[data-project-result-count]");
+    const carouselCount = document.querySelector(".projects-section .carousel-hint strong");
+    if (!projectGrid || !projectCards.length) return;
+
+    projectGrid.id ||= "selectedProjectGrid";
+
+    projectCards.forEach((card) => {
+      const title = card.querySelector("h3")?.textContent?.trim() || "Project";
+      const details = PROJECT_SHOWCASE_DETAILS[title] || { tools: [] };
+      const categories = PROJECT_CATEGORIES[title] || [];
+      card.dataset.projectCategories = categories.join(" ");
+
+      if (!card.querySelector(".project-card-meta")) {
+        const footer = document.createElement("div");
+        footer.className = "project-card-meta";
+
+        const tools = document.createElement("div");
+        tools.className = "project-card-tools";
+        tools.setAttribute("aria-label", "Key technologies");
+        details.tools.slice(0, 3).forEach((toolName) => {
+          const tag = document.createElement("span");
+          tag.textContent = toolName;
+          tools.appendChild(tag);
+        });
+
+        const openButton = document.createElement("button");
+        openButton.className = "project-open";
+        openButton.type = "button";
+        openButton.setAttribute("aria-label", `Open ${title} case study`);
+        openButton.append("Case study ");
+        const arrow = document.createElement("span");
+        arrow.setAttribute("aria-hidden", "true");
+        arrow.textContent = "↗";
+        openButton.appendChild(arrow);
+        openButton.addEventListener("click", () => {
+          const shot = card.querySelector(".project-shot.has-image");
+          const image = shot?.querySelector(".project-image");
+          if (image) openLightbox(image);
+        });
+
+        footer.append(tools, openButton);
+        card.appendChild(footer);
+      }
+    });
+
+    filterButtons.forEach((button) => {
+      button.setAttribute("aria-controls", projectGrid.id);
+      button.addEventListener("click", () => {
+        const filter = button.dataset.projectFilter || "all";
+        filterButtons.forEach((control) => {
+          const isActive = control === button;
+          control.classList.toggle("is-active", isActive);
+          control.setAttribute("aria-pressed", String(isActive));
+        });
+
+        let visibleCount = 0;
+        projectCards.forEach((card) => {
+          const categories = (card.dataset.projectCategories || "").split(" ").filter(Boolean);
+          const isVisible = filter === "all" || categories.includes(filter);
+          card.hidden = !isVisible;
+          if (isVisible) visibleCount += 1;
+        });
+
+        if (resultCount) resultCount.textContent = `${visibleCount} ${visibleCount === 1 ? "system" : "systems"} online`;
+        if (carouselCount) carouselCount.innerHTML = `01 / ${String(visibleCount).padStart(2, "0")} &rarr;`;
+      });
+    });
+  }
+
+  setupProjectDiscovery();
 
   const portfolioChatbot = document.querySelector("[data-portfolio-chatbot]");
 
@@ -509,7 +946,6 @@
     const suggestions = widget.querySelector("[data-chatbot-suggestions]");
     const quickActions = widget.querySelector("[data-chatbot-quick-actions]");
     const backdrop = document.querySelector("[data-chatbot-backdrop]");
-    panel.inert = true;
     let started = false;
     let knowledgeItems = [];
     let knowledgeLoadPromise = null;
@@ -559,6 +995,22 @@ A: The assistant should avoid inventing information and say that the specific in
     knowledgeItems = fallbackKnowledge;
 
     if (!toggle || !panel || !form || !input || !messages || !status || !suggestions || !quickActions) return;
+    panel.inert = true;
+
+    const chatbotPageTargets = document.querySelectorAll(".site-header, main, .site-footer");
+    const chatbotInertState = new Map();
+
+    function setChatbotPageInert(willBeInert) {
+      chatbotPageTargets.forEach((target) => {
+        if (willBeInert) {
+          chatbotInertState.set(target, target.inert);
+          target.inert = true;
+        } else {
+          target.inert = chatbotInertState.get(target) || false;
+        }
+      });
+      if (!willBeInert) chatbotInertState.clear();
+    }
 
     function trapFocusWithin(event, container) {
       if (event.key !== "Tab") return;
@@ -592,6 +1044,27 @@ A: The assistant should avoid inventing information and say that the specific in
     function ensurePortfolioKnowledge() {
       if (knowledgeLoadPromise) return knowledgeLoadPromise;
 
+      if (window.location.protocol === "file:") {
+        knowledgeLoadPromise = Promise.resolve().then(() => {
+          knowledgeItems = fallbackKnowledge;
+          projectData = Object.entries(PROJECT_SHOWCASE_DETAILS).map(([name, details]) => ({
+            name,
+            problemSolved: details.problem,
+            toolsUsed: details.tools,
+            businessImpact: details.impact,
+            mainFeatures: []
+          }));
+          contactData = {
+            email: "kinoilustrisimo.021@gmail.com",
+            phone: "+639927911469",
+            facebook: "https://www.facebook.com/palonpon.kino"
+          };
+          renderQuickActions();
+          if (!aiStatusResolved) status.textContent = "Ready with verified built-in portfolio information.";
+        });
+        return knowledgeLoadPromise;
+      }
+
       knowledgeLoadPromise = loadPortfolioKnowledge()
         .then(({ items, projects, contact }) => {
           knowledgeItems = items.length ? items : fallbackKnowledge;
@@ -622,6 +1095,7 @@ A: The assistant should avoid inventing information and say that the specific in
       toggle.setAttribute("aria-expanded", "true");
       panel.setAttribute("aria-hidden", "false");
       panel.inert = false;
+      setChatbotPageInert(true);
 
       if (!started) {
         addMessage(
@@ -659,6 +1133,7 @@ A: The assistant should avoid inventing information and say that the specific in
       toggle.setAttribute("aria-expanded", "false");
       panel.setAttribute("aria-hidden", "true");
       panel.inert = true;
+      setChatbotPageInert(false);
       window.clearTimeout(chatbotCloseTimer);
       chatbotCloseTimer = window.setTimeout(() => {
         widget.classList.remove("is-closing");
@@ -781,6 +1256,8 @@ A: The assistant should avoid inventing information and say that the specific in
 
       window.setTimeout(async () => {
         try {
+          await ensurePortfolioKnowledge();
+          if (requestVersion !== conversationVersion) return;
           const contextualQuestion = resolveConversationalQuestion(question, conversationContext);
           const localResponse = generatePortfolioResponse(contextualQuestion, knowledgeItems, projectData, contactData);
           const aiResult = await requestPortfolioAI(contextualQuestion, conversationHistory);
@@ -1026,6 +1503,7 @@ A: The assistant should avoid inventing information and say that the specific in
       document.body.appendChild(modal);
       projectRequestModal = modal;
       document.body.classList.add("project-modal-open");
+      widget.inert = true;
       panel.inert = true;
       panel.setAttribute("aria-hidden", "true");
       modal.addEventListener("keydown", (event) => trapFocusWithin(event, card));
@@ -1042,6 +1520,7 @@ A: The assistant should avoid inventing information and say that the specific in
       if (restoreFocus) projectRequestReturnFocus = null;
       modal.classList.remove("is-visible");
       document.body.classList.remove("project-modal-open");
+      widget.inert = false;
       if (widget.classList.contains("is-open")) {
         panel.inert = false;
         panel.setAttribute("aria-hidden", "false");

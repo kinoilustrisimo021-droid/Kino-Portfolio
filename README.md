@@ -6,7 +6,8 @@ This repository contains a static, GitHub Pages-ready professional portfolio for
 
 - `index.html` - Portfolio content and page structure
 - `styles.css` - Premium dark visual system, responsive Hire Me conversion section, mobile-first layouts, interaction states, and print/PDF styling
-- `script.js` - Mobile navigation, scroll reveals, page progress, active navigation, accessible project previews, and portfolio chatbot logic
+- `premium-upgrade.css` - Isolated screen-only interface refinement for the system intro, project discovery controls, calmer holographic styling, and responsive case-study navigation
+- `script.js` - Mobile navigation, scroll reveals, page progress, active navigation, project filtering and case-study navigation, accessible project previews, and portfolio chatbot logic
 - `api/portfolio-chat.js` - Secure serverless AI endpoint with bounded conversation history, portfolio grounding, privacy rules, and rate limiting
 - `api/portfolio-assistant-prompt.js` - Versioned AI behavior instructions for conversational tone, portfolio grounding, general guidance, context, and privacy
 - `tests/portfolio-assistant-prompt.test.js` - Prompt contract and secure request-shape regression tests
@@ -26,6 +27,8 @@ This repository contains a static, GitHub Pages-ready professional portfolio for
 ## Portfolio Chatbot
 
 The website includes a floating portfolio assistant at the bottom-right of the page. It opens into a professional chat window, shows suggested questions and quick action buttons, and answers using structured portfolio files first, with FAQ files as support.
+
+The selected-work section keeps all nine projects visible by default and adds lightweight client-side filters for automation, dashboards, and reporting. Each project exposes key technologies and opens an accessible mini case study with problem, solution, contribution, operational impact, and previous/next navigation. These controls are progressive enhancements: the original project content remains available if JavaScript is unavailable.
 
 The assistant now uses a hybrid setup. On a serverless host with `OPENAI_API_KEY` configured, it uses a real multi-turn AI endpoint grounded in the verified portfolio data. If the endpoint is unavailable—or when the site is hosted only on GitHub Pages—it automatically falls back to the local privacy-safe portfolio answer engine. Visitors can type naturally and receive answers without completing a questionnaire.
 
